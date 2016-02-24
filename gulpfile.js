@@ -41,8 +41,10 @@ gulp.task('css-prod', ['css-dist', 'sass-prod']);
 //-----------JS--------------------
 gulp.task('js-libs-dev', function() {
   return gulp.src([
-      PROJECT_SRC + 'js/modules/*.js',
-      PROJECT_SRC + 'js/app.js'])
+      'node_modules/es6-shim/es6-shim.min.js',
+      'node_modules/angular2/bundles/angular2-polyfills.js',
+      'node_modules/rxjs/bundles/Rx.umd.js',
+      'node_modules/angular2/bundles/angular2-all.umd.js'])
     .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
 gulp.task('js-libs-prod', function() {
@@ -67,7 +69,7 @@ gulp.task('js-app-prod', function() {
     .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
 
-gulp.task('js-dev', ['js-app-dev']);
+gulp.task('js-dev', ['js-libs-dev', 'js-app-dev']);
 gulp.task('js-prod', ['js-app-prod']);
 //-----------TEMPLATES-------------
 gulp.task('template-dev', function() {
@@ -81,7 +83,10 @@ var styleDev = ['bootstrap.css', 'bootstrap-theme.css', 'style.css'];
 var styleProd = ['base.min.css', 'style.css'];
 
 var libsScriptDev = [
-    'libs/angular.js',
+    'es6-shim.min.js',
+    'angular2-polyfills.js',
+    'Rx.umd.js',
+    'angular2-all.umd.js'
 ];
 var libsScriptProd = ['tools.js'];
 
@@ -107,14 +112,14 @@ function supportedLanguagesDev(callback) {
     var res = '<script type="text/javascript" >';
     res  += 'var supportedLanguages = [';
 
-    fs.readdir(DIST_MOBILE_SOURCE + 'lang/', function (err, files) {
+    /*fs.readdir(DIST_MOBILE_SOURCE + 'lang/', function (err, files) {
         files.forEach(function(file, index){
             var ln = file.substr(0, file.length - 5);
             res += (index === 0 ? '' : ',') + "'" + ln + "'";
         });
         res += '];</script>';
         callback(res);
-    });
+    });*/
 }
 function supportedLanguagesProd(callback) {
     var files = ['en'];
@@ -129,7 +134,6 @@ function supportedLanguagesProd(callback) {
 
 gulp.task('index-dev', function() {
   var version = 0.1;
-  var listLanguages = ['en'];
   supportedLanguagesProd(function(listLanguages){
       return gulp.src([
       PROJECT_SRC + 'view/index.html'])

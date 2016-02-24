@@ -1,0 +1,25 @@
+{
+  "name": "truckers",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Truckers social net",
+  "author": "FTR",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "bootstrap": "^3.3.6",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mysql": "^2.10.2"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0"
+  }
+}

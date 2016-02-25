@@ -44,7 +44,8 @@ gulp.task('js-libs-dev', function() {
       'node_modules/es6-shim/es6-shim.min.js',
       'node_modules/angular2/bundles/angular2-polyfills.js',
       'node_modules/rxjs/bundles/Rx.umd.js',
-      'node_modules/angular2/bundles/angular2-all.umd.js'])
+      'node_modules/angular2/bundles/angular2-all.umd.js',
+      'node_modules/angular2/bundles/router.dev.js'])
     .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
 gulp.task('js-libs-prod', function() {
@@ -86,7 +87,8 @@ var libsScriptDev = [
     'es6-shim.min.js',
     'angular2-polyfills.js',
     'Rx.umd.js',
-    'angular2-all.umd.js'
+    'angular2-all.umd.js',
+    'router.dev.js'
 ];
 var libsScriptProd = ['tools.js'];
 

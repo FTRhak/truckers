@@ -44,9 +44,10 @@ gulp.task('js-libs-dev', function() {
       'node_modules/es6-shim/es6-shim.min.js',
       'node_modules/angular2/bundles/angular2-polyfills.js',
       'node_modules/rxjs/bundles/Rx.umd.js',
-      'node_modules/angular2/bundles/angular2-all.umd.js',
+      'node_modules/angular2/bundles/angular2-all.umd.min.js',
+      'node_modules/angular2/bundles/angular2.dev.js',
       'node_modules/angular2/bundles/router.dev.js'])
-    .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
+    .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
 });
 gulp.task('js-libs-prod', function() {
   return gulp.src([
@@ -84,11 +85,12 @@ var styleDev = ['bootstrap.css', 'bootstrap-theme.css', 'style.css'];
 var styleProd = ['base.min.css', 'style.css'];
 
 var libsScriptDev = [
-    'es6-shim.min.js',
-    'angular2-polyfills.js',
-    'Rx.umd.js',
-    'angular2-all.umd.js',
-    'router.dev.js'
+    //'libs/es6-shim.min.js',
+    'libs/angular2-polyfills.js',
+    'libs/Rx.umd.js',
+    //'libs/angular2.dev.js',
+    'libs/angular2-all.umd.min.js',
+    'libs/router.dev.js'
 ];
 var libsScriptProd = ['tools.js'];
 

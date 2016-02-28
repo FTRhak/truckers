@@ -1,4 +1,4 @@
-module.exports = function UserController() {
+module.exports = function SiteController() {
     this.actionMethods = [
         {
             action: "index",
@@ -7,6 +7,6 @@ module.exports = function UserController() {
         }
     ];
     this.index = function (req, res) {
-        res.render('index', { title: 'Hey', message: 'Hello there!'});
+        res.render('index', { title: 'Hey', message: 'Hello there!' });
     };
 };

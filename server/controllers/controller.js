@@ -11,5 +11,6 @@ module.exports = function (express) {
 
     initUrlControllers(require(__dirname+ '/SiteController'));
     initUrlControllers(require(__dirname+ '/UserController'));
+    initUrlControllers(require(__dirname+ '/AuthenticationController'));
     initUrlControllers(require(__dirname+ '/MessageController'));
 };

@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
 global.db = connection;
 
 
-app.express.set('views', _basePath + './client/');
+app.express.set('views', _basePath + './client/view/');
 app.express.set('view engine', 'ejs');
 app.express.use(bodyParser.json());
 app.express.use(session({secret: 'reqrutment123'}));

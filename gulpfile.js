@@ -44,7 +44,7 @@ gulp.task('js-libs-dev', function () {
         'node_modules/es6-shim/es6-shim.min.js',
         'node_modules/angular2/bundles/angular2-polyfills.js',
         'node_modules/rxjs/bundles/Rx.umd.js',
-        'node_modules/angular2/bundles/angular2-all.umd.min.js',
+        'node_modules/angular2/bundles/angular2-all.umd.js',
         'node_modules/angular2/bundles/angular2.dev.js',
         'node_modules/angular2/bundles/router.dev.js'])
         .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
@@ -85,11 +85,11 @@ var styleDev = ['bootstrap.css', 'bootstrap-theme.css', 'style.css'];
 var styleProd = ['base.min.css', 'style.css'];
 
 var libsScriptDev = [
-//'libs/es6-shim.min.js',
+    'libs/es6-shim.min.js',
     'libs/angular2-polyfills.js',
     'libs/Rx.umd.js',
 //'libs/angular2.dev.js',
-    'libs/angular2-all.umd.min.js',
+    'libs/angular2-all.umd.js',
     //'libs/router.dev.js'
 ];
 var libsScriptProd = ['tools.js'];
@@ -144,7 +144,7 @@ gulp.task('index-dev', function () {
             .pipe(replace(/(<!--JSLIBS-->)/g, launchScriptsAsString(libsScriptDev, version)))
             .pipe(replace(/(<!--JSAPP-->)/g, launchScriptsAsString(scriptDev, version)))
             .pipe(replace(/(<!--LN-->)/g, listLanguages))
-            .pipe(rename(function (path) {console.log("___",path);
+            .pipe(rename(function (path) {
                 path.dirname = "/view/";
                 //path.basename += "";
                 path.extname = ".ejs"

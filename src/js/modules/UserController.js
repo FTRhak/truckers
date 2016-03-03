@@ -1,3 +1,5 @@
+/*global ng:true */
+
 (function (app) {
     app.UserProfileComponent = ng.core.Component({
         selector: 'app-trucker',

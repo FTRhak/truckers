@@ -14,6 +14,12 @@ module.exports = function AuthenticationController() {
             action: "pageRestore",
             url: "/restore",
             method: "get"
+        },
+        //-------------------
+        {
+            action: "actionLogin",
+            url: "/api/user/login",
+            method: "post"
         }
     ];
 
@@ -29,4 +35,10 @@ module.exports = function AuthenticationController() {
     this.pageRestore = function (req, res) {
         res.render('restore', { title: 'Hey', message: 'Hello there!' });
     };
+    
+    //-------------------------------
+    this.actionLogin = function (req, res) {
+        res.json({ title: 'Hey', message: 'Hello there!' });
+    };
+    
 };

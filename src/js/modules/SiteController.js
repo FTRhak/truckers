@@ -1,3 +1,5 @@
+/*global ng:true */
+
 (function (app) {
     app.SiteComponent = ng.core.Component({
         selector: 'app-trucker',

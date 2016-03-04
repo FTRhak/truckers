@@ -6,25 +6,21 @@
         //template: '<h1>Login page</h1>'
         templateUrl: 'templates/authentication/login.html'
     }).Class({
-        constructor: function () {
-            this.http = new ng.http.Http();
+        constructor: [ng.http.Http, function LoginClass(http) {
+            this.http = http;
             this.model = {
                 login: "",
                 password: ""
             };
             this.message = "";
-        },
+        }],
         onSubmit: function () {
-            try{
-                var headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
-                var options = new ng.http.RequestOptions({ headers: headers });
+            //var headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
+            //var options = new ng.http.RequestOptions({ headers: headers });
 
-                this.http.post('/api/user/login', JSON.stringify({data:1}),options).then(function(res){
-                    console.log(res);
-                }).catch(function(){console.error("some error");});
-                console.log("onSubmit login:", this.model, this.message);
-            } catch(er){console.error(er);}
-            
+            this.http.post('/api/user/login', JSON.stringify({ data: 1 })).toPromise().then(function (res) {
+                console.log(res);
+            }).catch(function () { console.error("some error"); });
         }
     });
     

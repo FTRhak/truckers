@@ -1,12 +1,37 @@
-<h1>Login</h1>
-<form action="" method="post" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="field_login">Email</label>
-        <input type="text" id="field_login" class="form-control"  [(ngModel)]="model.login" >
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Truckers</a>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="field_pass">Password</label>
-        <input type="password" id="field_pass" class="form-control"  [(ngModel)]="model.password">
+    <!-- /.container-fluid -->
+</nav>
+
+<section class="container-page">
+    <section class="row">
+    <div class="col-md-4 col-sm-3"></div>
+    <div class="col-md-4 col-sm-6">
+        <form action="" method="post" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="field_login">Email</label>
+                <input type="text" id="field_login" class="form-control" [(ngModel)]="model.login">
+            </div>
+            <div class="form-group">
+                <label for="field_pass">Password</label>
+                <input type="password" id="field_pass" class="form-control" [(ngModel)]="model.password">
+            </div>
+            <input type="submit" value="Login">
+        </form>
+        
+        <div class="fb-login-btn">Log in with Facebook</div>
     </div>
-    <input type="submit" value="Login">
-</form>
+    <div class="col-md-4 col-sm-3"></div>
+</section>

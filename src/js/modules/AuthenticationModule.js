@@ -3,10 +3,9 @@
 (function (app) {
     app.LoginComponent = ng.core.Component({
         selector: 'app-trucker',
-        //template: '<h1>Login page</h1>'
         templateUrl: 'templates/authentication/login.html'
     }).Class({
-        constructor: [ng.http.Http, function LoginClass(http) {
+        constructor: [ng.http.Http, function (http) {
             this.http = http;
             this.model = {
                 login: "",

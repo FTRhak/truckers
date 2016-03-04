@@ -17,11 +17,15 @@
 
     <!--JSLIBS-->
     <!--JSAPP-->
-    
+
     <script>
         (function (app) {
             document.addEventListener('DOMContentLoaded', function () {
-                ng.platform.browser.bootstrap(app.SiteComponent);
+                ng.platform.browser.bootstrap(app.TruckersApplication, [
+                    ng.router.ROUTER_PROVIDERS,
+                    ng.core.provide(ng.router.LocationStrategy, {useClass: ng.router.HashLocationStrategy}),
+                    ng.http.HTTP_PROVIDERS
+                    ]);
             });
         })(window.app || (window.app = {}));
     </script>

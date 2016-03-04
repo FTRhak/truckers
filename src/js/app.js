@@ -1,60 +1,42 @@
-/*System.config({
-		baseURL: '/app'
-	});*/
-	
-//System.import('bootstrap');
-
-
-
 (function (app) {
-    /*app.IndexComponent = ng.core.Component({
-        selector: 'router-outlet',
+    app.IndexDevComponent = ng.core.Component({
+        selector: 'router',
         template: '<h1>Index</h1>'
     }).Class({
         constructor: function () { }
     });
 
-    app.MainComponent = ng.core.Component({
-        //selector: 'router-outlet',
-        template: '<h1>Main</h1>'
+    app.ApplicationComponent = ng.core.Component({
+        selector: 'app-trucker',
+        template: `<h1>ROUT</h1>
+        <ul>
+            <li><a href="#/">Index</a></li>
+            <li><a href="#/login">Login</a></li>
+            <li><a href="#/register">Register</a></li>
+            <li><a href="#/restore">Restore</a></li>
+            
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/terms">Terms</a></li>
+        </ul>
+        <router-outlet></router-outlet>
+        `,
+        directives: [ng.router.ROUTER_DIRECTIVES]
     }).Class({
-        constructor: function () { }
-    });*/
+        constructor: function () {
 
-    /*app.Ro = ng.router.RouteConfig([
-        { path: "/", name: "Main", component: app.MainComponent },
-        { path: "/home", name: "Index", component: app.IndexComponent }
-    ]);*/
+        }
+    });
 
-    /*app.AppComponent = ng.core.Component({
-        selector: 'app-trucker',//<a [routerLink]="[\'Main\']">Main Center</a><a [routerLink]="[\'Index\']">Index</a>
-        template: '<h1>Component Router</h1><nav></nav>'//<a [routerLink]="[\'IndexComponent\']">IndexComponent Center</a><a [routerLink]="[\'MainComponent\']">Heroes</a><router-outlet></router-outlet>',
-        //providers: [app.MainComponent, app.IndexComponent],
-        //directives: [ng.router.ROUTER_DIRECTIVES]
-    })
-    .Class({
-        constructor: function(){}
-    })*/
-    /*.Class({
-        constructor: ng.router.RouteConfig([
-            { path: "/", name: "Main", component: app.MainComponent },
-            { path: "/home", name: "Index", component: app.IndexComponent }
-        ])
-    })*/
-    ;
-//ng.router.AsyncRoute
-    /*app.Ro = ng.router.RouteConfig([
-        { path: "/", name: "Main", component: app.MainComponent },
-        { path: "/home", name: "Index", component: app.IndexComponent }
-    ]);*/
+    app.TruckersApplication = ng.router.RouteConfig([
+        //---SITE---
+        { path: '/about', component: app.SiteAboutComponent, name: 'About' },
+        { path: '/terms', component: app.SiteTermsComponent, name: 'Terms' },
+        //---Authentication---
+        { path: '/login', component: app.LoginComponent, name: 'Login' },
+        { path: '/register', component: app.RegistrateComponent, name: 'Register' },
+        { path: '/restore', component: app.RestoreComponent, name: 'Restore' },
+        
+        { path: '/', component: app.IndexDevComponent, name: 'Index' },
+    ])(app.ApplicationComponent)
 
 })(window.app || (window.app = {}));
-
-/*(function (app) {
-    document.addEventListener('DOMContentLoaded', function () {
-
-        ng.platform.browser.bootstrap(app.UserComponent);
-    });
-})(window.app || (window.app = {}));*/
-
-//ng.router.Router

@@ -1,7 +1,7 @@
 /*global ng:true */
 
 (function (app) {
-    app.AuthenticationLoginComponent = ng.core.Component({
+    app.LoginComponent = ng.core.Component({
         selector: 'app-trucker',
         //template: '<h1>Login page</h1>'
         templateUrl: 'templates/authentication/login.html'
@@ -26,7 +26,7 @@
     
     //---------------------------------------------------------
 
-    app.AuthenticationRegistrateComponent = ng.core.Component({
+    app.RegistrateComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/register.html'
     }).Class({
@@ -45,7 +45,7 @@
     
     //---------------------------------------------------------
 
-    app.AuthenticationRestoreComponent = ng.core.Component({
+    app.RestoreComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/restore.html'
     }).Class({

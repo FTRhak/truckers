@@ -9,6 +9,7 @@
 
         }
     });
+
     app.SiteAboutComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/site/about.html'
@@ -26,7 +27,5 @@
 
         }
     });
-    
-
 
 })(window.app || (window.app = {}));

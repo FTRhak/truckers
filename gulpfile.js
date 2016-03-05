@@ -4,6 +4,7 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var rename = require("gulp-rename");
 var replace = require("gulp-replace");
+var compass = require('gulp-compass');
 
 var PROJECT_SRC = 'src/';
 var PROJECT_BUILD = 'client/';
@@ -28,7 +29,12 @@ gulp.task('css-dist-prod', function () {
 });
 gulp.task('sass-dev', function () {
     gulp.src(PROJECT_SRC + 'sass/style.scss')
-        .pipe(sass().on('error', sass.logError))
+        //.pipe(sass().on('error', sass.logError))
+        .pipe(compass({
+            css: PROJECT_BUILD + 'css',
+            sass: PROJECT_SRC + 'sass',
+            image: PROJECT_SRC + 'images',
+        }))
         .pipe(gulp.dest(PROJECT_BUILD + 'css/'));
 });
 gulp.task('sass-prod', function () {

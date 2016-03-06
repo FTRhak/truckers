@@ -31,9 +31,12 @@
     }).Class({
         constructor: function () {
             this.model = {
-                login: "user",
-                password: "user",
-                passwordConfirm: ""
+                firstName: "",
+                secondName: "",
+                email: "",
+                password: "",
+                passwordConfirm: "",
+                sex: ""
             };
             this.message = "hello";
         },

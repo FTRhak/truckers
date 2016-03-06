@@ -10,6 +10,7 @@ var app = {
     models: {}
 };
 global.app = app;
+global.DEBUD = true;
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({

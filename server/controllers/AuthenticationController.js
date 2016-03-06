@@ -39,8 +39,8 @@ module.exports = function AuthenticationController() {
     //-------------------------------
     this.actionLogin = function (req, res) {
         var user = new app.models.UserModel();
-        user.query('SELECT users.uid, users.mail FROM users', function(err, rows, fields) {
-            console.log(rows);
+        app.models.UserModel.find('all', { 'where': ' uid != 0' }, function (err, rows, fields) {
+            console.log(err, rows);
         });
 
         res.json({ status: req.body });

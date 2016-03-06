@@ -38,7 +38,12 @@ module.exports = function AuthenticationController() {
     
     //-------------------------------
     this.actionLogin = function (req, res) {
-        res.json({ title: 'Hey', message: 'Hello there!' });
+        var user = new app.models.UserModel();
+        user.query('SELECT users.uid, users.mail FROM users', function(err, rows, fields) {
+            console.log(rows);
+        });
+
+        res.json({ status: req.body });
     };
-    
+
 };

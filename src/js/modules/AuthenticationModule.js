@@ -14,10 +14,10 @@
             this.message = "";
         }],
         onSubmit: function () {
-            //var headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
-            //var options = new ng.http.RequestOptions({ headers: headers });
+            var headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
+            var options = new ng.http.RequestOptions({ headers: headers });
 
-            this.http.post('/api/user/login', JSON.stringify({ data: 1 })).toPromise().then(function (res) {
+            this.http.post('/api/user/login', JSON.stringify(this.model), options).toPromise().then(function (res) {
                 console.log(res);
             }).catch(function () { console.error("some error"); });
         }

@@ -1,43 +1,49 @@
-module.exports = function AuthenticationController() {
-    this.actionMethods = [
-        {
-            action: "pageLogin",
-            url: "/login",
-            method: "get"
-        },
-        {
-            action: "pageRegister",
-            url: "/register",
-            method: "get"
-        },
-        {
-            action: "pageRestore",
-            url: "/restore",
-            method: "get"
-        },
-        //-------------------
-        {
-            action: "actionLogin",
-            url: "/api/user/login",
-            method: "post"
-        }
-    ];
+/*global app:true, DEBUD:true */
+'use strict';
+
+class AuthenticationController {
+
+    get actionMethods() {
+        return [
+            {
+                action: "pageLogin",
+                url: "/login",
+                method: "get"
+            },
+            {
+                action: "pageRegister",
+                url: "/register",
+                method: "get"
+            },
+            {
+                action: "pageRestore",
+                url: "/restore",
+                method: "get"
+            },
+            //-------------------
+            {
+                action: "actionLogin",
+                url: "/api/user/login",
+                method: "post"
+            }
+        ]
+    }
 
 
-    this.pageLogin = function (req, res) {
+    pageLogin(req, res) {
         res.render('login', { title: 'Hey', message: 'Hello there!' });
-    };
+    }
 
-    this.pageRegister = function (req, res) {
+    pageRegister(req, res) {
         res.render('register', { title: 'Hey', message: 'Hello there!' });
-    };
+    }
 
-    this.pageRestore = function (req, res) {
+    pageRestore(req, res) {
         res.render('restore', { title: 'Hey', message: 'Hello there!' });
-    };
+    }
     
     //-------------------------------
-    this.actionLogin = function (req, res) {
+    actionLogin(req, res) {
         var user = new app.models.UserModel();
 
         /*app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: ['admin', 'Aa124'] } }, function (err, rows, fields) {
@@ -63,3 +69,5 @@ module.exports = function AuthenticationController() {
     };
 
 };
+
+module.exports = AuthenticationController;

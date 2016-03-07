@@ -1,3 +1,5 @@
+/*global __dirname:true, global:true */
+
 var ejs = require('ejs');
 var express = require('express');
 var session = require('express-session');
@@ -14,11 +16,11 @@ global.DEBUD = true;
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'trucker',
-  debug    :  false
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'trucker',
+    debug: false
 });
 global.db = connection;
 

@@ -1,27 +1,43 @@
+/*global app:true, db:true, DEBUD:true, __dirname:true */
+
+'use strict';
 
 function dbRequest(query, callback) {
     DEBUD && console.log('\x1b[35m%s\x1b[0m', "Query : " + query);
     db.query(query, callback);
 }
-function MySQLModelConstructor(modelClass) {
-    modelClass.prototype.setData = function (data) {
-        var self = this;
-        Object.keys(data).forEach(function (key) {
-            //self[key] = data[key];
-        });
-    };
 
+function activeRecordParser(str, variables) {
+    var pattern = /%s|%d/g;
+    var i = 0;
+    var res = str.replace(pattern, function (capture) {
+        return variables[i++];
+    });
+    return res;
+}
 
-    modelClass.query = function (query, callback) {
+class ModelBase {
+    setData(data) {
+        let i, key, attributes = this.constructor.attributes;
+        for (i = 0; i < attributes.length; i++) {
+            key = attributes[i];
+            if (data[key] !== undefined) {
+                this[key] = data[key];
+            }
+        }
+    }
+
+    static query(query, callback) {
         dbRequest(query, function (err, result, fields) {
             if (callback) {
                 callback(err, result, fields);
             }
         });
-    };
+    }
 
-    modelClass.find = function (method, conditions, callback) {
-        var query = "";
+    static find(method, conditions, callback) {
+        let self = this;
+        let query = "";
         if (arguments.length === 1 && typeof (method) == "function") {
             callback = method;
             method = 'all';
@@ -31,16 +47,16 @@ function MySQLModelConstructor(modelClass) {
             conditions = {};
         }
 
-        var tableName = modelClass.prototype.tableName;
+        let tableName = self.tableName;
         
         // building query conditions
-        var qcond = '';
-        var fields = this.prototype.attributes.join(', ');
+        let qcond = '';
+        let fields = self.attributes.join(', ');
         if (conditions['fields']) {
             fields = conditions['fields'];
         }
         if (conditions['where']) {
-            qcond += " WHERE " + conditions['where'];
+            qcond += " WHERE " + activeRecordParser(conditions['where'].query, conditions['where'].data);
         }
         if (conditions['group']) {
             qcond += " GROUP BY " + conditions['group'];
@@ -69,7 +85,7 @@ function MySQLModelConstructor(modelClass) {
                     if (callback) {
                         if (!err && result) {
                             result = result.map(function (record) {
-                                var el = new (modelClass)();
+                                let el = new self;
                                 el.setData(record);
                                 return el;
                             });
@@ -93,52 +109,74 @@ function MySQLModelConstructor(modelClass) {
                 query = "SELECT " + fields + " FROM " + tableName + qcond;
                 dbRequest(query, function (err, result, fields) {
                     if (callback) {
-                        if (!err && result) {
-                            var el = new (modelClass)();
+                        if (!err && result && result.length) {
+                            let el = new self;
                             el.setData(result[0]);
                             result = el;
+                        } else {
+                            result = result[0];
                         }
                         callback(err, result, fields);
                     }
                 });
                 break;
         }
+    }
+
+    static findOne(conditions, callback) {
+        this.find('first', conditions, callback);
+    }
+
+    static findAll(conditions, callback) {
+        this.find('all', conditions, callback);
+    };
+    static findById(id, callback) {
+        this.find('first', { 'where': { query: " `" + this.primaryKey + "` = %d ", data: [id] } }, callback);
     };
 
-    modelClass.findOne = function () { };
-    modelClass.findAll = function () { };
-    modelClass.findById = function () { };
-
-    modelClass.prototype.save = function (callback) {
-        var tableName = this.tableName;
-        var primaryKey = this.primaryKey || 'id';
-        var query = "UPDATE " + tableName + " SET " + db.escape(this.attributes) + " WHERE " + primaryKey + "=" + this.data[primaryKey];
+    save(callback) {
+        let tableName = this.constructor.tableName;
+        let primaryKey = this.constructor.primaryKey || 'id';
+        let query = "UPDATE " + tableName + " SET " + db.escape(this.attributes) + " WHERE " + primaryKey + "=" + this.data[primaryKey];
         //var q = "INSERT INTO "+tableName+" SET "+ connection.escape(this.attributes);
         dbRequest(query, function (err, result) {
             if (callback) {
                 callback(err, result);
             }
         });
-    };
-    modelClass.prototype.remove = function (callback) {
-        var tableName = this.tableName;
-        var primaryKey = this.primaryKey || 'id';
+    }
+
+    remove(callback) {
+        var tableName = this.constructor.tableName;
+        var primaryKey = this.constructor.primaryKey || 'id';
         var query = "DELETE FROM " + tableName + " WHERE " + primaryKey + "=" + this[primaryKey];
         dbRequest(query, function (err, result) {
             if (callback) {
                 callback(err, result);
             }
         });
-    };
+    }
 
+    toJson() {
+        return this.___;
+    }
 
-    return modelClass;
+    constructor() {
+        let attributes = this.constructor.attributes;
+        let i;
+        let privateProperties = {};
+        attributes.forEach(function (key) {
+            privateProperties[key] = null;
+        });
+        this.___ = privateProperties;
+    }
 }
 
-
 module.exports = function (modelsList) {
+    modelsList['ModelBase'] = ModelBase;
+
     function initUrlControllers(modelClass) {
-        modelsList[modelClass.name] = MySQLModelConstructor(modelClass);
+        modelsList[modelClass.name] = modelClass;//MySQLModelConstructor(modelClass);
         DEBUD && console.log('\x1b[33m%s\x1b[0m: ', "Init model ", modelClass.name);
     }
 

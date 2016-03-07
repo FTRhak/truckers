@@ -1,16 +1,38 @@
 
-
+.soc-login-btn{
+    &:before{
+        content: "";
+        width: 21px;
+        height: 21px;
+        background-image: inline-image('../images/authentication/social-auth-icon.png');
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+    }
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;  
+    padding: 5px 5px 5px 30px;  
+    position: relative;
+    margin: 2px;
+    text-align: center;
+    min-width: 180px;
+}
 .fb-login-btn{
     background-color: #3B5998;
     color: #FFFFFF;
     text-align: center;
-    padding: 10px 10px 10px 55px;
-    font-size: 24px;
-    display: inline-block;
-    border-radius: 5px;
-    background-image: inline-image('../images/authentication/fb-login.png');
-    background-position: 4px center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    
+    &:before {
+        background-position: -24px 0px;
+    }
+}
+
+.vk-login-btn{
+    background-color: #6085AE;
+    color: #FFFFFF;
+    text-align: center;
+    &:before {
+        background-position: 0px 0px;
+    }
 }

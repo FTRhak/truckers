@@ -39,11 +39,27 @@ module.exports = function AuthenticationController() {
     //-------------------------------
     this.actionLogin = function (req, res) {
         var user = new app.models.UserModel();
-        app.models.UserModel.find('all', { 'where': ' uid != 0' }, function (err, rows, fields) {
+
+        /*app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: ['admin', 'Aa124'] } }, function (err, rows, fields) {
+            console.log(err, rows);
+        });*/
+        app.models.UserModel.findById(1, function (err, rows, fields) {
             console.log(err, rows);
         });
+        
+        /*app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: ['admin', 'Aa124'] } },
+            function (err, rows, fields) {
+                console.log(err, rows.toJson());
+                res.json({ status: rows });
+            });*/
+        user.uid = 123;
+        user.mail = "ftr@fd.sd";
+        user.phone = 123;
+        res.json({ status: user, data: user.mail });
+        /*user.test();
+        var user2 = new app.models.UserModel();*/
 
-        res.json({ status: req.body });
+
     };
 
 };

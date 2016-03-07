@@ -16,7 +16,7 @@ class SiteController {
             }
         ];
     }
-    pageIndex(req, res) {
+    pageIndex(req, res) {console.log("session:",req.session.user);
         res.render('index', { title: 'Hey', message: 'Hello there!' });
     }
     pageDev(req, res) {

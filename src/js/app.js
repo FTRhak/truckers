@@ -17,6 +17,8 @@
         { path: '/login', component: app.LoginComponent, name: 'Login' },
         { path: '/register', component: app.RegistrateComponent, name: 'Register' },
         { path: '/restore', component: app.RestoreComponent, name: 'Restore' },
+        //---User---
+        { path: '/user', component: app.UserProfileComponent, name: 'Profile' },
         
         { path: '/', component: app.LoginComponent, name: 'Index' },
     ])(app.ApplicationComponent)

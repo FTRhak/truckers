@@ -2,15 +2,24 @@
 
 'use strict';
 
+/**
+ * @param {string} query
+ * @param {function} callback
+ */
 function dbRequest(query, callback) {
     DEBUD && console.log('\x1b[35m%s\x1b[0m', "Query : " + query);
-    db.query(query, callback);
+    db.query(query, function(err, result, fields) {
+        if (err.code === 'ECONNREFUSED') {
+            console.error('\x1b[31m%s\x1b[0m', "DB error connection!");
+        }
+        callback(err, result, fields)
+    });
 }
 
 function activeRecordParser(str, variables) {
     var pattern = /%s|%d/g;
     var i = 0;
-    var res = str.replace(pattern, function (capture) {
+    var res = str.replace(pattern, function(capture) {
         return variables[i++];
     });
     return res;
@@ -27,14 +36,23 @@ class ModelBase {
         }
     }
 
+    /**
+     * @param {string} query
+     * @param {function} callback
+     */
     static query(query, callback) {
-        dbRequest(query, function (err, result, fields) {
+        dbRequest(query, function(err, result, fields) {
             if (callback) {
                 callback(err, result, fields);
             }
         });
     }
 
+    /**
+     * @param {string} method
+     * @param {Object} conditions
+     * @param {function} callback
+     */
     static find(method, conditions, callback) {
         let self = this;
         let query = "";
@@ -48,7 +66,7 @@ class ModelBase {
         }
 
         let tableName = self.tableName;
-        
+
         // building query conditions
         let qcond = '';
         let fields = self.attributes.join(', ');
@@ -81,10 +99,10 @@ class ModelBase {
             // default method
             case 'all':
                 query = "SELECT " + fields + " FROM " + tableName + qcond;
-                dbRequest(query, function (err, result, fields) {
+                dbRequest(query, function(err, result, fields) {
                     if (callback) {
                         if (!err && result) {
-                            result = result.map(function (record) {
+                            result = result.map(function(record) {
                                 let el = new self;
                                 el.setData(record);
                                 return el;
@@ -98,22 +116,22 @@ class ModelBase {
             // method returning value of COUNT(*)
             case 'count':
                 query = "SELECT COUNT(*) FROM " + tableName + qcond;
-                dbRequest(query, function (err, result, fields) {
+                dbRequest(query, function(err, result, fields) {
                     if (callback) {
                         callback(err, result[0]['COUNT(*)'], fields);
                     }
                 });
-                break;		
+                break;
             // method returning only first result (to use when you expect only one result)				
             case 'first':
                 query = "SELECT " + fields + " FROM " + tableName + qcond;
-                dbRequest(query, function (err, result, fields) {
+                dbRequest(query, function(err, result, fields) {
                     if (callback) {
                         if (!err && result && result.length) {
                             let el = new self;
                             el.setData(result[0]);
                             result = el;
-                        } else {
+                        } else if (result && result.length) {
                             result = result[0];
                         }
                         callback(err, result, fields);
@@ -139,7 +157,7 @@ class ModelBase {
         let primaryKey = this.constructor.primaryKey || 'id';
         let query = "UPDATE " + tableName + " SET " + db.escape(this.attributes) + " WHERE " + primaryKey + "=" + this.data[primaryKey];
         //var q = "INSERT INTO "+tableName+" SET "+ connection.escape(this.attributes);
-        dbRequest(query, function (err, result) {
+        dbRequest(query, function(err, result) {
             if (callback) {
                 callback(err, result);
             }
@@ -150,7 +168,7 @@ class ModelBase {
         var tableName = this.constructor.tableName;
         var primaryKey = this.constructor.primaryKey || 'id';
         var query = "DELETE FROM " + tableName + " WHERE " + primaryKey + "=" + this[primaryKey];
-        dbRequest(query, function (err, result) {
+        dbRequest(query, function(err, result) {
             if (callback) {
                 callback(err, result);
             }
@@ -165,14 +183,14 @@ class ModelBase {
         let attributes = this.constructor.attributes;
         let i;
         let privateProperties = {};
-        attributes.forEach(function (key) {
+        attributes.forEach(function(key) {
             privateProperties[key] = null;
         });
         this.___ = privateProperties;
     }
 }
 
-module.exports = function (modelsList) {
+module.exports = function(modelsList) {
     modelsList['ModelBase'] = ModelBase;
 
     function initUrlControllers(modelClass) {

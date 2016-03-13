@@ -57,7 +57,7 @@ class AuthenticationController {
         app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: [login, pass] } }, function (err, row, fields) {
             if (!err && row) {
                 req.session.user = row;
-                res.json({ status: row });
+                res.json({ status: 200, action: 'redirect', url: '/user' });
             } else {
                 res.json({ status: 400, error: "User does not exist!" });
             }

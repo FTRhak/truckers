@@ -9,7 +9,7 @@
 function dbRequest(query, callback) {
     DEBUD && console.log('\x1b[35m%s\x1b[0m', "Query : " + query);
     db.query(query, function(err, result, fields) {
-        if (err.code === 'ECONNREFUSED') {
+        if (err && err.code === 'ECONNREFUSED') {
             console.error('\x1b[31m%s\x1b[0m', "DB error connection!");
         }
         callback(err, result, fields)
@@ -131,7 +131,7 @@ class ModelBase {
                             let el = new self;
                             el.setData(result[0]);
                             result = el;
-                        } else if (result && result.length) {
+                        } else if (result && Array.isArray(result)) {
                             result = result[0];
                         }
                         callback(err, result, fields);

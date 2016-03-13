@@ -22,12 +22,13 @@
             <form action="" method="post" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="field_login">Email</label>
-                    <input type="text" id="field_login" class="form-control" [(ngModel)]="model.login">
+                    <input type="email" class="form-control" required id="field_login" [(ngModel)]="model.login">
                 </div>
                 <div class="form-group">
                     <label for="field_pass">Password</label>
-                    <input type="password" id="field_pass" class="form-control" [(ngModel)]="model.password">
+                    <input type="password" class="form-control" required id="field_pass" [(ngModel)]="model.password">
                 </div>
+                <div class="alert alert-danger" [style.display]="errorMessage?'block':'none'" role="alert">{{errorMessage}}</div>
                 <input type="submit" value="Login" class="btn btn-md btn-default">
             </form>
             <div class="form-group">

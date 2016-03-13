@@ -14,6 +14,8 @@
     <section id="page" class="container">
         <app-trucker-route>Loading...</app-trucker-route>
     </section>
+    
+    <footer>Trucker@</footer>
 
     <!--JSLIBS-->
     <!--JSAPP-->
@@ -24,6 +26,7 @@
                 ng.platform.browser.bootstrap(app.TruckersApplication, [
                     ng.router.ROUTER_PROVIDERS,
                     ng.core.provide(ng.router.LocationStrategy, {useClass: ng.router.HashLocationStrategy}),
+                    ng.core.provide(ng.router.APP_BASE_HREF, {useValue: '/'}),
                     ng.http.HTTP_PROVIDERS
                     ]);
             });

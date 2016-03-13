@@ -8,7 +8,7 @@
         templateUrl: 'templates/authentication/login.html',
         directives: [ng.router.ROUTER_DIRECTIVES]
     }).Class({
-        constructor: [ng.http.Http, ng.router.Location, function(http, location) {
+        constructor: [ng.http.Http, ng.router.Location, ng.router.Router, function(http, location, router) {
             this.http = http;
 
             this.errorMessage = "";
@@ -19,15 +19,16 @@
             this.message = "";
 
             this.onSubmit = function() {
-                var self = this;
-                var headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
-                var options = new ng.http.RequestOptions({ headers: headers });
+                const self = this;
+                const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
+                const options = new ng.http.RequestOptions({ headers: headers });
 
                 this.http.post('/api/user/login?rid=' + Math.random(), JSON.stringify(this.model), options).toPromise().then(function(res) {
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {
-                            location.go('/user');
+                            //TODO bugfix location.go('/user');
+                            app.tools.location.go('/user');
                         } else {
                             self.errorMessage = body.error;
                         }
@@ -74,6 +75,20 @@
         onSubmit: function() {
 
         }
+    });
+
+    //---------------------------------------------------------
+
+    app.LogoutComponent = ng.core.Component({
+        selector: 'app-trucker',
+        templateUrl: 'templates/authentication/logout.html'
+    }).Class({
+        constructor: [ng.http.Http, function(http) {
+            http.post('/api/logout?rid=' + Math.random()).toPromise().then(function(res) {
+                //TODO bugfix location.go('/user');
+                app.tools.location.go('/login');
+            }).catch(function() { console.error("some error"); });
+        }]
     });
 
 })(window.app || (window.app = {}));

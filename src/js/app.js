@@ -1,17 +1,32 @@
 (function (app) {
+    app.tools = {
+        location: {
+            go: function(path){
+                let a = document.createElement('a');
+                a.href='#'+path;
+                a.click();
+                a.remove();
+            }
+        }
+    };
+    
+    
     app.ApplicationComponent = ng.core.Component({
         selector: 'app-trucker-route',
         template: "<router-outlet></router-outlet>",
         directives: [ng.router.ROUTER_DIRECTIVES]
     }).Class({
-        constructor: [ng.router.Router, function (router) {
-            console.log("router:",router);
-            router.subscribe((val) => console.error('change:',val));
-        }],
-        locationChangeStart: function(){
-            console.log("locationChangeStart");
-            //router.subscribe((val) => /*detect changes*/)
-        }
+        constructor: [ng.router.Router, ng.http.Http, function (router, http) {
+            router.subscribe(function(path){
+                console.log("path changed: ", path);
+                const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
+                const options = new ng.http.RequestOptions({ headers: headers });
+
+                http.post('/api/user/access?rid=' + Math.random(), JSON.stringify({path: path}), options).toPromise().then(function(res) {
+                    console.log("resp::",res);
+                }).catch(function() { console.error("some error"); });
+            });
+        }]
     });
 
     app.TruckersApplication = ng.router.RouteConfig([
@@ -22,6 +37,7 @@
         new ng.router.Route({ path: '/login', component: app.LoginComponent, name: 'Login' }),
         new ng.router.Route({ path: '/register', component: app.RegistrateComponent, name: 'Register' }),
         new ng.router.Route({ path: '/restore', component: app.RestoreComponent, name: 'Restore' }),
+        new ng.router.Route({ path: '/logout', component: app.LogoutComponent, name: 'Logout' }),
         //---User---
         new ng.router.Route({ path: '/user', component: app.UserProfileComponent, name: 'Profile' }),
         

@@ -29,6 +29,10 @@ class AuthenticationController {
                 action: "actionLogout",
                 url: "/api/logout",
                 method: "get"
+            }, {
+                action: "actionAccess",
+                url: "/api/user/access",
+                method: "post"
             }
         ]
     }
@@ -73,6 +77,10 @@ class AuthenticationController {
                 res.json({ status: 200, action: 'redirect', url: '/' });
             }
         });
+    }
+    
+    actionAccess(req, res) {
+        res.json({ status: 200, access: true });
     }
 
 };

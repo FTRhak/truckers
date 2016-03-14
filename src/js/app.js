@@ -13,8 +13,9 @@
     
     app.ApplicationComponent = ng.core.Component({
         selector: 'app-trucker-route',
-        template: "<router-outlet></router-outlet>",
-        directives: [ng.router.ROUTER_DIRECTIVES]
+        template: "<navigate-menu></navigate-menu><user-menu></user-menu><router-outlet></router-outlet>",
+        directives: [ng.router.ROUTER_DIRECTIVES],
+        providers: [app.NavigateMenuController, app.UserMenuController]
     }).Class({
         constructor: [ng.router.Router, ng.http.Http, function (router, http) {
             router.subscribe(function(path){

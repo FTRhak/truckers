@@ -60,7 +60,7 @@ class AuthenticationController {
         const pass = req.body.password;
         app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: [login, pass] } }, function (err, row, fields) {
             if (!err && row) {
-                req.session.user = row;
+                req.session.user = row.toJson();
                 res.json({ status: 200, action: 'redirect', url: '/user' });
             } else {
                 res.json({ status: 400, error: "User does not exist!" });
@@ -71,7 +71,6 @@ class AuthenticationController {
     actionLogout(req, res) {
         req.session.destroy(function (err) {
             if (err) {
-                console.log(err);
                 res.json({ status: 400, error: err });
             } else {
                 res.json({ status: 200, action: 'redirect', url: '/' });

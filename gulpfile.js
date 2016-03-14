@@ -86,6 +86,13 @@ gulp.task('template-dev', function () {
     //.pipe(concat('app.js'))
         .pipe(gulp.dest(PROJECT_BUILD + 'templates/'));
 });
+//-----------ICONS-----------------
+gulp.task('icons', function () {
+    return gulp.src([
+        PROJECT_SRC + 'icons/*'])
+    //.pipe(concat('app.js'))
+        .pipe(gulp.dest(PROJECT_BUILD + 'icons/'));
+});
 //-----------INDEX-----------------
 var styleDev = ['bootstrap.css', 'bootstrap-theme.css', 'style.css'];
 var styleProd = ['base.min.css', 'style.css'];
@@ -161,4 +168,4 @@ gulp.task('index-dev', function () {
 
 
 //===============================
-gulp.task('dev-web', ['css-dev', 'js-dev', 'template-dev', 'index-dev']);
+gulp.task('dev-web', ['css-dev', 'js-dev', 'template-dev', 'icons', 'index-dev']);

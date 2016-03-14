@@ -8,6 +8,11 @@ class UserController {
                 action: "pageIndex",
                 url: "/user",
                 method: "get"
+            },
+            {
+                action: "actionUser",
+                url: "/api/user",
+                method: "get"
             }
         ];
     }
@@ -20,6 +25,21 @@ class UserController {
         });*/
         res.render('profile', { data: "" });
     };
+    
+    actionUser(req, res) {
+        if (!req.session.user) {
+            res.sendStatus(404);
+            return;
+        }
+        const user = req.session.user;
+        app.models.UserModel.findById(user.uid, function (err, row, fields) {
+            if (!err && row) {
+                res.json({ status: 200, user: row.toJson() });
+            } else {
+                res.sendStatus(404);
+            }
+        });
+    }
 };
 
 module.exports = UserController;

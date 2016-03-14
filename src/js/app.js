@@ -18,13 +18,13 @@
     }).Class({
         constructor: [ng.router.Router, ng.http.Http, function (router, http) {
             router.subscribe(function(path){
-                console.log("path changed: ", path);
-                const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
+                console.log("path changed: ", path,router);
+                /*const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
                 const options = new ng.http.RequestOptions({ headers: headers });
 
                 http.post('/api/user/access?rid=' + Math.random(), JSON.stringify({path: path}), options).toPromise().then(function(res) {
-                    console.log("resp::",res);
-                }).catch(function() { console.error("some error"); });
+                    //console.log("resp::",res);
+                }).catch(function() { console.error("some error"); });*/
             });
         }]
     });
@@ -40,6 +40,7 @@
         new ng.router.Route({ path: '/logout', component: app.LogoutComponent, name: 'Logout' }),
         //---User---
         new ng.router.Route({ path: '/user', component: app.UserProfileComponent, name: 'Profile' }),
+        new ng.router.Route({ path: '/user/edit', component: app.UserProfileEditComponent, name: 'ProfileEdit' }),
         
         new ng.router.Route({ path: '/', component: app.LoginComponent, name: 'Index' }),
     ])(app.ApplicationComponent)

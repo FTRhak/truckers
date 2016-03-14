@@ -22,25 +22,27 @@
 
     app.UserProfileEditComponent = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/user/edit.html'
+        templateUrl: 'templates/user/user_edit.html'
     }).Class({
         constructor: [ng.http.Http, function(http) {
+            this.model = new app.UserModel();
+            let self = this;
             http.get('/api/user/?rid=' + Math.random(), {}).toPromise().then(function(res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     if (body.status === 200) {
-                        console.log(body);
-                        //TODO bugfix location.go('/user');
-                        //app.tools.location.go('/user');
-                    } else {
-                        self.errorMessage = body.error;
+                        self.model.setData(body.user);
+                        //console.log(body.user, self.model);
                     }
                 }
             }).catch(function() {
                 //TODO bugfix location.go('/user');
                 app.tools.location.go('/login');
             });
-        }]
+        }],
+        onSubmit: function() {
+            console.log("Edit User",this.model);
+        }
     });
 
 })(window.app || (window.app = {}));

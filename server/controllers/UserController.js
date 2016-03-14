@@ -25,15 +25,16 @@ class UserController {
         });*/
         res.render('profile', { data: "" });
     };
-    
+
     actionUser(req, res) {
         if (!req.session.user) {
             res.sendStatus(404);
             return;
         }
         const user = req.session.user;
-        app.models.UserModel.findById(user.uid, function (err, row, fields) {
+        app.models.UserModel.findById(user.uid, function(err, row, fields) {
             if (!err && row) {
+                row.security();
                 res.json({ status: 200, user: row.toJson() });
             } else {
                 res.sendStatus(404);

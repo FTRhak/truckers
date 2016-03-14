@@ -62,6 +62,15 @@ gulp.task('js-libs-prod', function () {
         .pipe(concat('tools.js'))
         .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
+
+gulp.task('js-models-dev', function () {
+    return gulp.src([
+        PROJECT_SRC + 'js/models/ModelBase.js',
+        PROJECT_SRC + 'js/models/*.js'])
+        .pipe(concat('models.js'))
+        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
+});
+
 gulp.task('js-app-dev', function () {
     return gulp.src([
         PROJECT_SRC + 'js/modules/*.js',
@@ -71,13 +80,15 @@ gulp.task('js-app-dev', function () {
 });
 gulp.task('js-app-prod', function () {
     return gulp.src([
+        PROJECT_SRC + 'js/models/ModelBase.js',
+        PROJECT_SRC + 'js/models/*.js',
         PROJECT_SRC + 'js/modules/*.js',
         PROJECT_SRC + 'js/app.js'])
         .pipe(concat('app.js'))
         .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
 
-gulp.task('js-dev', ['js-libs-dev', 'js-app-dev']);
+gulp.task('js-dev', ['js-libs-dev', 'js-models-dev', 'js-app-dev']);
 gulp.task('js-prod', ['js-app-prod']);
 //-----------TEMPLATES-------------
 gulp.task('template-dev', function () {
@@ -107,7 +118,7 @@ var libsScriptDev = [
 ];
 var libsScriptProd = ['tools.js'];
 
-var scriptDev = ['app.js'];
+var scriptDev = ['models.js', 'app.js'];
 var scriptProd = ['script.js'];
 
 function launchStylesAsString(list, title) {

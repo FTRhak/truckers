@@ -162,6 +162,10 @@ class UserModel extends app.models.ModelBase {
         super();
 
     }
+    
+    security() {
+        this.password = "";
+    }
 }
 
 

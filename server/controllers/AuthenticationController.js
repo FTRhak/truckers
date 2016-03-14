@@ -60,6 +60,7 @@ class AuthenticationController {
         const pass = req.body.password;
         app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: [login, pass] } }, function (err, row, fields) {
             if (!err && row) {
+                row.security();
                 req.session.user = row.toJson();
                 res.json({ status: 200, action: 'redirect', url: '/user' });
             } else {

@@ -3,7 +3,8 @@
 (function(app) {
     app.UserProfileComponent = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/user/profile.html'
+        templateUrl: 'templates/user/profile.html',
+        directives: [app.UserMenuController]
     }).Class({
         constructor: [ng.http.Http, function(http) {
             http.get('/api/user/?rid=' + Math.random(), {}).toPromise().then(function(res) {
@@ -22,7 +23,8 @@
 
     app.UserProfileEditComponent = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/user/user_edit.html'
+        templateUrl: 'templates/user/user_edit.html',
+        directives: [app.UserMenuController]
     }).Class({
         constructor: [ng.http.Http, function(http) {
             this.model = new app.UserModel();

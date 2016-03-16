@@ -13,11 +13,12 @@
     
     app.ApplicationComponent = ng.core.Component({
         selector: 'app-trucker-route',
-        template: "<navigate-menu></navigate-menu><user-menu></user-menu><router-outlet></router-outlet>",
-        directives: [ng.router.ROUTER_DIRECTIVES],
-        providers: [app.NavigateMenuController, app.UserMenuController]
+        template: "<navigate-menu></navigate-menu><router-outlet></router-outlet>",
+        directives: [ng.router.ROUTER_DIRECTIVES,app.NavigateMenuController]
     }).Class({
         constructor: [ng.router.Router, ng.http.Http, function (router, http) {
+            var i = 0;
+            var _self = this;
             router.subscribe(function(path){
                 console.log("path changed: ", path,router);
                 /*const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });

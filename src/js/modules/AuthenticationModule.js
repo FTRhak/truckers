@@ -6,9 +6,10 @@
     app.LoginComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/login.html',
-        directives: [ng.router.ROUTER_DIRECTIVES]
+        directives: [ng.router.ROUTER_DIRECTIVES],
+        providers: [app.Auth]
     }).Class({
-        constructor: [ng.http.Http, ng.router.Location, ng.router.Router, function(http, location, router) {
+        constructor: [ng.http.Http, ng.router.Location, ng.router.Router, app.Auth, function(http, location, router, user) {
 
             this.errorMessage = "";
             this.model = {

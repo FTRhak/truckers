@@ -1,19 +1,28 @@
-(function (app) {
+(function(app) {
     app.tools = {
         location: {
-            go: function(path){
+            go: function(path) {
                 let a = document.createElement('a');
-                a.href='#'+path;
+                a.href = '#' + path;
                 a.click();
                 a.remove();
             }
         }
     };
-    
+
+    app.Auth = ng.core.Injectable({}).Class({
+        constructor: function() {
+            console.log("init Auth");
+        },
+        getData: function() {
+            console.log("init Auth");
+        }
+    });
+
     app.TestDirective = ng.core.Directive({
         selector: 'router-access'
     }).Class({
-        constructor: function AccessClass(){
+        constructor: function AccessClass() {
             console.log('call directive');
         }
     });
@@ -22,11 +31,11 @@
     app.ApplicationComponent = ng.core.Component({
         selector: 'app-trucker-route',
         template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
-        directives: [ng.router.ROUTER_DIRECTIVES,app.NavigateMenuController,app.TestDirective]
+        directives: [ng.router.ROUTER_DIRECTIVES, app.NavigateMenuController, app.TestDirective]
     }).Class({
-        constructor: [ng.router.Router, ng.http.Http, function (router, http) {
-            router.subscribe(function(path){
-                console.log("path changed: ", path,router);
+        constructor: [ng.router.Router, ng.http.Http, function(router, http) {
+            router.subscribe(function(path) {
+                console.log("path changed: ", path, router);
                 /*const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
                 const options = new ng.http.RequestOptions({ headers: headers });
 
@@ -49,11 +58,11 @@
         //---User---
         new ng.router.Route({ path: '/user', component: app.UserProfileComponent, name: 'Profile' }),
         new ng.router.Route({ path: '/user/edit', component: app.UserProfileEditComponent, name: 'ProfileEdit' }),
-        
-        new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true}),
 
-        new ng.router.Route({ path: '/404', component: app.Site404Component, name: 'Page404'}),
-        new ng.router.Route({path: '/*path',  component: app.Site404Component})
+        new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true }),
+
+        new ng.router.Route({ path: '/404', component: app.Site404Component, name: 'Page404' }),
+        new ng.router.Route({ path: '/*path', component: app.Site404Component })
     ])(app.ApplicationComponent)
 
 })(window.app || (window.app = {}));

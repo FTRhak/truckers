@@ -10,15 +10,21 @@
         }
     };
     
-    
+    app.TestDirective = ng.core.Directive({
+        selector: 'router-access'
+    }).Class({
+        constructor: function AccessClass(){
+            console.log('call directive');
+        }
+    });
+
+
     app.ApplicationComponent = ng.core.Component({
         selector: 'app-trucker-route',
-        template: "<navigate-menu></navigate-menu><router-outlet></router-outlet>",
-        directives: [ng.router.ROUTER_DIRECTIVES,app.NavigateMenuController]
+        template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
+        directives: [ng.router.ROUTER_DIRECTIVES,app.NavigateMenuController,app.TestDirective]
     }).Class({
         constructor: [ng.router.Router, ng.http.Http, function (router, http) {
-            var i = 0;
-            var _self = this;
             router.subscribe(function(path){
                 console.log("path changed: ", path,router);
                 /*const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
@@ -44,7 +50,7 @@
         new ng.router.Route({ path: '/user', component: app.UserProfileComponent, name: 'Profile' }),
         new ng.router.Route({ path: '/user/edit', component: app.UserProfileEditComponent, name: 'ProfileEdit' }),
         
-        new ng.router.Route({ path: '/', component: app.LoginComponent, name: 'Index' }),
+        new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true}),
     ])(app.ApplicationComponent)
 
 })(window.app || (window.app = {}));

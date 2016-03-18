@@ -1,4 +1,6 @@
 (function(app) {
+    'use strict';
+
     class ModelBase {
         constructor() {
             this.___ = {};
@@ -12,7 +14,7 @@
                 }
             }
         }
-        toJson(){
+        toJson() {
             return this.____;
         }
     }

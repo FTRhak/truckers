@@ -9,7 +9,6 @@
         directives: [ng.router.ROUTER_DIRECTIVES]
     }).Class({
         constructor: [ng.http.Http, ng.router.Location, ng.router.Router, function(http, location, router) {
-            this.http = http;
 
             this.errorMessage = "";
             this.model = {
@@ -23,7 +22,7 @@
                 const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
                 const options = new ng.http.RequestOptions({ headers: headers });
 
-                this.http.post('/api/user/login?rid=' + Math.random(), JSON.stringify(this.model), options).toPromise().then(function(res) {
+                http.post('/api/user/login?rid=' + Math.random(), JSON.stringify(this.model), options).toPromise().then(function(res) {
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {

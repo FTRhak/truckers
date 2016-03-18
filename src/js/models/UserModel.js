@@ -1,4 +1,6 @@
 (function(app) {
+    'use strict';
+
     class UserModel extends app.ModelBase {
 
         static get attributes() {

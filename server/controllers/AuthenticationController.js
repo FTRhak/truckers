@@ -81,6 +81,10 @@ class AuthenticationController {
     
     actionAccess(req, res) {
         res.json({ status: 200, access: true });
+        /*setTimeout(function() {
+            res.sendStatus(404);
+        }, 2000);/**/
+        
     }
 
 };

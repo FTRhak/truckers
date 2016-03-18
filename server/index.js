@@ -53,7 +53,12 @@ models(app.models);
 var controllers = require(__dirname + '/controllers/controller.js');
 controllers(app.express);
 
-var server = app.express.listen(3000, function () {
+app.express.get('*', function(req, res) {
+    res.status(404);
+    res.render('404', {});
+});
+
+var server = app.express.listen(3000, function() {
     var host = server.address().address;
     var port = server.address().port;
 

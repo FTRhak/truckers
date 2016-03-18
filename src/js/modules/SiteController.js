@@ -27,5 +27,15 @@
 
         }
     });
+    
+    app.Site404Component = ng.core.Component({
+        selector: 'app-trucker',
+        templateUrl: 'templates/site/404.html'
+    }).Class({
+        constructor: function () {
+
+        }
+    });
+
 
 })(window.app || (window.app = {}));

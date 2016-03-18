@@ -51,6 +51,9 @@
         new ng.router.Route({ path: '/user/edit', component: app.UserProfileEditComponent, name: 'ProfileEdit' }),
         
         new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true}),
+
+        new ng.router.Route({ path: '/404', component: app.Site404Component, name: 'Page404'}),
+        new ng.router.Route({path: '/*path',  component: app.Site404Component})
     ])(app.ApplicationComponent)
 
 })(window.app || (window.app = {}));

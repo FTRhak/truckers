@@ -1,29 +1,11 @@
 (function(app) {
-    app.tools = {
-        location: {
-            go: function(path) {
-                let a = document.createElement('a');
-                a.href = '#' + path;
-                a.click();
-                a.remove();
-            }
-        }
-    };
-
-    app.Auth = ng.core.Injectable({}).Class({
-        constructor: function() {
-            console.log("init Auth");
-        },
-        getData: function() {
-            console.log("init Auth");
-        }
-    });
+    'use strict';
 
     app.TestDirective = ng.core.Directive({
         selector: 'router-access'
     }).Class({
         constructor: function AccessClass() {
-            console.log('call directive');
+            //console.log('call directive');
         }
     });
 
@@ -31,17 +13,13 @@
     app.ApplicationComponent = ng.core.Component({
         selector: 'app-trucker-route',
         template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
-        directives: [ng.router.ROUTER_DIRECTIVES, app.NavigateMenuController, app.TestDirective]
+        directives: [ng.router.ROUTER_DIRECTIVES, app.NavigateMenuController, app.TestDirective],
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: [ng.router.Router, ng.http.Http, function(router, http) {
+        constructor: [ng.router.Router, app.Auth, function ApplicationComponent(router, user) {
+            user.synchronizeUser();
             router.subscribe(function(path) {
-                console.log("path changed: ", path, router);
-                /*const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
-                const options = new ng.http.RequestOptions({ headers: headers });
-
-                http.post('/api/user/access?rid=' + Math.random(), JSON.stringify({path: path}), options).toPromise().then(function(res) {
-                    //console.log("resp::",res);
-                }).catch(function() { console.error("some error"); });*/
+                //console.log("path changed: ",path);
             });
         }]
     });

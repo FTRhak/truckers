@@ -28,7 +28,7 @@ class AuthenticationController {
             }, {
                 action: "actionLogout",
                 url: "/api/logout",
-                method: "get"
+                method: "post"
             }, {
                 action: "actionAccess",
                 url: "/api/user/access",
@@ -53,16 +53,17 @@ class AuthenticationController {
     //-------------------------------
     actionLogin(req, res) {
         if (req.session.user) {
-            res.json({ status: 200, action: 'redirect', url: '/user' });
+            res.json({ status: 200, user: req.session.user });
             return;
         }
+        console.log("BODY:",req.body);
         const login = req.body.login;
         const pass = req.body.password;
         app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: [login, pass] } }, function (err, row, fields) {
             if (!err && row) {
                 row.security();
                 req.session.user = row.toJson();
-                res.json({ status: 200, action: 'redirect', url: '/user' });
+                res.json({ status: 200, user: row.toJson() });
             } else {
                 res.json({ status: 400, error: "User does not exist!" });
             }
@@ -72,19 +73,19 @@ class AuthenticationController {
     actionLogout(req, res) {
         req.session.destroy(function (err) {
             if (err) {
-                res.json({ status: 400, error: err });
+                 res.sendStatus(401);
             } else {
-                res.json({ status: 200, action: 'redirect', url: '/' });
+                 res.sendStatus(200);
             }
         });
     }
     
     actionAccess(req, res) {
-        res.json({ status: 200, access: true });
-        /*setTimeout(function() {
-            res.sendStatus(404);
-        }, 2000);/**/
-        
+        if (req.session.user) {
+            res.json({ status: 200, id: req.session.user.id });
+        } else {
+            res.sendStatus(401);
+        }
     }
 
 };

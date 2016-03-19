@@ -6,11 +6,12 @@
     app.WallComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/wall/wall.html',
-        directives: [app.UserMenuController]
+        directives: [app.UserMenuController],
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: function() {
+        constructor: [app.Http, app.Auth, function(http, user) {
 
-        }
+        }]
     });
 
 })(window.app || (window.app = {}));

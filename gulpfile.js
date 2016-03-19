@@ -73,6 +73,7 @@ gulp.task('js-models-dev', function () {
 
 gulp.task('js-app-dev', function () {
     return gulp.src([
+        PROJECT_SRC + 'js/tools.js',
         PROJECT_SRC + 'js/modules/*.js',
         PROJECT_SRC + 'js/app.js'])
         .pipe(concat('app.js'))
@@ -80,6 +81,7 @@ gulp.task('js-app-dev', function () {
 });
 gulp.task('js-app-prod', function () {
     return gulp.src([
+        PROJECT_SRC + 'js/tools.js',
         PROJECT_SRC + 'js/models/ModelBase.js',
         PROJECT_SRC + 'js/models/*.js',
         PROJECT_SRC + 'js/modules/*.js',

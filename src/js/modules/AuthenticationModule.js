@@ -7,10 +7,12 @@
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/login.html',
         directives: [ng.router.ROUTER_DIRECTIVES],
-        providers: [app.Auth]
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: [ng.http.Http, ng.router.Location, ng.router.Router, app.Auth, function(http, location, router, user) {
-
+        constructor: [app.Http, app.Auth, ng.router.Location, ng.router.Router, function(http, user, location, router) {
+            if (user.isLogin()) {
+                app.tools.location.go('/');
+            }
             this.errorMessage = "";
             this.model = {
                 login: "",
@@ -20,20 +22,19 @@
 
             this.onSubmit = function() {
                 const self = this;
-                const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
-                const options = new ng.http.RequestOptions({ headers: headers });
-
-                http.post('/api/user/login?rid=' + Math.random(), JSON.stringify(this.model), options).toPromise().then(function(res) {
+                console.log('model:', this.model);
+                http.post('/api/user/login?rid=' + Math.random(), this.model, function(res) {
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {
+                            user.login(body.user.id);
                             //TODO bugfix location.go('/user');
                             app.tools.location.go('/user');
                         } else {
                             self.errorMessage = body.error;
                         }
                     }
-                }).catch(function() { console.error("some error"); });
+                });
             }
         }]
     });
@@ -43,9 +44,13 @@
     app.RegistrateComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/register.html',
-        directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES]
+        directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES],
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: [ng.http.Http, function(http) {
+        constructor: [app.Http, app.Auth, function(http, user) {
+            if (user.isLogin()) {
+                app.tools.location.go('/');
+            }
             this.model = {
                 firstName: "",
                 secondName: "",
@@ -67,11 +72,14 @@
 
     app.RestoreComponent = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/authentication/restore.html'
+        templateUrl: 'templates/authentication/restore.html',
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: function() {
-
-        },
+        constructor: [app.Http, app.Auth, function(http, user) {
+            if (user.isLogin()) {
+                app.tools.location.go('/login');
+            }
+        }],
         onSubmit: function() {
 
         }
@@ -81,13 +89,18 @@
 
     app.LogoutComponent = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/authentication/logout.html'
+        templateUrl: 'templates/authentication/logout.html',
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: [ng.http.Http, function(http) {
-            http.post('/api/logout?rid=' + Math.random()).toPromise().then(function(res) {
-                //TODO bugfix location.go('/user');
+        constructor: [app.Http, app.Auth, function(http, user) {
+            if (!user.isLogin()) {
                 app.tools.location.go('/login');
-            }).catch(function() { console.error("some error"); });
+                return;
+            }
+            http.post('/api/logout?rid=' + Math.random(), {}, function(res) {
+                user.loguot();
+                app.tools.location.go('/login');
+            });
         }]
     });
 

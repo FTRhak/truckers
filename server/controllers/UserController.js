@@ -12,7 +12,7 @@ class UserController {
             {
                 action: "actionUser",
                 url: "/api/user",
-                method: "get"
+                method: "post"
             }
         ];
     }

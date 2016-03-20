@@ -44,6 +44,9 @@
                 });
             }
         }],
+        /**
+         * @return {bool}
+         */
         isLogin: function() {
             return !!localStorage.getItem('user');
         },

@@ -10,7 +10,10 @@
         providers: [app.Http, app.Auth]
     }).Class({
         constructor: [app.Http, app.Auth, function(http, user) {
-
+            if (!user.isLogin()) {
+                app.tools.location.go('/login');
+            }
+            
         }]
     });
 

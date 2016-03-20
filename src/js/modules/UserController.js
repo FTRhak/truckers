@@ -4,10 +4,16 @@
     app.UserProfileComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/user/profile.html',
-        directives: [app.UserMenuController]
+        directives: [app.UserMenuController],
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: [ng.http.Http, function(http) {
-            http.get('/api/user/?rid=' + Math.random(), {}).toPromise().then(function(res) {
+        constructor: [app.Http, app.Auth, function(http, user) {
+            if (!user.isLogin()) {
+                app.tools.location.go('/login');
+            }
+            
+            
+            http.post('/api/user/?rid=' + Math.random(), {}, function(res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     if (body.status === 200) {
@@ -17,19 +23,24 @@
                         self.errorMessage = body.error;
                     }
                 }
-            }).catch(function() { console.error("some error"); });
+            });
         }]
     });
 
     app.UserProfileEditComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/user/user_edit.html',
-        directives: [app.UserMenuController]
+        directives: [app.UserMenuController],
+        providers: [app.Http, app.Auth]
     }).Class({
-        constructor: [ng.http.Http, function(http) {
+        constructor: [app.Http, app.Auth, function(http, user) {
+            if (!user.isLogin()) {
+                app.tools.location.go('/login');
+            }
+            
             this.model = new app.UserModel();
             let self = this;
-            http.get('/api/user/?rid=' + Math.random(), {}).toPromise().then(function(res) {
+            http.post('/api/user/?rid=' + Math.random(), {}, function(res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     if (body.status === 200) {
@@ -37,9 +48,6 @@
                         //console.log(body.user, self.model);
                     }
                 }
-            }).catch(function() {
-                //TODO bugfix location.go('/user');
-                app.tools.location.go('/login');
             });
         }],
         onSubmit: function() {

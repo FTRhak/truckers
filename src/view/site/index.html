@@ -18,12 +18,8 @@
     <!--LN-->
 </head>
 
-<body>
-    <section id="page" class="container">
-        <app-trucker-route>Loading...</app-trucker-route>
-    </section>
-
-    <footer>Trucker@</footer>
+<body class="page">
+    <div app-trucker>Loading...</div>
 
     <!--JSLIBS-->
     <!--JSAPP-->
@@ -40,6 +36,8 @@
             });
         })(window.app || (window.app = {}));
     </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6LWAt8hsoCtgK3efbbtnCG81uKBvuCpc&callback=app.initMap"  async defer></script>
 </body>
 
 </html>

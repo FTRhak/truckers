@@ -74,6 +74,7 @@ gulp.task('js-models-dev', function () {
 gulp.task('js-app-dev', function () {
     return gulp.src([
         PROJECT_SRC + 'js/tools.js',
+        PROJECT_SRC + 'js/components/*.js',
         PROJECT_SRC + 'js/modules/*.js',
         PROJECT_SRC + 'js/app.js'])
         .pipe(concat('app.js'))
@@ -102,13 +103,14 @@ gulp.task('template-dev', function () {
 //-----------ICONS-----------------
 gulp.task('icons', function () {
     return gulp.src([
-        PROJECT_SRC + 'icons/*'])
+        PROJECT_SRC + 'icons/*',
+        PROJECT_SRC + 'icons/*/*'])
     //.pipe(concat('app.js'))
         .pipe(gulp.dest(PROJECT_BUILD + 'icons/'));
 });
 //-----------INDEX-----------------
-var styleDev = ['bootstrap.css', 'bootstrap-theme.css', 'style.css'];
-var styleProd = ['base.min.css', 'style.css'];
+var styleDev = [/*'bootstrap.css', 'bootstrap-theme.css',*/ 'style.css'];
+var styleProd = [/*'base.min.css',*/ 'style.css'];
 
 var libsScriptDev = [
     'libs/es6-shim.min.js',
@@ -163,11 +165,11 @@ function supportedLanguagesProd(callback) {
 }
 
 gulp.task('index-dev', function () {
-    var version = 0.1;
+    var version = Math.random();
     supportedLanguagesProd(function (listLanguages) {
         gulp.src([PROJECT_SRC + 'view/*/*.html'])
             .pipe(replace(/(<!--STYLES-->)/g, launchStylesAsString(styleDev, version)))
-            .pipe(replace(/(<!--JSLIBS-->)/g, launchScriptsAsString(libsScriptDev, version)))
+            .pipe(replace(/(<!--JSLIBS-->)/g, launchScriptsAsString(libsScriptDev, 0.1)))
             .pipe(replace(/(<!--JSAPP-->)/g, launchScriptsAsString(scriptDev, version)))
             .pipe(replace(/(<!--LN-->)/g, listLanguages))
             .pipe(rename(function (path) {

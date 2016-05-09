@@ -1,8 +1,8 @@
-<section class="container-page">
-    <section class="row">
-        <div class="col-md-4 col-sm-3"></div>
-        <div class="col-md-4 col-sm-6">
-            <form action="" method="post" (ngSubmit)="onSubmit()">
+<section class="row">
+    <div class="col-md-4 col-sm-3"></div>
+    <div class="col-md-4 col-sm-6">
+        <div class="form">
+            <form action=""  method="post" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="field_login">Email</label>
                     <input type="email" class="form-control" required id="field_login" [(ngModel)]="model.login">
@@ -22,6 +22,6 @@
                 <a href="/#/register" class="btn btn-md btn-default">Create user</a>
             </div>
         </div>
-        <div class="col-md-4 col-sm-3"></div>
-    </section>
+    </div>
+    <div class="col-md-4 col-sm-3"></div>
 </section>

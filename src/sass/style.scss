@@ -1,11 +1,39 @@
 @import 'compass';
 @import 'constants';
 @import 'base';
+@import 'site/media';
+@import 'site/header';
+@import 'site/footer';
+@import 'site/side-bar';
+@import 'site/navigate';
+@import 'site/form';
 
-.container{
-    padding: 0px;
+@import 'components/map';
+html {
+    height: 100%;
 }
-.container-page{
-    padding-left: 15px;
-    padding-right: 15px;
+.page {
+    background-image: url("/icons/bg.jpg");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    color: $baseTextColor;
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a {
+    color: $baseTextColor;
+}
+
+.content {
+    @include box-sizing(border-box);
+    padding: 15px;
+    margin-left: 240px;
+    overflow: hidden;
 }

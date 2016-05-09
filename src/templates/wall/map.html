@@ -1,0 +1,72 @@
+<div id="mapContent" class="map-content">
+    <div id="mapView" class="map-view"></div>
+    <div class="map-nav">
+        <ul class="list-actions">
+            <li class="action-item">
+                <span class="btn" (click)="actionFollewMe()">F</span>
+            </li>
+            <li class="action-item">
+                <span>Show drivers</span>
+            </li>
+            <li class="action-item">
+                <div class="btn range-setting">
+                    <label for="rng">Range (<span>30</span>km)</label>
+                    <input type="checkbox" value="range" class="range-open" id="rng">
+                    <div class="range-panel">
+                        <div class="slider slider-horizontal">
+                            <div class="slider-track">
+                                <div class="slider-selection"></div>
+                                <div class="slider-handle round" style="left: 10%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="action-item">
+                <div class="multy-select multy-select-icon">
+                    <label for="msOpen" class="title-list">Objects</label>
+                    <input type="checkbox" value="1" id="msOpen" class="ms-open">
+                    <ul class="items-list">
+                        <li class="object-item">
+                            <div class="input-checkbox">
+                                <input type="checkbox" value="gass" class="flag-checkbox" id="cbGass">
+                                <label for="cbGass" class="view-checkbox">Glass stantion</label>
+                            </div>
+                        </li>
+                        <li class="object-item">
+                            <div class="input-checkbox">
+                                <input type="checkbox" value="gass" class="flag-checkbox" id="cbStop">
+                                <label for="cbStop" class="view-checkbox">Stop</label>
+                            </div>
+                        </li>
+                        <li class="object-item">
+                            <div class="input-checkbox">
+                                <input type="checkbox" value="gass" class="flag-checkbox" id="cbCaffe">
+                                <label for="cbCaffe" class="view-checkbox">Caffe</label>
+                            </div>
+                        </li>
+                        <li class="object-item">
+                            <div class="input-checkbox">
+                                <input type="checkbox" value="gass" class="flag-checkbox" id="cbBorder">
+                                <label for="cbBorder" class="view-checkbox">Border</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="action-item">
+                <div class="btn">
+                    <div class="input-checkbox">
+                        <input type="checkbox" value="event" class="flag-checkbox" id="cbEvents">
+                        <label for="cbEvents" class="view-checkbox">Events</label>
+                    </div>
+                </div>
+            </li>
+
+            <li class="action-item">
+                <span class="btn btn-icon btn-fullscreen" title="Full screen" (click)="actionFullScreen($event)"></span>
+            </li>
+        </ul>
+
+    </div>
+</div>

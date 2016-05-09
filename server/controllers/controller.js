@@ -1,10 +1,17 @@
 /*global app:true, DEBUD:true, __dirname:true */
 'use strict';
 
-module.exports = function (express) {
-    function initUrlControllers(controllerClass) {
+class ControllerBase {
+    constructor() {
+
+    }
+}
+
+module.exports = function(express) {
+    function initUrlControllers(controllerClassBuild) {
+        let controllerClass = controllerClassBuild(ControllerBase);
         let obj = new controllerClass();
-        obj.actionMethods.forEach(function (el) {
+        obj.actionMethods.forEach(function(el) {
             let action = el.action;
             let method = el.method;
             let url = el.url;

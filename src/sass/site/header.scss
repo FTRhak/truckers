@@ -1,0 +1,38 @@
+
+$headerBgColor: $baseBgColor;
+//$headerBgSecongColor: lighten($baseBgColor, 20%);
+
+$headerPadding: 3px;
+.header {
+    padding: $headerPadding $headerPadding * 3;
+    height: $headerHeight;
+    @include box-sizing(border-box);
+    //@include background-image(linear-gradient(to bottom, $headerBgSecongColor 0%,$headerBgColor 90%,$headerBgSecongColor 97%,$headerBgSecongColor 100%));
+    background-color: $headerBgColor;
+    border-bottom: 1px solid #FFFFFF;
+    
+    display: table;
+    width: 100%;
+}
+.header {
+    .avatar {
+        height: $headerHeight - $headerPadding * 2;
+        width: $headerHeight - $headerPadding * 2;
+        border-radius: $headerHeight / 2;
+        background-color: rgba(255, 255, 255, 0.7);
+        display: table-cell;
+    }
+    .user-name {
+        @include box-sizing(border-box);
+        font-size: 2em;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 0px 15px;
+    }
+    .settings {
+        display: table-cell;
+        width: $headerHeight - $headerPadding * 2;
+        background-color: red;
+    }
+    
+}

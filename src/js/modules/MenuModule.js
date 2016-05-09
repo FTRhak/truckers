@@ -14,7 +14,7 @@
     });
     
     app.UserMenuController = ng.core.Component({
-        selector: 'user-menu',
+        selector: '[header-profile]',
         templateUrl: 'templates/navigation/user_menu.html'
     }).Class({
         constructor: [ng.http.Http, function (http) {

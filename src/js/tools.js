@@ -30,7 +30,7 @@
     });
 
 
-    app.Auth = ng.core.Injectable({
+    let Auth = ng.core.Injectable({
         providers: [app.Http]
     }).Class({
         constructor: [app.Http, function AuthUser(http) {
@@ -56,6 +56,17 @@
         loguot: function() {
             localStorage.removeItem('user');
         }
+    });
+    
+    app.Auth = Auth;
+    
+    app.Server = ng.core.Injectable({
+        providers: [app.Http, Auth]
+    }).Class({
+        constructor: [app.Http, Auth, function ServerClass(http, user){
+            this.http = http;
+            this.user = user;
+        }]
     });
 
 })(window.app || (window.app = {}));

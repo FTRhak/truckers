@@ -191,11 +191,11 @@ class ModelBase {
 }
 
 module.exports = function(modelsList) {
-    modelsList['ModelBase'] = ModelBase;
-
     function initUrlControllers(modelClass) {
-        modelsList[modelClass.name] = modelClass;//MySQLModelConstructor(modelClass);
-        DEBUD && console.log('\x1b[33m%s\x1b[0m: ', "Init model ", modelClass.name);
+        let classElement = modelClass(ModelBase);
+        modelsList[classElement.name] = classElement;
+        
+        DEBUD && console.log('\x1b[33m%s\x1b[0m: ', "Init model ", classElement.name);
     }
 
     initUrlControllers(require(__dirname + '/UserModel'));

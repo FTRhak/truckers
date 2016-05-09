@@ -5,15 +5,15 @@
         selector: 'app-trucker',
         templateUrl: 'templates/user/profile.html',
         directives: [app.UserMenuController],
-        providers: [app.Http, app.Auth]
+        providers: [app.Server]
     }).Class({
-        constructor: [app.Http, app.Auth, function(http, user) {
-            if (!user.isLogin()) {
+        constructor: [app.Server, function(server) {
+            if (!server.user.isLogin()) {
                 app.tools.location.go('/login');
             }
             
             
-            http.post('/api/user/?rid=' + Math.random(), {}, function(res) {
+            server.http.post('/api/user/?rid=' + Math.random(), {}, function(res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     if (body.status === 200) {
@@ -31,16 +31,16 @@
         selector: 'app-trucker',
         templateUrl: 'templates/user/user_edit.html',
         directives: [app.UserMenuController],
-        providers: [app.Http, app.Auth]
+        providers: [app.Server]
     }).Class({
-        constructor: [app.Http, app.Auth, function(http, user) {
-            if (!user.isLogin()) {
+        constructor: [app.Server, function(server) {
+            if (!server.user.isLogin()) {
                 app.tools.location.go('/login');
             }
             
             this.model = new app.UserModel();
             let self = this;
-            http.post('/api/user/?rid=' + Math.random(), {}, function(res) {
+            server.http.post('/api/user/?rid=' + Math.random(), {}, function(res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     if (body.status === 200) {

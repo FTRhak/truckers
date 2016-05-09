@@ -7,10 +7,10 @@
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/login.html',
         directives: [ng.router.ROUTER_DIRECTIVES],
-        providers: [app.Http, app.Auth]
+        providers: [app.Server]
     }).Class({
-        constructor: [app.Http, app.Auth, ng.router.Location, ng.router.Router, function(http, user, location, router) {
-            if (user.isLogin()) {
+        constructor: [app.Server, ng.router.Location, ng.router.Router, function(server, location, router) {
+            if (server.user.isLogin()) {
                 app.tools.location.go('/');
             }
             this.errorMessage = "";
@@ -23,11 +23,11 @@
             this.onSubmit = function() {
                 const self = this;
                 console.log('model:', this.model);
-                http.post('/api/user/login?rid=' + Math.random(), this.model, function(res) {
+                server.http.post('/api/user/login?rid=' + Math.random(), this.model, function(res) {
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {
-                            user.login(body.user.id);
+                            server.user.login(body.user.id);
                             //TODO bugfix location.go('/user');
                             app.tools.location.go('/user');
                         } else {
@@ -45,10 +45,10 @@
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/register.html',
         directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES],
-        providers: [app.Http, app.Auth]
+        providers: [app.Server]
     }).Class({
-        constructor: [app.Http, app.Auth, function(http, user) {
-            if (user.isLogin()) {
+        constructor: [app.Server, function(server) {
+            if (server.user.isLogin()) {
                 app.tools.location.go('/');
             }
             this.model = {
@@ -73,10 +73,10 @@
     app.RestoreComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/restore.html',
-        providers: [app.Http, app.Auth]
+        providers: [app.Server]
     }).Class({
-        constructor: [app.Http, app.Auth, function(http, user) {
-            if (user.isLogin()) {
+        constructor: [app.Server, function(server) {
+            if (server.user.isLogin()) {
                 app.tools.location.go('/login');
             }
         }],
@@ -90,14 +90,14 @@
     app.LogoutComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/logout.html',
-        providers: [app.Http, app.Auth]
+        providers: [app.Server]
     }).Class({
-        constructor: [app.Http, app.Auth, function(http, user) {
-            if (!user.isLogin()) {
+        constructor: [app.Server, function(server) {
+            if (!server.user.isLogin()) {
                 app.tools.location.go('/login');
                 return;
             }
-            http.post('/api/logout?rid=' + Math.random(), {}, function(res) {
+            server.http.post('/api/logout?rid=' + Math.random(), {}, function(res) {
                 user.loguot();
                 app.tools.location.go('/login');
             });

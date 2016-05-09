@@ -10,20 +10,37 @@
     });
 
 
+/*
+<section id="page" class="container">
+        <app-trucker-route>Loading...</app-trucker-route>
+    </section>
+
+    <footer>Trucker@</footer>
+*/
+
     app.ApplicationComponent = ng.core.Component({
-        selector: 'app-trucker-route',
-        template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
-        directives: [ng.router.ROUTER_DIRECTIVES, app.NavigateMenuController, app.TestDirective],
+        selector: '[app-trucker]',
+        //template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
+        template: `
+            <header header-profile class="header">Hello user</header>
+            <side class="side-bar">Side</side>
+            <section page-content class="content">
+                <router-outlet></router-outlet>
+            </section>
+            <nav class="navigation">Settings</nav>
+            <footer class="footer"></footer>
+        `,
+        directives: [ng.router.ROUTER_DIRECTIVES, app.NavigateMenuController, app.UserMenuController, app.TestDirective],
         providers: [app.Http, app.Auth]
     }).Class({
         constructor: [ng.router.Router, app.Auth, function ApplicationComponent(router, user) {
-            user.synchronizeUser();
+            //user.synchronizeUser();
             router.subscribe(function(path) {
                 //console.log("path changed: ",path);
             });
         }]
     });
-
+    //ng.core.enableProdMode();
     app.TruckersApplication = ng.router.RouteConfig([
         //---SITE---
         new ng.router.Route({ path: '/about', component: app.SiteAboutComponent, name: 'About' }),

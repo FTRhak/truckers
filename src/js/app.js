@@ -23,7 +23,7 @@
         //template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
         template: `
             <header header-profile class="header">Hello user</header>
-            <side class="side-bar">Side</side>
+            <side class="side-bar left-side-bar">Side</side>
             <section page-content class="content">
                 <router-outlet></router-outlet>
             </section>
@@ -53,6 +53,14 @@
         //---User---
         new ng.router.Route({ path: '/user', component: app.UserProfileComponent, name: 'Profile' }),
         new ng.router.Route({ path: '/user/edit', component: app.UserProfileEditComponent, name: 'ProfileEdit' }),
+        new ng.router.Route({ path: '/user/settings', component: app.UserSettingsComponent, name: 'UserSettings' }),
+        //---freight---
+        new ng.router.Route({ path: '/freights', component: app.FreightsController, name: 'Freights' }),
+        new ng.router.Route({ path: '/freight/:id/', component: app.FreightController, name: 'Freight' }),
+        new ng.router.Route({ path: '/freight/:id/edit', component: app.FreightEditController, name: 'Freight edit' }),
+        new ng.router.Route({ path: '/freight/:id/delete', component: app.FreightDeleteController, name: 'Freight delete' }),
+        new ng.router.Route({ path: '/freight/create/', component: app.FreightCreateController, name: 'Freight create' }),
+        //--- ---
 
         new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true }),
 

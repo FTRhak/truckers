@@ -7,6 +7,7 @@
 @import 'site/side-bar';
 @import 'site/navigate';
 @import 'site/form';
+@import 'site/panel';
 
 @import 'components/map';
 html {
@@ -33,7 +34,47 @@ a {
 
 .content {
     @include box-sizing(border-box);
-    padding: 15px;
+    padding: 15px 15px 50px 15px;
     margin-left: 240px;
     overflow: hidden;
+}
+
+.hide-left-side {
+    .left-side-bar {
+        display: none;
+    }
+    .content {
+        margin-left: 0px;
+    }
+}
+
+.profile-info {
+    @include box-sizing(border-box);
+    background-image: url("/icons/profile-bg.jpg");
+    background-size: cover;
+    background-position: top center;
+    padding: 15px;
+    border-radius: 2px;
+    display: table;
+    width: 100%;
+}
+.profile-avatar {
+    @include box-sizing(border-box);
+    width: 100px;
+    display: table-cell;
+}
+.profile-avatar-img {
+    @include box-sizing(border-box);
+    background-image: inline-image('../images/empty-avatar.png');
+    background-color: #FFFFFF;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: 3px solid #CCCCCC;
+    display: inline-block;
+}
+.profile-data {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 20px;
 }

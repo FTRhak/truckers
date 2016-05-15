@@ -1,0 +1,15 @@
+.panel {
+    @include box-sizing(border-box);
+    background-color: $baseBgColor;
+    border-radius: 2px;
+}
+.panel-header {
+    @include box-sizing(border-box);
+    background-color: $baseBgColor;
+    border-radius: 2px 2px 0px 0px;
+    padding: 3px;
+}
+.panel-content {
+    @include box-sizing(border-box);
+    padding: 5px;
+}

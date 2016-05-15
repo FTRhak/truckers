@@ -27,7 +27,7 @@
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {
-                            server.user.login(body.user.id);
+                            server.user.login(body.user.uid);
                             //TODO bugfix location.go('/user');
                             app.tools.location.go('/user');
                         } else {

@@ -96,7 +96,16 @@
 
 
         }],
-        actionFollewMe() {
+        
+        ngOnInit () {
+            this._initComponent();
+        },
+        ngAfterViewChecked() {
+            //console.log("ngAfterViewChecked");
+        },
+        
+        
+        _initComponent() {
             let currentLocation = { lat: -34.43183746326928, lng: 150.45929235839844 };
             map = new google.maps.Map(document.getElementById('mapView'), {
                 center: currentLocation,
@@ -143,6 +152,10 @@
 
             }
 
+        },
+        
+        actionFollewMe() {
+            
         },
 
         actionTrafic() {

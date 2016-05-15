@@ -1,12 +1,39 @@
-<user-menu></user-menu>
-<section class="container-page">
-    <section class="row">
-        <div class="col-md-4 col-sm-3"></div>
-        <div class="col-md-4 col-sm-6">
-            <h1>Profile</h1>
-            
-            
+<section class="row">
+    <div class="col-md-2 col-sm-2"></div>
+    <div class="col-md-8 col-sm-8">
+        <div class="profile-info">
+            <div class="profile-avatar">
+                <i class="profile-avatar-img" style=""></i>
+            </div>
+            <div class="profile-data">
+                <label>{{user.firstname}} {{user.surname}}</label>
+                <ul>
+                    <li>Age: {{getAge()}}</li>
+                    <li>{{getLocation()}}</li>
+                </ul>
+                <a href="#/user/edit">Edit</a>
+            </div>
         </div>
-        <div class="col-md-4 col-sm-3"></div>
-    </section>
+        <ul>
+            <li>
+                <a href="#/freight/create" class="btn">Create race</a>
+            </li>
+            <li>
+                <a href="#/user/settings" class="btn">Settings</a>
+            </li>
+        </ul>
+
+        <div class="panel">
+            <div class="panel-header">Freights history</div>
+            <div class="panel-content">
+                <ul>
+                    <li>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-2 col-sm-2"></div>
 </section>

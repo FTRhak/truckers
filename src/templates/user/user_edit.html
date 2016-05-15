@@ -1,68 +1,66 @@
-<user-menu></user-menu>
-<section class="container-page">
-    <section class="row">
-        <div class="col-md-4 col-sm-3"></div>
-        <div class="col-md-4 col-sm-6">
-            <h1>Edit</h1>
-            
-            <form action="" method="post" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="field_firstname">Mail</label>
-                    <input type="text" class="form-control" name="mail" id="field_firstname" [(ngModel)]="model.mail" placeholder="Mail" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="field_firstname">First name</label>
-                    <input type="text" class="form-control" required name="firstName" id="field_firstname" [(ngModel)]="model.firstname" placeholder="First name">
-                </div>
-                <div class="form-group">
-                    <label for="field_firstname">Second name</label>
-                    <input type="text" class="form-control" required name="secondName" id="field_firstname" [(ngModel)]="model.surname">
-                </div>
-                <div class="form-group">
-                    <label for="field_email">Nickname</label>
-                    <input type="text" class="form-control" name="nickname" id="field_email" [(ngModel)]="model.nickname" placeholder="Nickname">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass">FB</label>
-                    <input type="text" class="form-control" name="fb_key" id="field_pass" [(ngModel)]="model.fb_key">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">TW</label>
-                    <input type="text" class="form-control" name="tw_key" id="field_pass_confirm" [(ngModel)]="model.tw_key">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">VK</label>
-                    <input type="text" class="form-control" name="vk_key" id="field_pass_confirm" [(ngModel)]="model.vk_key">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">G+</label>
-                    <input type="text" class="form-control" name="gplus_key" id="field_pass_confirm" [(ngModel)]="model.gplus_key">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">Country</label>
-                    <input type="text" class="form-control" name="country" id="field_pass_confirm" [(ngModel)]="model.country" placeholder="Country">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">City</label>
-                    <input type="text" class="form-control" name="city" id="field_pass_confirm" [(ngModel)]="model.city" placeholder="City">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">Address</label>
-                    <input type="text" class="form-control" name="address" id="field_pass_confirm" [(ngModel)]="model.address" placeholder="Address">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">Birthday</label>
-                    <input type="text" class="form-control" name="birthday" id="field_pass_confirm" [(ngModel)]="model.birthday" placeholder="Birthday">
-                </div>
-                <div class="form-group">
-                    <label for="field_pass_confirm">Phone</label>
-                    <input type="tel" class="form-control" name="phone" id="field_pass_confirm" [(ngModel)]="model.phone" placeholder="Phone">
-                </div>
-                
+<section class="row">
+    <div class="col-md-4 col-sm-3"></div>
+    <div class="col-md-4 col-sm-6">
+        <h1>Edit</h1>
+
+        <form action="" method="post" class="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="field_firstname">Mail</label>
+                <input type="text" class="form-control" name="mail" id="field_firstname" [(ngModel)]="model.mail" placeholder="Mail" readonly>
+            </div>
+            <div class="form-group">
+                <label for="field_firstname">First name</label>
+                <input type="text" class="form-control" required name="firstName" id="field_firstname" [(ngModel)]="model.firstname" placeholder="First name">
+            </div>
+            <div class="form-group">
+                <label for="field_firstname">Second name</label>
+                <input type="text" class="form-control" required name="secondName" id="field_firstname" [(ngModel)]="model.surname">
+            </div>
+            <div class="form-group">
+                <label for="field_email">Nickname</label>
+                <input type="text" class="form-control" name="nickname" id="field_email" [(ngModel)]="model.nickname" placeholder="Nickname">
+            </div>
+            <div class="form-group">
+                <label for="field_pass">FB</label>
+                <input type="text" class="form-control" name="fb_key" id="field_pass" [(ngModel)]="model.fb_key">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">TW</label>
+                <input type="text" class="form-control" name="tw_key" id="field_pass_confirm" [(ngModel)]="model.tw_key">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">VK</label>
+                <input type="text" class="form-control" name="vk_key" id="field_pass_confirm" [(ngModel)]="model.vk_key">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">G+</label>
+                <input type="text" class="form-control" name="gplus_key" id="field_pass_confirm" [(ngModel)]="model.gplus_key">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">Country</label>
+                <input type="text" class="form-control" name="country" id="field_pass_confirm" [(ngModel)]="model.country" placeholder="Country">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">City</label>
+                <input type="text" class="form-control" name="city" id="field_pass_confirm" [(ngModel)]="model.city" placeholder="City">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">Address</label>
+                <input type="text" class="form-control" name="address" id="field_pass_confirm" [(ngModel)]="model.address" placeholder="Address">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">Birthday</label>
+                <input type="text" class="form-control" name="birthday" id="field_pass_confirm" [(ngModel)]="model.birthday" placeholder="Birthday">
+            </div>
+            <div class="form-group">
+                <label for="field_pass_confirm">Phone</label>
+                <input type="tel" class="form-control" name="phone" id="field_pass_confirm" [(ngModel)]="model.phone" placeholder="Phone">
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Edit" class="btn btn-md btn-default">
-            </form>
-            
-        </div>
-        <div class="col-md-4 col-sm-3"></div>
-    </section>
+                <a href="#/user" class="btn">Back</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4 col-sm-3"></div>
 </section>

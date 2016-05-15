@@ -48,7 +48,7 @@
          * @return {bool}
          */
         isLogin: function() {
-            return !!localStorage.getItem('user');
+            return !!(localStorage.getItem('user') * 1);
         },
         login: function(id) {
             localStorage.setItem('user', id);

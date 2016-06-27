@@ -76,6 +76,7 @@ gulp.task('js-app-dev', function () {
         PROJECT_SRC + 'js/tools.js',
         PROJECT_SRC + 'js/components/*.js',
         PROJECT_SRC + 'js/modules/*.js',
+        PROJECT_SRC + 'js/modules/*/*.js',
         PROJECT_SRC + 'js/app.js'])
         .pipe(concat('app.js'))
         .pipe(gulp.dest(PROJECT_BUILD + 'js/'));

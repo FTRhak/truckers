@@ -25,7 +25,7 @@
                 'phone'];
         }
 
-        get uid() {
+        /*get uid() {
             return this.___.uid;
         }
         set uid(value) {
@@ -149,7 +149,7 @@
         }
         set phone(value) {
             this.___.phone = value;
-        }
+        }*/
 
         constructor() {
             super();

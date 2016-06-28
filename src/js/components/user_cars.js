@@ -2,13 +2,12 @@
 
 (function (ng, app) {
 
-    app.FreightsHistoryComponent = ng.core.Component({
-        selector: '[freights-history]',
-        templateUrl: 'templates/components/freights_history.html'
+    app.UserCarsComponent = ng.core.Component({
+        selector: '[user-cars]',
+        templateUrl: 'templates/components/user_cars.html'
     }).Class({
         constructor: [app.Server, function (server) {
             this.model = [];
-            
         }],
 
         _loadData() {

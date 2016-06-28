@@ -1,11 +1,11 @@
 /*global ng:true */
 
-(function(app) {
+(function (ng, app) {
     'use strict';
     app.tools = {
         location: {
-            go: function(path) {
-                setTimeout(function() {
+            go: function (path) {
+                setTimeout(function () {
                     let a = document.createElement('a');
                     a.href = '#' + path;
                     a.click();
@@ -20,10 +20,16 @@
             const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
             const jsonHeader = new ng.http.RequestOptions({ headers: headers });
 
-            this.post = function(url, data, success, error) {
+            this.post = function (url, data, success, error) {
                 http.post(url, JSON.stringify(data), jsonHeader).toPromise()
                     .then(success)
-                    .catch(error || function() { app.tools.location.go('/login'); });
+                    .catch(error || function () { app.tools.location.go('/login'); });
+            };
+
+            this.get = function (url, data, success, error) {
+                http.get(url).toPromise()
+                    .then(success)
+                    .catch(error || function () { app.tools.location.go('/login'); });
             };
         }]
 
@@ -36,10 +42,10 @@
         constructor: [app.Http, function AuthUser(http) {
             let self = this;
 
-            this.synchronizeUser = function() {
-                http.post('/api/user/access?rid=' + Math.random(), {}, function(res) {
+            this.synchronizeUser = function () {
+                http.post('/api/user/access?rid=' + Math.random(), {}, function (res) {
                     self.login(res.id);
-                }, function(error) {
+                }, function (error) {
                     self.loguot();
                 });
             }
@@ -47,26 +53,42 @@
         /**
          * @return {bool}
          */
-        isLogin: function() {
+        isLogin: function () {
             return !!(localStorage.getItem('user') * 1);
         },
-        login: function(id) {
+        login: function (id) {
             localStorage.setItem('user', id);
         },
-        loguot: function() {
+        loguot: function () {
             localStorage.removeItem('user');
         }
     });
-    
+
     app.Auth = Auth;
-    
+
+
+    class LocalStorage{
+        constructor () {
+            var data = {};
+            this.setData = function (key, value) {
+                data[key] = value;
+            };
+            this.getData = function (key) {
+                return data[key];
+            };
+        }
+
+    }
+
+
     app.Server = ng.core.Injectable({
         providers: [app.Http, Auth]
     }).Class({
-        constructor: [app.Http, Auth, function ServerClass(http, user){
+        constructor: [app.Http, Auth, function ServerClass(http, user) {
             this.http = http;
             this.user = user;
+            this.storage = new LocalStorage();
         }]
     });
 
-})(window.app || (window.app = {}));
+})(ng, window.app || (window.app = {}));

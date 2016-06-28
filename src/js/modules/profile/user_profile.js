@@ -7,12 +7,16 @@
     app.UserProfileComponent = ng.core.Component({
         selector: 'app-trucker',
         templateUrl: 'templates/user/profile.html',
-        directives: [app.UserMenuController, app.FreightsHistoryComponent],
-        providers: [app.Server]
+        directives: [
+            app.UserMenuController, 
+            app.FreightsHistoryComponent, 
+            app.UserCarsComponent, 
+            app.UserCompanyComponent],
+        providers: [app.Server, ng.platform.browser.Title]
     }).Class({
-        constructor: [app.Server, function(server) {
+        constructor: [app.Server, ng.platform.browser.Title, function(server, title) {
             let self = this;
-            
+            title.setTitle("User profile");
             if (!server.user.isLogin()) {
                 app.tools.location.go('/login');
             }

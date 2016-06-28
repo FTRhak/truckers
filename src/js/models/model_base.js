@@ -3,7 +3,11 @@
 
     class ModelBase {
         constructor() {
-            this.___ = {};
+            let attributes = this.constructor.attributes;
+            for (let i = 0; i < attributes.length; i++) {
+                const attributeName = attributes[i];
+                this[attributeName] = null;
+            }
         }
         setData(data) {
             let i, key, attributes = this.constructor.attributes;
@@ -15,7 +19,7 @@
             }
         }
         toJson() {
-            return this.____;
+            return {};
         }
     }
 

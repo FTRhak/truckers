@@ -1,3 +1,19 @@
+* {
+    @include box-sizing(border-box);
+    padding: 0px;
+    margin: 0px;
+}
+
+ul {
+    list-style: none;
+}
+
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
 
 .soc-login-btn{
     &:before{

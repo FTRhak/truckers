@@ -20,6 +20,7 @@
             const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
             const jsonHeader = new ng.http.RequestOptions({ headers: headers });
 
+            
             this.post = function (url, data, success, error) {
                 http.post(url, JSON.stringify(data), jsonHeader).toPromise()
                     .then(success)
@@ -27,7 +28,13 @@
             };
 
             this.get = function (url, data, success, error) {
-                http.get(url).toPromise()
+                let options = url.indexOf('?') !== -1 ? '&' : '?';
+                let result = [];
+                if (Object.keys(data).length > 0) {
+                    for (let property in data) result.push(encodeURIComponent(property) + "=" + encodeURIComponent(data[property]));
+                    options += result.join("&");
+                }
+                http.get(url + options).toPromise()
                     .then(success)
                     .catch(error || function () { app.tools.location.go('/login'); });
             };
@@ -68,7 +75,7 @@
 
 
     class LocalStorage{
-        constructor () {
+        constructor () {console.log("INIT storage");
             var data = {};
             this.setData = function (key, value) {
                 data[key] = value;
@@ -84,7 +91,7 @@
     app.Server = ng.core.Injectable({
         providers: [app.Http, Auth]
     }).Class({
-        constructor: [app.Http, Auth, function ServerClass(http, user) {
+        constructor: [app.Http, Auth, function ServerClass(http, user) {console.log("INIT server");
             this.http = http;
             this.user = user;
             this.storage = new LocalStorage();

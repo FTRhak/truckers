@@ -1,0 +1,39 @@
+<section class="row">
+    <div class="col-md-4 col-sm-3"></div>
+    <div class="col-md-4 col-sm-6">
+        <section *ngIf="model">
+            <h1>
+                Company: {{model.company_name}}
+                <a href="#/trance-company/{{model.id}}/edit">e</a>
+            </h1>
+            <ul>
+                <li>
+                    <label>Company name</label>
+                    <span>{{model.company_name}}</span>
+                </li>
+                <li>
+                    <label>Owner</label>
+                    <span>{{owner}}</span>
+                </li>
+                <li>
+                    <label>Location</label>
+                    <span>{{model.latitude}} {{model.longitude}}</span>
+                </li>
+                <li>
+                    <label>Address</label>
+                    <span>{{model.country}} {{model.city}} {{model.address}}</span>
+                </li>
+                <li>
+                    <label>Email</label>
+                    <span>{{model.email}}</span>
+                </li>
+                <li>
+                    <label>Phone</label>
+                    <span>{{model.phone}}</span>
+                </li>
+            </ul>
+            <div trance-company-cars></div>
+        </section>
+    </div>
+    <div class="col-md-4 col-sm-3"></div>
+</section>

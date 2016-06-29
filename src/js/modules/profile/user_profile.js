@@ -11,7 +11,7 @@
             app.UserMenuController, 
             app.FreightsHistoryComponent, 
             app.UserCarsComponent, 
-            app.UserCompanyComponent],
+            app.UserTranceCompanyComponent],
         providers: [app.Server, ng.platform.browser.Title]
     }).Class({
         constructor: [app.Server, ng.platform.browser.Title, function(server, title) {

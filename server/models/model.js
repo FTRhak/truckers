@@ -199,5 +199,6 @@ module.exports = function(modelsList) {
     }
 
     initUrlControllers(require(__dirname + '/UserModel'));
-    initUrlControllers(require(__dirname + '/CompanyModel'));
+    initUrlControllers(require(__dirname + '/TranceCompanyModel'));
+    initUrlControllers(require(__dirname + '/CarModel'));
 };

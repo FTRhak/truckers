@@ -1,1 +1,7 @@
-<a href="#/company/create" class="btn">Create company</a>
+<span>
+    <a *ngIf="!model" href="#/company/create" class="btn">Create company</a>
+    <span  *ngIf="model">
+        <a href="#/trance-company/{{model.id}}">{{model.company_name}}</a>
+        <a href="#/trance-company/{{model.id}}/edit">e</a>
+    </span>
+</span>

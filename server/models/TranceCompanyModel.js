@@ -1,8 +1,8 @@
 module.exports = function(ModelBaseClass) {
     'use strict';
-    return (class CompanyModel extends ModelBaseClass {
+    return (class TranceCompanyModel extends ModelBaseClass {
         static get tableName() {
-            return "companies";
+            return "trance_companies";
         }
 
         static get primaryKey() {

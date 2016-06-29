@@ -3,7 +3,7 @@
 (function (ng, app) {
     app.CompanyCreateController = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/company/edit.html',
+        templateUrl: 'templates/trance_company/edit.html',
         directives: [app.MapNavigatorComponent],
         providers: [app.Server]
     }).Class({
@@ -26,7 +26,7 @@
                 phone: ""
             };
 
-            server.http.get('/api/company/create?rid=' + Math.random(), {}, function (res) {
+            server.http.get('/api/trance-company/create?rid=' + Math.random(), {}, function (res) {
                 const body = JSON.parse(res._body);
                 self.owner = body.user;
             });
@@ -38,7 +38,7 @@
 
                 const self = this;
                 console.log('model:', this.model);
-                server.http.post('/api/company/create?rid=' + Math.random(), this.model, function (res) {
+                server.http.post('/api/trance-company/create?rid=' + Math.random(), this.model, function (res) {
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {
@@ -56,6 +56,6 @@
     });
 
     app.routeList = app.routeList || [];
-    app.routeList.push(new ng.router.Route({ path: '/company/create/', component: app.CompanyCreateController, name: 'Car create' }));
+    app.routeList.push(new ng.router.Route({ path: '/trance-company/create/', component: app.CompanyCreateController, name: 'Car create' }));
 
 })(ng, window.app || (window.app = {}));

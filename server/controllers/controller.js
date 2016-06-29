@@ -7,11 +7,11 @@ class ControllerBase {
     }
 }
 
-module.exports = function(express) {
+module.exports = function (express) {
     function initUrlControllers(controllerClassBuild) {
         let controllerClass = controllerClassBuild(ControllerBase);
         let obj = new controllerClass();
-        obj.actionMethods.forEach(function(el) {
+        obj.actionMethods.forEach(function (el) {
             let action = el.action;
             let method = el.method;
             let url = el.url;
@@ -24,5 +24,7 @@ module.exports = function(express) {
     initUrlControllers(require(__dirname + '/UserController'));
     initUrlControllers(require(__dirname + '/AuthenticationController'));
     initUrlControllers(require(__dirname + '/MessageController'));
-    initUrlControllers(require(__dirname + '/CompanyController'));
+    initUrlControllers(require(__dirname + '/TranceCompanyController'));
+    initUrlControllers(require(__dirname + '/car_controller'));
+
 };

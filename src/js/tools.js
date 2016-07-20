@@ -16,7 +16,7 @@
     };
 
     app.Http = ng.core.Injectable({}).Class({
-        constructor: [ng.http.Http, function AjaxClass(http) {
+        constructor: [ng.http.Http, ng.router.Router, function AjaxClass(http, router) {
             const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
             const jsonHeader = new ng.http.RequestOptions({ headers: headers });
 
@@ -24,7 +24,9 @@
             this.post = function (url, data, success, error) {
                 http.post(url, JSON.stringify(data), jsonHeader).toPromise()
                     .then(success)
-                    .catch(error || function () { app.tools.location.go('/login'); });
+                    .catch(error || function () { 
+                        router.navigate(['Login']);
+                    });
             };
 
             this.get = function (url, data, success, error) {
@@ -75,7 +77,7 @@
 
 
     class LocalStorage{
-        constructor () {console.log("INIT storage");
+        constructor () {
             var data = {};
             this.setData = function (key, value) {
                 data[key] = value;
@@ -91,7 +93,7 @@
     app.Server = ng.core.Injectable({
         providers: [app.Http, Auth]
     }).Class({
-        constructor: [app.Http, Auth, function ServerClass(http, user) {console.log("INIT server");
+        constructor: [app.Http, Auth, function ServerClass(http, user) {
             this.http = http;
             this.user = user;
             this.storage = new LocalStorage();

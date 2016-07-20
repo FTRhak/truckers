@@ -4,6 +4,7 @@ var ejs = require('ejs');
 var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 var _basePath = __dirname + "/../";
 
 global._basePath = _basePath;
@@ -50,12 +51,20 @@ app.express.set('/node_modules', express.static(_basePath + 'node_modules'));
 var models = require(__dirname + '/models/model.js');
 models(app.models);
 
+
+
 var controllers = require(__dirname + '/controllers/controller.js');
 controllers(app.express);
 
 app.express.get('*', function(req, res) {
-    res.status(404);
-    res.render('404', {});
+    if (req.headers['content-type'] !== 'application/json') {
+        res.render('index', { title: 'Hey', message: 'Hello there!' });
+    } else {
+        console.log("404");
+        res.status(404);
+        res.render('404', {"msg": "Error"});
+    }
+        
 });
 
 var server = app.express.listen(3000, function() {

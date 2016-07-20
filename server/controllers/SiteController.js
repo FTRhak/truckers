@@ -9,17 +9,20 @@ module.exports = function(ControllerBaseClass) {
                 {
                     action: "pageIndex",
                     url: "/",
-                    method: "get"
+                    method: "get",
+                    isAjax: false
                 },
                 {
                     action: "page404",
                     url: "/404",
-                    method: "get"
+                    method: "get",
+                    isAjax: false
                 },
                 {
                     action: "pageDev",
                     url: "/dev",
-                    method: "get"
+                    method: "get",
+                    isAjax: false
                 }
             ];
         }

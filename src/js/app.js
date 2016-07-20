@@ -1,4 +1,4 @@
-(function(app) {
+(function(ng, app) {
     'use strict';
 
     app.TestDirective = ng.core.Directive({
@@ -28,7 +28,9 @@
                 <router-outlet></router-outlet>
             </section>
             <nav class="navigation">Settings</nav>
-            <footer class="footer"></footer>
+            <footer class="footer">
+                <a class="user-name" [routerLink]="['About']" >About</a>
+            </footer>
         `,
         directives: [ng.router.ROUTER_DIRECTIVES, app.NavigateMenuController, app.UserMenuController, app.TestDirective],
         providers: [app.Http, app.Auth]
@@ -54,4 +56,4 @@
 
     app.routeList = [];
 
-})(window.app || (window.app = {}));
+})(ng, window.app || (window.app = {}));

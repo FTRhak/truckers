@@ -14,16 +14,15 @@
                 app.tools.location.go('/');
             }
             this.errorMessage = "";
-            this.model = {
-                login: "",
-                password: ""
-            };
             this.message = "";
 
-            this.onSubmit = function () {
+            this.onSubmit = function (inputLogin, inputPassword) {
+                const model = {
+                    login: inputLogin.value,
+                    password: inputPassword.value
+                };
                 const self = this;
-                console.log('model:', this.model);
-                server.http.post('/api/user/login?rid=' + Math.random(), this.model, function (res) {
+                server.http.post('/api/user/login?rid=' + Math.random(), model, function (res) {
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {

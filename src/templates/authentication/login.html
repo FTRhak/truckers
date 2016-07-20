@@ -2,14 +2,14 @@
     <div class="col-md-4 col-sm-3"></div>
     <div class="col-md-4 col-sm-6">
         <div class="form">
-            <form action=""  method="post" (ngSubmit)="onSubmit()">
+            <form action=""  method="post" (ngSubmit)="onSubmit(inputLogin, inputPassword)">
                 <div class="form-group">
                     <label for="field_login">Email</label>
-                    <input type="email" class="form-control" required id="field_login" [(ngModel)]="model.login">
+                    <input type="email" class="form-control" required id="field_login" #inputLogin>
                 </div>
                 <div class="form-group">
                     <label for="field_pass">Password</label>
-                    <input type="password" class="form-control" required id="field_pass" [(ngModel)]="model.password">
+                    <input type="password" class="form-control" required id="field_pass" #inputPassword>
                 </div>
                 <div class="alert alert-danger" [style.display]="errorMessage?'block':'none'" role="alert">{{errorMessage}}</div>
                 <input type="submit" value="Login" class="btn btn-md btn-default">

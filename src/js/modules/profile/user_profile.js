@@ -14,11 +14,12 @@
             app.UserTranceCompanyComponent],
         providers: [app.Server, ng.platform.browser.Title]
     }).Class({
-        constructor: [app.Server, ng.platform.browser.Title, function(server, title) {
+        constructor: [app.Server, ng.router.Router, ng.platform.browser.Title, function(server, router, title) {
             let self = this;
             title.setTitle("User profile");
+            console.log("isLogin",server.user.isLogin());
             if (!server.user.isLogin()) {
-                app.tools.location.go('/login');
+                router.navigate(['Login']);
             }
             
             this.user = {};
@@ -45,6 +46,6 @@
 
 
     app.routeList = app.routeList || [];
-    app.routeList.push(new ng.router.Route({ path: '/user', component: app.UserProfileComponent, name: 'Profile' }));
+    app.routeList.push(new ng.router.Route({ path: '/user', component: app.UserProfileComponent, name: 'UserProfile' }));
 
 })(ng, window.app || (window.app = {}));

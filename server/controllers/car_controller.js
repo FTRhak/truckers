@@ -9,7 +9,8 @@ module.exports = function (ControllerBaseClass) {
                 {
                     action: "pageCompanyCars",
                     url: "/company-cars/:id",
-                    method: "get"
+                    method: "get",
+                    isAjax: true
                 }
             ];
         }

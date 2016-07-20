@@ -9,12 +9,14 @@ module.exports = function(ControllerBaseClass) {
                 {
                     action: "pageIndex",
                     url: "/user",
-                    method: "get"
+                    method: "get",
+                    isAjax: false
                 },
                 {
                     action: "actionUser",
                     url: "/api/user",
-                    method: "post"
+                    method: "post",
+                    isAjax: true
                 }
             ];
         }

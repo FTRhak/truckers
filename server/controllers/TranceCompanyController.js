@@ -9,22 +9,26 @@ module.exports = function (ControllerBaseClass) {
                 {
                     action: "pageCreate",
                     url: "/api/trance-company/create",
-                    method: "get"
+                    method: "get",
+                    isAjax: true
                 },
                 {
                     action: "pageItem",
                     url: "/api/trance-company/item/:id",
-                    method: "get"
+                    method: "get",
+                    isAjax: true
                 },
                 {
                     action: "pageUserItem",
                     url: "/api/trance-company/uitem/",
-                    method: "get"
+                    method: "get",
+                    isAjax: true
                 },
                 {
                     action: "actionCreate",
                     url: "/api/trance-company/create",
-                    method: "post"
+                    method: "post",
+                    isAjax: true
                 }
             ];
         }

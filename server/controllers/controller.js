@@ -15,7 +15,10 @@ module.exports = function (express) {
             let action = el.action;
             let method = el.method;
             let url = el.url;
-            express[method](url, obj[action]);
+            const isAjax = el.isAjax;
+            if(isAjax) {
+                express[method](url, obj[action]);
+            }
         });
         DEBUD && console.log('\x1b[33m%s\x1b[0m: ', "Init controller ", controllerClass.name);
     }

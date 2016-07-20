@@ -9,7 +9,8 @@ module.exports = function(ControllerBaseClass) {
                 {
                     action: "pageIndex",
                     url: "/message/index",
-                    method: "get"
+                    method: "get",
+                    isAjax: true
                 }
             ];
         }

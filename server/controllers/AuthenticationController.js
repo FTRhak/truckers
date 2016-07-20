@@ -10,31 +10,37 @@ module.exports = function(ControllerBaseClass) {
                 {
                     action: "pageLogin",
                     url: "/login",
-                    method: "get"
+                    method: "get",
+                    isAjax: false
                 },
                 {
                     action: "pageRegister",
                     url: "/register",
-                    method: "get"
+                    method: "get",
+                    isAjax: false
                 },
                 {
                     action: "pageRestore",
                     url: "/restore",
-                    method: "get"
+                    method: "get",
+                    isAjax: false
                 },
                 //-------------------
                 {
                     action: "actionLogin",
                     url: "/api/user/login",
-                    method: "post"
+                    method: "post",
+                    isAjax: true
                 }, {
                     action: "actionLogout",
                     url: "/api/logout",
-                    method: "post"
+                    method: "post",
+                    isAjax: true
                 }, {
                     action: "actionAccess",
                     url: "/api/user/access",
-                    method: "post"
+                    method: "post",
+                    isAjax: true
                 }
             ]
         }

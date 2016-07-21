@@ -16,6 +16,7 @@
     };
 
     app.Http = ng.core.Injectable({}).Class({
+        //https://www.youtube.com/watch?v=L7xPwhwbcHE
         constructor: [ng.http.Http, ng.router.Router, function AjaxClass(http, router) {
             const headers = new ng.http.Headers({ 'Content-Type': 'application/json' });
             const jsonHeader = new ng.http.RequestOptions({ headers: headers });
@@ -38,7 +39,10 @@
                 }
                 http.get(url + options).toPromise()
                     .then(success)
-                    .catch(error || function () { app.tools.location.go('/login'); });
+                    .catch(error || function () { 
+                        router.navigate(['Login']);
+                        localStorage.removeItem('user');
+                     });
             };
         }]
 

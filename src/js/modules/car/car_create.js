@@ -7,9 +7,9 @@
         directives: [app.MapNavigatorComponent],
         providers: [app.Server]
     }).Class({
-        constructor: [app.Server, function (server) {
+        constructor: [app.Server, ng.router.Router, function (server, router) {
             if (!server.user.isLogin()) {
-                app.tools.location.go('/login');
+                router.navigate(['Login']);
             }
 
         }]

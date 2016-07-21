@@ -7,9 +7,9 @@
         directives: [app.TranceCompanyCarsComponent],
         providers: [app.Server]
     }).Class({
-        constructor: [app.Server, ng.router.RouteParams, function (server, params) {
+        constructor: [app.Server, ng.router.Router, ng.router.RouteParams, function (server, router, params) {
             if (!server.user.isLogin()) {
-                app.tools.location.go('/login');
+                router.navigate(['Login']);
             }
             let self = this;
             const id = params.get('id') * 1;

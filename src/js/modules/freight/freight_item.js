@@ -7,15 +7,15 @@
         directives: [app.MapNavigatorComponent],
         providers: [app.Server]
     }).Class({
-        constructor: [app.Server, function (server) {
+        constructor: [app.Server, ng.router.Router, function (server, router) {
             if (!server.user.isLogin()) {
-                app.tools.location.go('/login');
+                router.navigate(['Login']);
             }
 
         }]
     });
 
     app.routeList = app.routeList || [];
-    app.routeList.push(new ng.router.Route({ path: '/freight/:id/', component: app.FreightController, name: 'Freight' }));
+    app.routeList.push(new ng.router.Route({ path: '/freight/:id/', component: app.FreightController, name: 'FreightItem' }));
 
 })(ng, window.app || (window.app = {}));

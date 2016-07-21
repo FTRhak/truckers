@@ -8,6 +8,7 @@
         selector: 'app-trucker',
         templateUrl: 'templates/user/profile.html',
         directives: [
+            ng.router.ROUTER_DIRECTIVES,
             app.UserMenuController, 
             app.FreightsHistoryComponent, 
             app.UserCarsComponent, 
@@ -17,7 +18,6 @@
         constructor: [app.Server, ng.router.Router, ng.platform.browser.Title, function(server, router, title) {
             let self = this;
             title.setTitle("User profile");
-            console.log("isLogin",server.user.isLogin());
             if (!server.user.isLogin()) {
                 router.navigate(['Login']);
             }

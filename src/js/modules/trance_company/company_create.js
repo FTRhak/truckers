@@ -7,9 +7,9 @@
         directives: [app.MapNavigatorComponent],
         providers: [app.Server]
     }).Class({
-        constructor: [app.Server, function (server) {
+        constructor: [app.Server, ng.router.Router, function (server, router) {
             if (!server.user.isLogin()) {
-                app.tools.location.go('/login');
+                router.navigate(['Login']);
             }
             let self = this;
             this.owner = "";
@@ -42,8 +42,7 @@
                     if (res.status === 200) {
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {
-                            //TODO bugfix location.go('/user');
-                            app.tools.location.go('/user');
+                            router.navigate(['UserProfile']);
                         } else {
                             self.errorMessage = body.error;
                         }

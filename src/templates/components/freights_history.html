@@ -1,15 +1,15 @@
 <div class="panel">
     <div class="panel-header">
         <span class="panel-btn" title="Show last freights" (click)="actionShowList()">v</span>
-        <a href="#/freight/create" class="panel-btn" title="Create">+</a>
-        <a href="#/freights"  class="panel-btn" title="List">=</a>
+        <a [routerLink]="['FreightCreate']" class="panel-btn" title="Create">+</a>
+        <a [routerLink]="['Freights']"  class="panel-btn" title="List">=</a>
         <h3 class="title">Freights history</h3>
     </div>
     <div class="panel-content">
         <ul>
             <li *ngFor="#item of model">
-                {{item.name}}
-                <a href="#/freight/{{item.id}}/edit" title="Edit" class="right">Edit</a>
+                <a [routerLink]="['FreightItem',{id: item.id}]" >{{item.name}}</a>
+                <a [routerLink]="['FreightEdit',{id: item.id}]" title="Edit" class="right">Edit</a>
             </li>
         </ul>
     </div>

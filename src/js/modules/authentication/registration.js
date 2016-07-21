@@ -9,9 +9,9 @@
         directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES],
         providers: [app.Server]
     }).Class({
-        constructor: [app.Server, function (server) {
+        constructor: [app.Server, ng.router.Router, function (server, router) {
             if (server.user.isLogin()) {
-                app.tools.location.go('/');
+                router.navigate(['Index']);
             }
             this.model = {
                 firstName: "",

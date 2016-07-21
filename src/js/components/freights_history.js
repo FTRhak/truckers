@@ -4,7 +4,11 @@
 
     app.FreightsHistoryComponent = ng.core.Component({
         selector: '[freights-history]',
-        templateUrl: 'templates/components/freights_history.html'
+        templateUrl: 'templates/components/freights_history.html',
+        directives: [ng.router.ROUTER_DIRECTIVES],
+        /*styles: [`
+            h3{color:red;}
+        `]*/
     }).Class({
         constructor: [app.Server, function (server) {
             this.model = [];

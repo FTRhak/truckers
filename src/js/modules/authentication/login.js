@@ -11,7 +11,7 @@
     }).Class({
         constructor: [app.Server, ng.router.Location, ng.router.Router, function LoginComponent(server, location, router) {
             if (server.user.isLogin()) {
-                app.tools.location.go('/');
+                router.navigate(['Index']);
             }
             this.errorMessage = "";
             this.message = "";
@@ -27,8 +27,7 @@
                         const body = JSON.parse(res._body);
                         if (body.status === 200) {
                             server.user.login(body.user.uid);
-                            //TODO bugfix location.go('/user');
-                            app.tools.location.go('/user');
+                            router.navigate(['UserProfile']);
                         } else {
                             self.errorMessage = body.error;
                         }

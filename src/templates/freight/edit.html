@@ -2,7 +2,16 @@
     <div class="col-md-4 col-sm-3"></div>
     <div class="col-md-4 col-sm-6">
         <h1>Freights create/edit</h1>
-
+        <form #editFreightForm="ngForm" class="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="freightName">Freight name</label>
+                <input type="text" class="form-control" id="freightName" [(ngModel)]="model.freightName">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-md btn-default" [disabled]="!editFreightForm.form.valid">
+                <a href="#/user" class="btn">Back</a>
+            </div>
+        </form>
     </div>
     <div class="col-md-4 col-sm-3"></div>
 </section>

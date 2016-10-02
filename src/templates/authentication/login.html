@@ -2,7 +2,7 @@
     <div class="col-md-4 col-sm-3"></div>
     <div class="col-md-4 col-sm-6">
         <div class="form">
-            <form action=""  method="post" (ngSubmit)="onSubmit(inputLogin, inputPassword)">
+            <form action="" method="post" (ngSubmit)="onSubmit(inputLogin, inputPassword)">
                 <div class="form-group">
                     <label for="field_login">Email</label>
                     <input type="email" class="form-control" required id="field_login" #inputLogin>
@@ -19,7 +19,8 @@
                 <div class="soc-login-btn vk-login-btn">Log in with VK</div>
             </div>
             <div class="form-group">
-                <a href="/#/register" class="btn btn-md btn-default">Create user</a>
+                <a [routerLink]="['Register']" class="btn btn-md btn-default">Create user</a>
+                <a [routerLink]="['Restore']" class="btn btn-md btn-default">Restore</a>
             </div>
         </div>
     </div>

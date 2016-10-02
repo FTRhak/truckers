@@ -74,6 +74,7 @@ gulp.task('js-models-dev', function () {
 gulp.task('js-app-dev', function () {
     return gulp.src([
         PROJECT_SRC + 'js/tools.js',
+        PROJECT_SRC + 'js/server/*.js',
         PROJECT_SRC + 'js/components/*.js',
         PROJECT_SRC + 'js/modules/*.js',
         PROJECT_SRC + 'js/modules/*/*.js',

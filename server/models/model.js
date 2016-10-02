@@ -152,12 +152,37 @@ class ModelBase {
         this.find('first', { 'where': { query: " `" + this.primaryKey + "` = %d ", data: [id] } }, callback);
     };
 
-    save(callback) {
+    update(callback) {
         let tableName = this.constructor.tableName;
         let primaryKey = this.constructor.primaryKey || 'id';
         let query = "UPDATE " + tableName + " SET " + db.escape(this.attributes) + " WHERE " + primaryKey + "=" + this.data[primaryKey];
         //var q = "INSERT INTO "+tableName+" SET "+ connection.escape(this.attributes);
         dbRequest(query, function(err, result) {
+            if (callback) {
+                callback(err, result);
+            }
+        });
+    }
+
+    save(callback) {
+        let tableName = this.constructor.tableName;
+        let attributs = this.constructor.attributes;
+
+        let properiesList = [];
+        let valuesList = [];
+
+        let self = this;
+        attributs.forEach(function (property) {
+            if (self[property] !== null) {
+                properiesList.push("`" + property + "`");
+                valuesList.push("'" + self[property] + "'");
+            }
+        });
+        let query = "INSERT INTO `users` (" + properiesList.join(',') + ") VALUES (" + valuesList.join(',') + ")";
+        dbRequest(query, function(err, result) {
+            if(result && result.insertId) {
+                self[self.primaryKey] = result.insertId;
+            }
             if (callback) {
                 callback(err, result);
             }

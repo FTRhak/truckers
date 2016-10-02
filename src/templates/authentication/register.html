@@ -1,7 +1,7 @@
 <section class="row">
     <div class="col-md-4 col-sm-3"></div>
     <div class="col-md-4 col-sm-6">
-        <form action="" class="form" method="post" (ngSubmit)="onSubmit()">
+        <form action="" class="form" method="post" (ngSubmit)="onSubmit()" [ngClass]="{'hidden':registrationComplete}" >
             <div class="form-group">
                 <label for="field_firstname">First name</label>
                 <input type="text" class="form-control" required name="firstName" id="field_firstname" [ngControl]='formControl' [(ngModel)]="model.firstName">
@@ -30,8 +30,12 @@
                 </select>
             </div>
             <input type="submit" value="Sign Up" class="btn btn-md btn-default">
-            <a class="btn " href="#/login">Back</a>
+            <a [routerLink]="['Login']" class="btn btn-md btn-default">Back</a>
         </form>
+        <div [ngClass]="{'hidden':!registrationComplete}">
+            <h1>Registration complete</h1>
+            <a [routerLink]="['Login']" class="btn btn-md btn-default">Go to Login</a>
+        </div>
     </div>
     <div class="col-md-4 col-sm-3"></div>
 </section>

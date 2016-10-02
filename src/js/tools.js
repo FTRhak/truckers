@@ -72,7 +72,7 @@
         login: function (id) {
             localStorage.setItem('user', id);
         },
-        loguot: function () {
+        logout: function () {
             localStorage.removeItem('user');
         }
     });

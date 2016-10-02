@@ -1,26 +1,33 @@
 /*global ng:true */
 
-(function (ng, app) {
+(function (ng, PageTitle, app, Server, AuthenticationServerComponent) {
     'use strict';
 
-    app.LogoutComponent = ng.core.Component({
+    let LogoutComponent = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/authentication/logout.html',
-        providers: [app.Server]
+        template: `<div>Logout...</div>`,
+        providers: [Server, AuthenticationServerComponent, PageTitle]
     }).Class({
-        constructor: [app.Server, ng.router.Router, function (server, router) {
+        constructor: [Server, AuthenticationServerComponent, ng.router.Router, PageTitle, function (server, authServer, router, title) {
             if (!server.user.isLogin()) {
                 router.navigate(['Login']);
                 return;
             }
-            server.http.post('/api/logout?rid=' + Math.random(), {}, function (res) {
-                user.loguot();
+            title.setTitle("Logout");
+            authServer.logout(function (data) {
+                server.user.logout();
                 router.navigate(['Login']);
             });
         }]
     });
 
     app.routeList = app.routeList || [];
-    app.routeList.push(new ng.router.Route({ path: '/logout', component: app.LogoutComponent, name: 'Logout' }));
+    app.routeList.push(new ng.router.Route({ path: '/logout', component: LogoutComponent, name: 'Logout' }));
 
-})(ng, window.app || (window.app = {}));
+})(
+    ng,
+    ng.platform.browser.Title,
+    window.app,
+    window.app.Server,
+    window.app.AuthenticationServerComponent
+    );

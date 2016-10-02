@@ -31,8 +31,32 @@ $headerPadding: 3px;
     }
     .settings {
         display: table-cell;
+        position: relative;
         width: $headerHeight - $headerPadding * 2;
         background-color: red;
+        &:hover .setting-panel {
+            display: block;
+        }
+    }
+    .setting-panel{
+        display: none;
+        position: absolute;
+        background-color: rgba(200,200,200,0.6);
+        border-radius: 3px;
+        bottom: -10px;
+        right: 0px;
+        padding: 5px;
+        min-width: 120px;
+    }
+    .list-item {
+        padding: 3px;
+        border-radius: 2px;
+        &:hover {
+            background-color: rgba(200,200,200,0.6);
+        }
+    }
+    .list-item-link {
+        display: block;
     }
     
 }

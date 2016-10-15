@@ -1,55 +1,90 @@
 
-$headerBgColor: $baseBgColor;
-//$headerBgSecongColor: lighten($baseBgColor, 20%);
 
-$headerPadding: 3px;
+//$headerBgSecongColor: lighten($baseBgColor, 20%);
+$settingsSize: 30px;
+
 .header {
-    padding: $headerPadding $headerPadding * 3;
     height: $headerHeight;
-    @include box-sizing(border-box);
-    //@include background-image(linear-gradient(to bottom, $headerBgSecongColor 0%,$headerBgColor 90%,$headerBgSecongColor 97%,$headerBgSecongColor 100%));
     background-color: $headerBgColor;
-    border-bottom: 1px solid #FFFFFF;
-    
     display: table;
     width: 100%;
+    padding: 0px 10px;
+    
+    -webkit-box-shadow: inset 0px -1px 2px 0px rgba(0,0,0,0.4);
+-moz-box-shadow: inset 0px -1px 2px 0px rgba(0,0,0,0.4);
+box-shadow: inset 0px -1px 2px 0px rgba(0,0,0,0.4);
+
+    //@include box-shadow(border-box);
 }
 .header {
-    .avatar {
-        height: $headerHeight - $headerPadding * 2;
-        width: $headerHeight - $headerPadding * 2;
-        border-radius: $headerHeight / 2;
-        background-color: rgba(255, 255, 255, 0.7);
-        display: table-cell;
-    }
-    .user-name {
-        @include box-sizing(border-box);
-        font-size: 2em;
+    .header-content {
         display: table-cell;
         vertical-align: middle;
-        padding: 0px 15px;
+        padding-left: $headerHeight;
     }
-    .settings {
+    .header-menu {
         display: table-cell;
-        position: relative;
-        width: $headerHeight - $headerPadding * 2;
-        background-color: red;
-        &:hover .setting-panel {
-            display: block;
-        }
+        width: $headerHeight;
+        padding: ($headerHeight - $settingsSize) / 2;
     }
-    .setting-panel{
-        display: none;
-        position: absolute;
-        background-color: rgba(200,200,200,0.6);
+
+    .header-title {
+        text-transform: uppercase;
+    }
+    .header-link {
+        text-decoration: none;
+    }
+
+    .settings {
+        position: relative;
+        width: $settingsSize;
+        height: $settingsSize;
+        background-color: $headerBgColor;
         border-radius: 3px;
-        bottom: -10px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: $settingsSize / 6;
+            right: $settingsSize / 6;
+            top: $settingsSize / 6;
+            height: $settingsSize / 6;
+            border-top: 3px solid rgba(255, 255, 255, 0.8);
+            border-bottom: 3px solid rgba(255, 255, 255, 0.8);
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            left: $settingsSize / 6;
+            right: $settingsSize / 6;
+            bottom: $settingsSize / 6;
+            height: 1;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.8);
+        }
+
+        
+    }
+
+    .settings-menu {
+
+    }
+    
+    .setting-panel{
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
         right: 0px;
-        padding: 5px;
-        min-width: 120px;
+        z-index: 2;
+        background-color: rgba(160,160,160,0.9);
+        min-width: 300px;
+        padding: 17px;
+        //widows: 50%;
+    }
+    .menu-items {
+
     }
     .list-item {
-        padding: 3px;
+        padding: 5px;
         border-radius: 2px;
         &:hover {
             background-color: rgba(200,200,200,0.6);
@@ -57,6 +92,8 @@ $headerPadding: 3px;
     }
     .list-item-link {
         display: block;
+        padding: 5px;
+        text-decoration: none;
     }
     
 }

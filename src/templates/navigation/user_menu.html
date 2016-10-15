@@ -1,6 +1,6 @@
 <div class="avatar"></div>
 <a class="user-name" [routerLink]="['UserProfile']">FTR hak</a>
-<div class="settings">
+<div class="settings" (click)="toggleMenu()">
     <ul class="setting-panel">
         <li class="list-item">
             <a [routerLink]="['Logout']" class="list-item-link">Logout</a>

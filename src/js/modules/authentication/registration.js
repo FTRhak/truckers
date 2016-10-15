@@ -7,6 +7,7 @@
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/register.html',
         directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES, ng.router.ROUTER_DIRECTIVES],
+        pipes: [ng.localization.Translate],
         providers: [Server, AuthenticationServerComponent, PageTitle]
     }).Class({
         constructor: [Server, AuthenticationServerComponent, ng.router.Router, PageTitle, function RegistrateComponent(server, authServer, router, title) {

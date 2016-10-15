@@ -11,16 +11,26 @@
                     <label for="field_pass">Password</label>
                     <input type="password" class="form-control" required id="field_pass" #inputPassword>
                 </div>
-                <div class="alert alert-danger" [style.display]="errorMessage?'block':'none'" role="alert">{{errorMessage}}</div>
-                <input type="submit" value="Login" class="btn btn-md btn-default">
+                <div class="form-group">
+                    <div class="alert alert-danger" [style.display]="errorMessage?'block':'none'" role="alert">{{errorMessage}}</div>
+                    <input type="submit" value="Login" class="btn btn-align btn-default">
+                </div>
+                <div class="form-group center">
+                    <a [routerLink]="['Restore']" class="link">Forgot password</a>
+                </div>
             </form>
-            <div class="form-group">
+            <div class="form-group hidden">
                 <div class="soc-login-btn fb-login-btn">Log in with Facebook</div>
                 <div class="soc-login-btn vk-login-btn">Log in with VK</div>
             </div>
-            <div class="form-group">
-                <a [routerLink]="['Register']" class="btn btn-md btn-default">Create user</a>
-                <a [routerLink]="['Restore']" class="btn btn-md btn-default">Restore</a>
+            <div class="form-group group-margin">
+                <a [routerLink]="['Register']" class="btn btn-align btn-default">Create user</a>
+            </div>
+            <hr/>
+            <div class="form-group center">
+                <a [routerLink]="['ChangeLanguage']" class="link">English</a> |
+                <a [routerLink]="['ChangeLanguage']" class="link">Українська</a> |
+                <a [routerLink]="['ChangeLanguage']" class="link">all languages...</a>
             </div>
         </div>
     </div>

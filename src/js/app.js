@@ -22,7 +22,7 @@
         selector: '[app-trucker]',
         //template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
         template: `
-            <header header-profile class="header">Hello user</header>
+            <header header-profile class="header"></header>
             <side class="side-bar left-side-bar">Side</side>
             <section page-content class="content">
                 <router-outlet></router-outlet>
@@ -32,7 +32,7 @@
                 <a class="user-name" [routerLink]="['About']" >About</a>
             </footer>
         `,
-        directives: [ng.router.ROUTER_DIRECTIVES, app.NavigateMenuController, app.UserMenuController, app.TestDirective],
+        directives: [ng.router.ROUTER_DIRECTIVES, app.HeaderController, app.TestDirective],
         providers: [app.Http, app.Auth]
     }).Class({
         constructor: [ng.router.Router, app.Auth, function ApplicationComponent(router, user) {

@@ -52,7 +52,12 @@ gulp.task('js-libs-dev', function () {
         'node_modules/rxjs/bundles/Rx.umd.js',
         'node_modules/angular2/bundles/angular2-all.umd.js',
         'node_modules/angular2/bundles/angular2.dev.js',
-        'node_modules/angular2/bundles/router.dev.js'])
+        'node_modules/angular2/bundles/router.dev.js',
+        'node_modules/angular2-translator/bundles/angular2-translator.js',
+        //'node_modules/systemjs/dist/system-polyfills.js',
+        //'node_modules/systemjs/dist/system.js',
+        //'node_modules/systemjs/dist/system.js.map'
+        ])
         .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
 });
 gulp.task('js-libs-prod', function () {
@@ -74,6 +79,7 @@ gulp.task('js-models-dev', function () {
 gulp.task('js-app-dev', function () {
     return gulp.src([
         PROJECT_SRC + 'js/tools.js',
+        PROJECT_SRC + 'js/tools/*.js',
         PROJECT_SRC + 'js/server/*.js',
         PROJECT_SRC + 'js/components/*.js',
         PROJECT_SRC + 'js/modules/*.js',
@@ -115,12 +121,16 @@ var styleDev = [/*'bootstrap.css', 'bootstrap-theme.css',*/ 'style.css'];
 var styleProd = [/*'base.min.css',*/ 'style.css'];
 
 var libsScriptDev = [
+    //'libs/system.js',
+    //'libs/system-polyfills.js',
+    
     'libs/es6-shim.min.js',
     'libs/angular2-polyfills.js',
     'libs/Rx.umd.js',
 //'libs/angular2.dev.js',
     'libs/angular2-all.umd.js',
     //'libs/router.dev.js'
+    //'libs/angular2-localization.js'
 ];
 var libsScriptProd = ['tools.js'];
 

@@ -1,0 +1,24 @@
+<div class="header-content">
+    <span class="header-title">Truker:</span>
+	<a *ngIf="isLogin" class="header-link" [routerLink]="['UserProfile']">FTR hak</a>
+    <a *ngIf="!isLogin" class="header-link" [routerLink]="['Login']">Login</a>
+</div>
+<div class="header-menu">
+	<div *ngIf="isLogin" class="settings" (click)="showMenu()"></div>
+</div>
+<div  *ngIf="isLogin" class="settings-menu" [class.hidden]="!isShown">
+    <div class="full-screen" (click)="hideMenu()"></div>
+    <div class="setting-panel">
+        <ul class="menu-items">
+            <li class="list-item">
+                <a [routerLink]="['UserProfile']" class="list-item-link">Profile</a>
+            </li>
+            <li class="list-item">
+                <a [routerLink]="['UserProfile']" class="list-item-link">Settings</a>
+            </li>
+            <li class="list-item">
+                <a [routerLink]="['Logout']" class="list-item-link">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>

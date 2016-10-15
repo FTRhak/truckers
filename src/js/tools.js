@@ -69,6 +69,9 @@
         isLogin: function () {
             return !!(localStorage.getItem('user') * 1);
         },
+        getUser: function() {
+            return {name:"FTR"}
+        },
         login: function (id) {
             localStorage.setItem('user', id);
         },

@@ -15,11 +15,7 @@ module.exports = function (ControllerBaseClass) {
             ];
         }
         pageCompanyCars(req, res) {
-            if (!req.session.user) {
-                res.sendStatus(404);
-                return;
-            }
-            const user = req.session.user;
+            const user = this.checkAuthentication(req, res);
             app.models.CarModel.findAll({ 'where': { query: "`cid` = '%s' and `is_deleted` = '%s'", data: [1, 0] } }, function (err, row, fields) {
                 if (!err && row) {
                     res.json({ status: 200, data: row.toJson() });

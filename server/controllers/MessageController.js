@@ -1,6 +1,6 @@
 /*global app:true, DEBUD:true */
-'use strict';
-module.exports = function(ControllerBaseClass) {
+
+module.exports = function (ControllerBaseClass) {
     'use strict';
 
     return (class MessageController extends ControllerBaseClass {
@@ -8,7 +8,7 @@ module.exports = function(ControllerBaseClass) {
             return [
                 {
                     action: "pageIndex",
-                    url: "/message/index",
+                    url: "/api/message/index",
                     method: "get",
                     isAjax: true
                 }
@@ -17,6 +17,6 @@ module.exports = function(ControllerBaseClass) {
 
         pageIndex(req, res) {
             res.json({ message: 'index' });
-        };
+        }
     });
 };

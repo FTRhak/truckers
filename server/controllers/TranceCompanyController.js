@@ -7,19 +7,13 @@ module.exports = function (ControllerBaseClass) {
         get actionMethods() {
             return [
                 {
-                    action: "pageCreate",
-                    url: "/api/trance-company/create",
-                    method: "get",
-                    isAjax: true
-                },
-                {
-                    action: "pageItem",
+                    action: "actionGetOneItem",
                     url: "/api/trance-company/item/:id",
                     method: "get",
                     isAjax: true
                 },
                 {
-                    action: "pageUserItem",
+                    action: "actionGetUsersItems",
                     url: "/api/trance-company/uitem/",
                     method: "get",
                     isAjax: true
@@ -33,34 +27,23 @@ module.exports = function (ControllerBaseClass) {
             ];
         }
 
-        pageCreate(req, res) {
-            if (!req.session.user) {
-                res.sendStatus(404);
-                return;
+        actionGetOneItem(req, res) {
+            const user = this.checkAuthentication(req, res);
+            if (user) {
+                const id = req.params.id;
+                app.models.TranceCompanyModel.findOne({ 'where': { query: "`id` = '%s' and `is_deleted` = '%s'", data: [id, 0] } }, function (err, row, fields) {
+                    if (!err && row) {
+                        res.json({ status: 200, data: row.toJson() });
+                    } else {
+                        res.sendStatus(404);
+                    }
+                });
             }
-            const user = req.session.user;
-            app.models.UserModel.findById(user.uid, function (err, row, fields) {
-                if (!err && row) {
-                    res.json({ status: 200, user: row.nickname || (row.firstname + ' ' + row.surname) });
-                } else {
-                    res.sendStatus(404);
-                }
-            });
+
         }
 
-        pageUserItem(req, res) {
-            if (!req.session.user) {
-                res.sendStatus(404);
-                return;
-            }
-            const user = req.session.user;
-            app.models.TranceCompanyModel.findOne({ 'where': { query: "`uid` = '%s' and `is_deleted` = '%s'", data: [user.uid, 0] } }, function (err, row, fields) {
-                if (!err && row) {
-                    res.json({ status: 200, data: row.toJson() });
-                } else {
-                    res.sendStatus(404);
-                }
-            });
+        actionGetUsersItems(req, res) {
+
         }
 
         pageItem(req, res) {

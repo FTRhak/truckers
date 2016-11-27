@@ -46,4 +46,7 @@ module.exports = function (express) {
     initUrlControllers(require(__dirname + '/TranceCompanyController'));
     initUrlControllers(require(__dirname + '/car_controller'));
 
+    DEBUD && initUrlControllers(require(__dirname + '/AppInstallationController'));
+    
+
 };

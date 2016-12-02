@@ -216,14 +216,14 @@ class ModelBase {
 }
 
 module.exports = function(modelsList) {
-    function initUrlControllers(modelClass) {
-        let classElement = modelClass(ModelBase);
-        modelsList[classElement.name] = classElement;
+    function initUrlControllers(modelClassName) {
+        let classElement = require(__dirname + '/'+modelClassName+'Model');
+        modelsList[modelClassName] = classElement;
         
-        DEBUD && console.log('\x1b[33m%s\x1b[0m: ', "Init model ", classElement.name);
+        DEBUD && console.log('\x1b[33m%s\x1b[0m: ', "Init model ", modelClassName);
     }
 
-    initUrlControllers(require(__dirname + '/UserModel'));
-    initUrlControllers(require(__dirname + '/TranceCompanyModel'));
-    initUrlControllers(require(__dirname + '/CarModel'));
+    //initUrlControllers(require(__dirname + '/UserModel'));
+    initUrlControllers('TranceCompany');
+    //initUrlControllers(require(__dirname + '/CarModel'));
 };

@@ -13,7 +13,7 @@ class ControllerBase {
     }
     checkAuthentication(req, res) {
         if (DEBUD && req.headers['access-for-test']) {
-            return {uid: 1, name: "Test Account"};
+            return {_id: 1001, name: "Test Account"};
         }
         if (!this.isLogin(req)) {
             res.sendStatus(401);
@@ -39,12 +39,12 @@ module.exports = function (express) {
         });
     }
 
-    initUrlControllers(require(__dirname + '/SiteController'));
-    initUrlControllers(require(__dirname + '/UserController'));
-    initUrlControllers(require(__dirname + '/AuthenticationController'));
-    initUrlControllers(require(__dirname + '/MessageController'));
+    //initUrlControllers(require(__dirname + '/SiteController'));
+    //initUrlControllers(require(__dirname + '/UserController'));
+    //initUrlControllers(require(__dirname + '/AuthenticationController'));
+    //initUrlControllers(require(__dirname + '/MessageController'));
     initUrlControllers(require(__dirname + '/TranceCompanyController'));
-    initUrlControllers(require(__dirname + '/car_controller'));
+    //initUrlControllers(require(__dirname + '/car_controller'));
 
     DEBUD && initUrlControllers(require(__dirname + '/AppInstallationController'));
     

@@ -5,7 +5,10 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var settings = require('./settings');
 var _basePath = __dirname + "/../";
+
+global.mongoose = require('mongoose');
 
 global._basePath = _basePath;
 var app = {
@@ -15,7 +18,7 @@ var app = {
 global.app = app;
 global.DEBUD = true;
 
-var mysql = require('mysql');
+/*var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -23,8 +26,17 @@ var connection = mysql.createConnection({
     database: 'trucker',
     debug: false
 });
-global.db = connection;
+global.db = connection;*/
 
+mongoose.connect('mongodb://' + settings.db.host + '/' + settings.db.database);
+var db = mongoose.connection;
+db.on('error', function (err) {
+    console.error('\x1b[31m%s\x1b[0m: ','Connection DB error:', err.message);
+});
+db.once('open', function callback() {
+    console.log('\x1b[33m%s\x1b[0m: ', "Connected to DB! ", "");
+});
+global.db = db;
 
 app.express.set('views', _basePath + './client/view/');
 app.express.set('view engine', 'ejs');
@@ -56,18 +68,18 @@ models(app.models);
 var controllers = require(__dirname + '/controllers/controller.js');
 controllers(app.express);
 
-app.express.get('*', function(req, res) {
+app.express.get('*', function (req, res) {
     if (req.headers['content-type'] !== 'application/json') {
         res.render('index', { title: 'Hey', message: 'Hello there!' });
     } else {
         console.log("404");
         res.status(404);
-        res.render('404', {"msg": "Error"});
+        res.render('404', { "msg": "Error" });
     }
-        
+
 });
 
-var server = app.express.listen(3000, function() {
+var server = app.express.listen(3000, function () {
     var host = server.address().address;
     var port = server.address().port;
 

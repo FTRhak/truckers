@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var rename = require("gulp-rename");
 var replace = require("gulp-replace");
 var compass = require('gulp-compass');
+var minifyCSS = require('gulp-minify-css');
 
 var PROJECT_SRC = 'src/';
 var PROJECT_BUILD = 'client/';
@@ -15,16 +16,10 @@ gulp.task('build-clean', function () {
         .pipe(clean());
 });
 //-----------CSS-------------------
-gulp.task('css-dist-dev', function () {
-    gulp.src(['node_modules/bootstrap/dist/css/bootstrap.css',
-        'node_modules/bootstrap/dist/css/bootstrap-theme.css'])
-    //.pipe(concat('base.min.css'))
-        .pipe(gulp.dest(PROJECT_BUILD + 'css/'));
-});
-gulp.task('css-dist-prod', function () {
+gulp.task('css-dist', function () {
     gulp.src(['node_modules/bootstrap/dist/css/bootstrap.min.css',
         'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'])
-    //.pipe(concat('base.min.css'))
+        .pipe(concat('base.min.css'))
         .pipe(gulp.dest(PROJECT_BUILD + 'css/'));
 });
 gulp.task('sass-dev', function () {
@@ -39,99 +34,97 @@ gulp.task('sass-dev', function () {
 });
 gulp.task('sass-prod', function () {
     gulp.src(PROJECT_SRC + 'sass/style.scss')
-        .pipe(sass().on('error', sass.logError))
+        //.pipe(sass().on('error', sass.logError))
+        .pipe(compass({
+            css: PROJECT_BUILD + 'css',
+            sass: PROJECT_SRC + 'sass',
+            image: PROJECT_SRC + 'images',
+        }))
+        .pipe(minifyCSS())
         .pipe(gulp.dest(PROJECT_BUILD + 'css/'));
 });
-gulp.task('css-dev', ['css-dist-dev', 'sass-dev']);
+gulp.task('css-dev', ['css-dist', 'sass-dev']);
 gulp.task('css-prod', ['css-dist', 'sass-prod']);
-//-----------JS--------------------
-gulp.task('js-libs-dev', function () {
-    return gulp.src([
-        'node_modules/es6-shim/es6-shim.min.js',
-        'node_modules/angular2/bundles/angular2-polyfills.js',
-        'node_modules/rxjs/bundles/Rx.umd.js',
-        'node_modules/angular2/bundles/angular2-all.umd.js',
-        'node_modules/angular2/bundles/angular2.dev.js',
-        'node_modules/angular2/bundles/router.dev.js',
-        'node_modules/angular2-translator/bundles/angular2-translator.js',
-        //'node_modules/systemjs/dist/system-polyfills.js',
-        //'node_modules/systemjs/dist/system.js',
-        //'node_modules/systemjs/dist/system.js.map'
-        ])
-        .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
-});
-gulp.task('js-libs-prod', function () {
-    return gulp.src([
-        PROJECT_SRC + 'js/modules/*.js',
-        PROJECT_SRC + 'js/app.js'])
-        .pipe(concat('tools.js'))
-        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
-});
-
-gulp.task('js-models-dev', function () {
-    return gulp.src([
-        PROJECT_SRC + 'js/models/model_base.js',
-        PROJECT_SRC + 'js/models/*.js'])
-        .pipe(concat('models.js'))
-        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
-});
-
-gulp.task('js-app-dev', function () {
-    return gulp.src([
-        PROJECT_SRC + 'js/tools.js',
-        PROJECT_SRC + 'js/tools/*.js',
-        PROJECT_SRC + 'js/server/*.js',
-        PROJECT_SRC + 'js/components/*.js',
-        PROJECT_SRC + 'js/modules/*.js',
-        PROJECT_SRC + 'js/modules/*/*.js',
-        PROJECT_SRC + 'js/app.js'])
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
-});
-gulp.task('js-app-prod', function () {
-    return gulp.src([
-        PROJECT_SRC + 'js/tools.js',
-        PROJECT_SRC + 'js/models/model_base.js',
-        PROJECT_SRC + 'js/models/*.js',
-        PROJECT_SRC + 'js/modules/*.js',
-        PROJECT_SRC + 'js/app.js'])
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
-});
-
-gulp.task('js-dev', ['js-libs-dev', 'js-models-dev', 'js-app-dev']);
-gulp.task('js-prod', ['js-app-prod']);
 //-----------TEMPLATES-------------
-gulp.task('template-dev', function () {
+gulp.task('templates', function () {
     return gulp.src([
         PROJECT_SRC + 'templates/*/*.html'])
-    //.pipe(concat('app.js'))
         .pipe(gulp.dest(PROJECT_BUILD + 'templates/'));
-});
-//-----------ICONS-----------------
+});//-----------ICONS-----------------
 gulp.task('icons', function () {
     return gulp.src([
         PROJECT_SRC + 'icons/*',
         PROJECT_SRC + 'icons/*/*'])
-    //.pipe(concat('app.js'))
         .pipe(gulp.dest(PROJECT_BUILD + 'icons/'));
 });
-//-----------INDEX-----------------
-var styleDev = [/*'bootstrap.css', 'bootstrap-theme.css',*/ 'style.css'];
-var styleProd = [/*'base.min.css',*/ 'style.css'];
+//-----------JS--------------------
+var jsLibsSources = [
+    'node_modules/'
+];
+var jsLibs = [
 
-var libsScriptDev = [
+];
+var jsSourves = [
+    // 'js/tools/logger.js',
+
+    // 'js/pipes/date_pipe.js',
+    // 'js/pipes/filesize_pipe.js',
+
+    //  'js/tools.js',
+
+    //'js/components/'
+
+    'js/app.js'
+];
+var jsApp = ['js/app.js'];
+
+
+gulp.task('js-libs-dev', function () {
+    return gulp.src(jsLibsSources)
+        .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
+});
+
+gulp.task('js-libs-prod', function () {
+    return gulp.src(jsLibsSources)
+        .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
+});
+
+gulp.task('js-app-dev', function () {
+    return gulp.src(jsSourves.map((el) => { return PROJECT_SRC + el; }))
+        //.pipe(concat('app.js'))
+        /*.pipe(rename(function (path) {
+            console.log("PATH::",path);
+            //jsApp.push(path.basename + path.extname);
+        }))*/
+        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
+});
+gulp.task('js-app-prod', function () {
+    return gulp.src(jsSourves.map((el) => { return PROJECT_SRC + el; }))
+        .pipe(concat('app.js'))
+        /*.pipe(rename(function (path) {
+            console.log("PATH::",path);
+            //jsApp.push(path.basename + path.extname);
+        }))*/
+        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
+});
+
+gulp.task('js-dev', ['js-libs-dev', 'js-app-dev']);
+gulp.task('js-prod', ['js-libs-prod', 'js-app-prod']);
+//-----------INDEX-----------------
+var styleProd = ['base.min.css', 'style.css'];
+
+/*var libsScriptDev = [
     //'libs/system.js',
     //'libs/system-polyfills.js',
-    
+
     'libs/es6-shim.min.js',
     'libs/angular2-polyfills.js',
     'libs/Rx.umd.js',
-//'libs/angular2.dev.js',
+    //'libs/angular2.dev.js',
     'libs/angular2-all.umd.js',
     //'libs/router.dev.js'
     //'libs/angular2-localization.js'
-];
+];*/
 var libsScriptProd = ['tools.js'];
 
 var scriptDev = ['models.js', 'app.js'];
@@ -148,24 +141,12 @@ function launchStylesAsString(list, title) {
 function launchScriptsAsString(list, title) {
     var res = "";
     list.forEach(function (el) {
-        res = res + "\n" + '<script type="text/javascript" src="js/' + el + '?v=' + title + '"></script>';
+        res = res + "\n" + '<script type="application/javascript" src="' + el + '?v=' + title + '"></script>';
     });
     return res;
 }
-function supportedLanguagesDev(callback) {
-    var res = '<script type="text/javascript" >';
-    res += 'var supportedLanguages = [';
 
-    /*fs.readdir(DIST_MOBILE_SOURCE + 'lang/', function (err, files) {
-        files.forEach(function(file, index){
-            var ln = file.substr(0, file.length - 5);
-            res += (index === 0 ? '' : ',') + "'" + ln + "'";
-        });
-        res += '];</script>';
-        callback(res);
-    });*/
-}
-function supportedLanguagesProd(callback) {
+function supportedLanguages() {
     var files = ['en'];
     var res = '<script type="text/javascript" >';
     res += 'var supportedLanguages = [';
@@ -173,26 +154,25 @@ function supportedLanguagesProd(callback) {
         res += (index === 0 ? '' : ',') + "'" + file + "'";
     });
     res += '];</script>';
-    callback(res);
+    return res;
 }
 
 gulp.task('index-dev', function () {
     var version = Math.random();
-    supportedLanguagesProd(function (listLanguages) {
-        gulp.src([PROJECT_SRC + 'view/*/*.html'])
-            .pipe(replace(/(<!--STYLES-->)/g, launchStylesAsString(styleDev, version)))
-            .pipe(replace(/(<!--JSLIBS-->)/g, launchScriptsAsString(libsScriptDev, 0.1)))
-            .pipe(replace(/(<!--JSAPP-->)/g, launchScriptsAsString(scriptDev, version)))
-            .pipe(replace(/(<!--LN-->)/g, listLanguages))
-            .pipe(rename(function (path) {
-                path.dirname = "/view/";
-                //path.basename += "";
-                path.extname = ".ejs"
-            }))
-            .pipe(gulp.dest(PROJECT_BUILD));
-    });
+    gulp.src([PROJECT_SRC + 'view/*/*.html'])
+        .pipe(replace(/(<!--STYLES-->)/g, launchStylesAsString(styleProd, version)))
+        .pipe(replace(/(<!--JSLIBS-->)/g, launchScriptsAsString(jsLibs, 0.1)))
+        .pipe(replace(/(<!--JSAPP-->)/g, launchScriptsAsString(jsApp, version)))
+        .pipe(replace(/(<!--LN-->)/g, supportedLanguages()))
+        .pipe(rename(function (path) {
+            path.dirname = "/view/";
+            //path.basename += "";
+            path.extname = ".ejs"
+        }))
+        .pipe(gulp.dest(PROJECT_BUILD));
 });
 
 
 //===============================
-gulp.task('dev-web', ['css-dev', 'js-dev', 'template-dev', 'icons', 'index-dev']);
+gulp.task('dev-web', ['css-dev', 'templates', 'icons', 'js-dev', 'index-dev']);
+gulp.task('prod-web', ['css-prod', 'templates', 'icons', 'js-prod', 'index-dev']);

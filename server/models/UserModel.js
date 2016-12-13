@@ -1,169 +1,42 @@
-module.exports = function(ModelBaseClass) {
-    'use strict';
-    return (class UserModel extends ModelBaseClass {
-        static get tableName() {
-            return "users";
-        }
+var Schema = mongoose.Schema;
 
-        static get primaryKey() {
-            return "uid";
-        }
+var UserModel = new Schema({
+    access_data: {
+        login: { type: String, required: true },
+        password: { type: String, required: true },
+        fb_key: { type: String, default: "" },
+        tw_key: { type: String, default: "" },
+        vk_key: { type: String, default: "" },
+        gplus_key: { type: String, default: "" },
+    },
+    personal_data: {
+        photo: { type: String, default: "" },
+        firstname: { type: String, required: true },
+        surname: { type: String, required: true },
+        nickname: { type: String, default: "" },
+        sex: { type: String, default: "" },
+        birthday: { type: Number, default: null },
+    },
+    address: {
+        country: { type: String, default: "" },
+        city: { type: String, default: "" },
+        street: { type: String, default: "" },
+    },
+    contacts: {
+        phone: { type: String, default: "" },
+        email: { type: String, default: "" },
+        website: { type: String, default: "" },
+        soc_net_vk: { type: String, default: "" },
+        soc_net_fb: { type: String, default: "" },
+        soc_net_tw: { type: String, default: "" },
+        soc_net_gplus: { type: String, default: "" },
+    },
+    description: { type: String, default: "" },
 
-        static get attributes() {
-            return [
-                'uid',
-                'mail',
-                'password',
-                'fb_key',
-                'tw_key',
-                'vk_key',
-                'gplus_key',
-                'date_registration',
-                'date_last_login',
-                'firstname',
-                'surname',
-                'nickname',
-                'sex',
-                'country',
-                'city',
-                'address',
-                'birthday',
-                'phone'];
-        }
+    is_approved: { type: Boolean, default: false },
+    is_deleted: { type: Boolean, default: false },
+    date_created: { type: Date, required: true },
+    date_last_visit: { type: Date }
+});
 
-        get uid() {
-            return this.___.uid;
-        }
-        set uid(value) {
-            this.___.uid = value;
-        }
-
-        get mail() {
-            return this.___.mail;
-        }
-        set mail(value) {
-            this.___.mail = value;
-        }
-
-        get password() {
-            return this.___.password;
-        }
-        set password(value) {
-            this.___.password = value;
-        }
-
-        get fb_key() {
-            return this.___.fb_key;
-        }
-        set fb_key(value) {
-            this.___.fb_key = value;
-        }
-
-        get tw_key() {
-            return this.___.tw_key;
-        }
-        set tw_key(value) {
-            this.___.tw_key = value;
-        }
-
-        get vk_key() {
-            return this.___.vk_key;
-        }
-        set vk_key(value) {
-            this.___.vk_key = value;
-        }
-
-        get gplus_key() {
-            return this.___.gplus_key;
-        }
-        set gplus_key(value) {
-            this.___.gplus_key = value;
-        }
-
-        get date_registration() {
-            return this.___.date_registration;
-        }
-        set date_registration(value) {
-            this.___.date_registration = value;
-        }
-
-        get date_last_login() {
-            return this.___.date_last_login;
-        }
-        set date_last_login(value) {
-            this.___.date_last_login = value;
-        }
-
-        get firstname() {
-            return this.___.firstname;
-        }
-        set firstname(value) {
-            this.___.firstname = value;
-        }
-
-        get surname() {
-            return this.___.surname;
-        }
-        set surname(value) {
-            this.___.surname = value;
-        }
-
-        get nickname() {
-            return this.___.nickname;
-        }
-        set nickname(value) {
-            this.___.nickname = value;
-        }
-
-        get sex() {
-            return this.___.sex;
-        }
-        set sex(value) {
-            this.___.sex = value;
-        }
-
-        get country() {
-            return this.___.country;
-        }
-        set country(value) {
-            this.___.country = value;
-        }
-
-        get city() {
-            return this.___.city;
-        }
-        set city(value) {
-            this.___.city = value;
-        }
-
-        get address() {
-            return this.___.address;
-        }
-        set address(value) {
-            this.___.address = value;
-        }
-
-        get birthday() {
-            return this.___.birthday;
-        }
-        set birthday(value) {
-            this.___.birthday = value;
-        }
-
-        get phone() {
-            return this.___.phone;
-        }
-        set phone(value) {
-            this.___.phone = value;
-        }
-
-        constructor() {
-            super();
-
-        }
-
-        security() {
-            this.password = "";
-        }
-    });
-};
+module.exports = mongoose.model('User', UserModel);

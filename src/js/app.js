@@ -42,16 +42,26 @@
             });
         }]
     });
+
+    app.Site404Page = ng.core.Component({
+        selector: 'app-trucker',
+        templateUrl: 'templates/site/404.html'
+    }).Class({
+        constructor: function () {
+
+        }
+    });
+
     //ng.core.enableProdMode();
     app.TruckersApplication = ng.router.RouteConfig(app.routeList.concat([
         //---SITE---
-        new ng.router.Route({ path: '/about', component: app.SiteAboutComponent, name: 'About' }),
-        new ng.router.Route({ path: '/terms', component: app.SiteTermsComponent, name: 'Terms' }),
+        //new ng.router.Route({ path: '/about', component: app.SiteAboutComponent, name: 'About' }),
+        //new ng.router.Route({ path: '/terms', component: app.SiteTermsComponent, name: 'Terms' }),
 
-        new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true }),
+        //new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true }),
 
-        new ng.router.Route({ path: '/404', component: app.Site404Component, name: 'Page404' }),
-        new ng.router.Route({ path: '/*path', component: app.Site404Component })
+        new ng.router.Route({ path: '/404', component: app.Site404Page, name: 'Page404' }),
+        new ng.router.Route({ path: '/*path', component: app.Site404Page })
     ]))(app.ApplicationComponent);
 
     app.routeList = [];

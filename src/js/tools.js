@@ -2,18 +2,6 @@
 
 (function (ng, app) {
     'use strict';
-    app.tools = {
-        location: {
-            go: function (path) {
-                setTimeout(function () {
-                    let a = document.createElement('a');
-                    a.href = '#' + path;
-                    a.click();
-                    a.remove();
-                }, 0);
-            }
-        }
-    };
 
     app.Http = ng.core.Injectable({}).Class({
         //https://www.youtube.com/watch?v=L7xPwhwbcHE

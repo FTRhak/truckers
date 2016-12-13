@@ -16,16 +16,22 @@
     <link rel="canonical" href="http://localhost:3000/" />
     <!--STYLES-->
     <!--LN-->
+
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
 </head>
 
 <body class="page">
     <div app-trucker class="hide-left-side">Loading...</div>
 
     <!--JSLIBS-->
-    <!--JSAPP-->
+    <!--JSAPP1-->
 
     <script>
-        (function (app) {
+        /*(function (app) {
             document.addEventListener('DOMContentLoaded', function () {
                 ng.platform.browser.bootstrap(app.TruckersApplication, [
                     ng.router.ROUTER_PROVIDERS,
@@ -35,10 +41,19 @@
                     ng.http.HTTP_PROVIDERS
                     ]);
             });
-        })(window.app || (window.app = {}));
+        })(window.app || (window.app = {}));*/
+
+
+
+
+//https://github.com/angular/quickstart/blob/master/index.html
+
+
+
+
     </script>
     
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6LWAt8hsoCtgK3efbbtnCG81uKBvuCpc&callback=app.initMap"  async defer></script1>
+    <script1 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6LWAt8hsoCtgK3efbbtnCG81uKBvuCpc&callback=app.initMap"  async defer></script1>
 </body>
 
 </html>

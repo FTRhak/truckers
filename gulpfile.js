@@ -58,8 +58,8 @@ gulp.task('icons', function () {
         .pipe(gulp.dest(PROJECT_BUILD + 'icons/'));
 });
 //-----------JS--------------------
+//TODO reorganize js files
 var jsLibsSources = [
-    'node_modules/'
 ];
 var jsLibs = [
 
@@ -91,20 +91,11 @@ gulp.task('js-libs-prod', function () {
 
 gulp.task('js-app-dev', function () {
     return gulp.src(jsSourves.map((el) => { return PROJECT_SRC + el; }))
-        //.pipe(concat('app.js'))
-        /*.pipe(rename(function (path) {
-            console.log("PATH::",path);
-            //jsApp.push(path.basename + path.extname);
-        }))*/
         .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
 gulp.task('js-app-prod', function () {
     return gulp.src(jsSourves.map((el) => { return PROJECT_SRC + el; }))
         .pipe(concat('app.js'))
-        /*.pipe(rename(function (path) {
-            console.log("PATH::",path);
-            //jsApp.push(path.basename + path.extname);
-        }))*/
         .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
 

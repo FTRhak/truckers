@@ -3,14 +3,10 @@
     <div class="col-md-8 col-sm-8">
         <div class="profile-info">
             <div class="profile-avatar">
-                <i class="profile-avatar-img" style=""></i>
+                <i class="profile-avatar-img"></i>
             </div>
             <div class="profile-data">
-                <label>{{user.firstname}} {{user.surname}}</label>
-                <ul>
-                    <li>Age: {{getAge()}}</li>
-                    <li>{{getLocation()}}</li>
-                </ul>
+                <label>{{user.personal_data.firstname}} {{user.personal_data.surname}}</label>
                 <a [routerLink]="['ProfileEdit']" >Edit</a>
             </div>
         </div>
@@ -23,7 +19,7 @@
             </li>
         </ul>
 
-        
+        <a [routerLink]="['Logout']">Logout</a>
 
         <div freights-history></div>
 

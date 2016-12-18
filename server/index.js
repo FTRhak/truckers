@@ -71,6 +71,15 @@ models(app.models);
 var controllers = require(__dirname + '/controllers/controller.js');
 controllers(app.express);
 
+app.express.get('/api/*', function (req, res) {
+    res.status(404);
+    res.render('404_ajax', { "msg": "Error API" });
+});
+app.express.post('/api/*', function (req, res) {
+    res.status(404);
+    res.render('404_ajax', { "msg": "Error API" });
+});
+
 app.express.get('*', function (req, res) {
     if (req.headers['content-type'] !== 'application/json') {
         res.render('index', { title: 'Hey', message: 'Hello there!' });

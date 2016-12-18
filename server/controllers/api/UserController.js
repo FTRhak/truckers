@@ -118,7 +118,7 @@ module.exports = function (ControllerBaseClass) {
             const model = req.body.model || {};
             const availableFields = this.getAvailableFields();
 
-            if (model.login && model.password && model.email && model.firstname && model.surname) {
+            /*if (model.login && model.password && model.email && model.firstname && model.surname) {
                 let data = {
                     is_deleted: false,
                     access_data: {
@@ -142,7 +142,11 @@ module.exports = function (ControllerBaseClass) {
                 });
             } else {
                 res.json({ status: true, error: { message: "Invalid data" } });
-            }
+            }*/
+            let item = new app.models.User(model);
+            item.save(function (err, data) {
+                res.json({ status: true, item_id: data._id, error: err });
+            });
         }
         actionEditItem(req, res) {
             const user = this.checkAuthentication(req, res);

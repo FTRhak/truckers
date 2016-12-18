@@ -11,7 +11,7 @@
 
             
             this.post = function (url, data, success, error) {
-                http.post(url, JSON.stringify(data), jsonHeader).toPromise()
+                return http.post(url, JSON.stringify(data), jsonHeader).toPromise()
                     .then(success)
                     .catch(error || function () { 
                         router.navigate(['Login']);
@@ -25,7 +25,7 @@
                     for (let property in data) result.push(encodeURIComponent(property) + "=" + encodeURIComponent(data[property]));
                     options += result.join("&");
                 }
-                http.get(url + options).toPromise()
+                return http.get(url + options).toPromise()
                     .then(success)
                     .catch(error || function () { 
                         router.navigate(['Login']);
@@ -36,35 +36,45 @@
 
     });
 
-
+    var userData = null;
     let Auth = ng.core.Injectable({
         providers: [app.Http]
     }).Class({
         constructor: [app.Http, function AuthUser(http) {
-            let self = this;
+            this.http = http;
+        }],
 
-            this.synchronizeUser = function () {
-                http.post('/api/user/access?rid=' + Math.random(), {}, function (res) {
-                    self.login(res.id);
+        synchronizeUser : function () {
+            let self = this;
+            if (this.isLogin()) {
+                this.http.get('/api/access?rid=' + Math.random(), {}, function (res) {
+                    const body = JSON.parse(res._body);
+                    self.login(body.user);
                 }, function (error) {
-                    self.loguot();
+                    self.logout();
                 });
             }
-        }],
+        },
         /**
          * @return {bool}
          */
         isLogin: function () {
-            return !!(localStorage.getItem('user') * 1);
+            //return userData && userData._id;
+            return !!(localStorage.getItem('user'));
         },
         getUser: function() {
-            return {name:"FTR"}
+            //return userData;
+            return JSON.parse(localStorage.getItem('userData'));
         },
-        login: function (id) {
-            localStorage.setItem('user', id);
+        login: function (user) {
+            localStorage.setItem('user', user._id);
+            userData = user;
+            localStorage.setItem('userData', JSON.stringify(user));
         },
         logout: function () {
+            userData = null;
             localStorage.removeItem('user');
+            localStorage.removeItem('userData');
         }
     });
 

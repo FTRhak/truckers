@@ -103,6 +103,12 @@ var jsSourves = [
     'js/modules/authentication/LogoutModule.js',
     'js/modules/authentication/RegistrationModule.js',
     'js/modules/authentication/RestoreModule.js',
+    'js/modules/authentication/ResetPasswordModule.js',
+
+    'js/modules/profile/UserEditModule.js',
+    'js/modules/profile/UserSettingsModule.js',
+    'js/modules/profile/UserProfileModule.js',
+    
     
 
     //'js/components/'
@@ -157,7 +163,7 @@ var scriptProd = ['script.js'];
 function launchStylesAsString(list, title) {
     var res = "";
     list.forEach(function (el) {
-        res = res + '<link rel="stylesheet" type="text/css" href="css/' + el + '?v=' + title + '" media="all" />' + "\n";
+        res = res + '<link rel="stylesheet" type="text/css" href="/css/' + el + '?v=' + title + '" media="all" />' + "\n";
     });
     return res;
 }
@@ -165,7 +171,7 @@ function launchStylesAsString(list, title) {
 function launchScriptsAsString(list, title) {
     var res = "";
     list.forEach(function (el) {
-        res = res + "\n" + '<script type="application/javascript" src="' + el + '?v=' + title + '"></script>';
+        res = res + "\n" + '<script type="application/javascript" src="/' + el + '?v=' + title + '"></script>';
     });
     return res;
 }

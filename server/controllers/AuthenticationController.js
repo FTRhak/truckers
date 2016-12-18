@@ -9,32 +9,32 @@ module.exports = function (ControllerBaseClass) {
             return [
                 {
                     action: "actionLogin",
-                    url: "/api/user/login",
+                    url: "/api/login",
                     method: "post",
                     isAjax: true
                 }, {
                     action: "actionLogout",
                     url: "/api/logout",
-                    method: "post",
+                    method: "get",
                     isAjax: true
                 }, {
                     action: "actionAccess",
-                    url: "/api/user/access",
-                    method: "post",
+                    url: "/api/access",
+                    method: "get",
                     isAjax: true
                 }, {
                     action: "actionRegister",
-                    url: "/api/user/register",
+                    url: "/api/register",
                     method: "post",
                     isAjax: true
                 }, {
                     action: "actionRestore",
-                    url: "/api/user/restore",
+                    url: "/api/restore",
                     method: "post",
                     isAjax: true
                 }, {
                     action: "actionResetPassword",
-                    url: "/api/user/reset-password",
+                    url: "/api/reset-password",
                     method: "post",
                     isAjax: true
                 }
@@ -43,19 +43,16 @@ module.exports = function (ControllerBaseClass) {
 
         actionLogin(req, res) {
             if (req.session.user) {
-                res.json({ status: 200, user: req.session.user });
+                res.json({ status: true, user: req.session.user });
                 return;
             }
             const login = req.body.login;
             const pass = req.body.password;
-            app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s' and `password` = '%s'", data: [login, pass] } }, function (err, row, fields) {
-                if (!err && row) {
-                    row.security();
-                    req.session.user = row.toJson();
-                    res.json({ status: 200, user: row.toJson() });
-                } else {
-                    res.json({ status: 400, error: "User does not exist!" });
-                }
+
+            app.models.User.findOne({ 'access_data.login': login, 'access_data.password': pass }, function (err, data) {
+                data.access_data = null;
+                req.session.user = data;
+                res.json({ status: true, data: "accept", user: data, error: err });
             });
         }
 
@@ -71,7 +68,7 @@ module.exports = function (ControllerBaseClass) {
 
         actionAccess(req, res) {
             if (req.session.user) {
-                res.json({ status: 200, id: req.session.user.id });
+                res.json({ status: true, user: req.session.user, data: "access", error: null });
             } else {
                 res.sendStatus(401);
             }

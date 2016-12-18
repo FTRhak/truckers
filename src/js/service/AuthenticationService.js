@@ -16,7 +16,7 @@
                 login: data.login,
                 password: data.password
             };
-            this.http.post('/api/user/login?rid=' + Math.random(), model, function (res) {
+            this.http.post('/api/login?rid=' + Math.random(), model, function (res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     callback(body);
@@ -24,7 +24,7 @@
             }, error || EMPTY_FUNCTION);
         },
         register: function (data, callback, error) {
-            this.http.post('/api/user/register?rid=' + Math.random(), data, function (res) {
+            this.http.post('/api/register?rid=' + Math.random(), data, function (res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     callback(body);
@@ -32,7 +32,7 @@
             }, error || EMPTY_FUNCTION);
         },
         restore: function (data, callback, error) {
-            this.http.post('/api/user/restore?rid=' + Math.random(), data, function (res) {
+            this.http.post('/api/restore?rid=' + Math.random(), data, function (res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     callback(body);
@@ -40,7 +40,7 @@
             }, error || EMPTY_FUNCTION);
         },
         resetPassword: function (data, callback, error) {
-            this.http.post('/api/user/reset-password?rid=' + Math.random(), data, function (res) {
+            this.http.post('/api/reset-password?rid=' + Math.random(), data, function (res) {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     callback(body);
@@ -48,7 +48,9 @@
             }, error || EMPTY_FUNCTION);
         },
         logout: function (callback, error) {
-            this.http.post('/api/logout?rid=' + Math.random(), {}, callback, error || EMPTY_FUNCTION);
+            this.http.get('/api/logout?rid=' + Math.random(), {}, function(res){
+                callback(res._body);
+            }, error || EMPTY_FUNCTION);
         }
     });
 

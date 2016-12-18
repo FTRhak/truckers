@@ -28,7 +28,8 @@
     }).Class({
         constructor: [ng.router.Router, app.Auth, function ApplicationComponent(router, user) {
             //this.name ="ApplicationComponent";
-            //user.synchronizeUser();
+            console.log('synchronizeUser');
+            user.synchronizeUser();
             //router.subscribe(function(path) {
                 //console.log("path changed: ",path);
             //});

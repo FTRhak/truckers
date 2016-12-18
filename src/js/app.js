@@ -10,17 +10,10 @@
     });
 
 
-/*
-<section id="page" class="container">
-        <app-trucker-route>Loading...</app-trucker-route>
-    </section>
 
-    <footer>Trucker@</footer>
-*/
 
     app.ApplicationComponent = ng.core.Component({
         selector: '[app-trucker]',
-        //template: "<navigate-menu></navigate-menu><router-outlet></router-outlet><router-access></router-access>",
         template: `
             <header header-profile class="header"></header>
             <side class="side-bar left-side-bar">Side</side>
@@ -28,18 +21,17 @@
                 <router-outlet></router-outlet>
             </section>
             <nav class="navigation">Settings</nav>
-            <footer class="footer">
-                <a class="user-name" [routerLink]="['About']" >About</a>
-            </footer>
+            <footer class="footer">Hello</footer>
         `,
-        directives: [ng.router.ROUTER_DIRECTIVES, app.HeaderController, app.TestDirective],
+        directives: [ng.router.ROUTER_DIRECTIVES, app.TestDirective],
         providers: [app.Http, app.Auth]
     }).Class({
         constructor: [ng.router.Router, app.Auth, function ApplicationComponent(router, user) {
+            //this.name ="ApplicationComponent";
             //user.synchronizeUser();
-            router.subscribe(function(path) {
+            //router.subscribe(function(path) {
                 //console.log("path changed: ",path);
-            });
+            //});
         }]
     });
 
@@ -52,14 +44,9 @@
         }
     });
 
-    //ng.core.enableProdMode();
+    app.routeList = app.routeList || [];
+    ng.core.enableProdMode();
     app.TruckersApplication = ng.router.RouteConfig(app.routeList.concat([
-        //---SITE---
-        //new ng.router.Route({ path: '/about', component: app.SiteAboutComponent, name: 'About' }),
-        //new ng.router.Route({ path: '/terms', component: app.SiteTermsComponent, name: 'Terms' }),
-
-        //new ng.router.Route({ path: '/', component: app.WallComponent, name: 'Index', useAsDefault: true }),
-
         new ng.router.Route({ path: '/404', component: app.Site404Page, name: 'Page404' }),
         new ng.router.Route({ path: '/*path', component: app.Site404Page })
     ]))(app.ApplicationComponent);
@@ -67,3 +54,17 @@
     app.routeList = [];
 
 })(ng, window.app || (window.app = {}));
+
+(function (app) {
+    document.addEventListener('DOMContentLoaded', function () {
+        ng.platform.browser.bootstrap(app.TruckersApplication, [
+            ng.router.ROUTER_PROVIDERS,
+            ng.core.provide(ng.router.LocationStrategy, {useClass: ng.router.PathLocationStrategy}),
+            //ng.core.provide(ng.router.LocationStrategy, {useClass: ng.router.HashLocationStrategy}),
+            ng.core.provide(ng.router.APP_BASE_HREF, {useValue: '/'}),
+            ng.http.HTTP_PROVIDERS
+            ]);
+    });
+})(window.app || (window.app = {}));
+
+//https://github.com/angular/quickstart/blob/master/index.html

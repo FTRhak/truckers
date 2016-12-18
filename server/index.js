@@ -54,6 +54,9 @@ app.express.use(bodyParser.json());
 app.express.use(session({ secret: 'dev-truckers-session' }));
 
 //app.express.use('/index.html', express.static(_basePath + 'client/index.html'));
+
+//app.express.use('/node_modules', express.static(_basePath + 'node_modules'));
+
 app.express.use('/css', express.static(_basePath + 'client/css'));
 app.express.use('/js', express.static(_basePath + 'client/js'));
 app.express.use('/icons', express.static(_basePath + 'client/icons'));

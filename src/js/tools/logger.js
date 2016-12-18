@@ -1,6 +1,4 @@
 (function (ng, app) {
-    ng.localization = ng.localization || {};
-
     app.Logger = ng.core.Injectable({}).Class({
         constructor: function () {
             this.logs = [];
@@ -14,4 +12,4 @@
 
     });
 
-})(ng, window.app);
+})(ng, (window.app || (window.app = {})));

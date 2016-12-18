@@ -6,6 +6,8 @@ var TruckModel = new Schema({
     name: { type: String, default: "" },
     logo: { type: String, default: "" },
     
+
+    
     is_deleted: { type: Boolean, default: false },
 });
 

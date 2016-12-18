@@ -5,10 +5,10 @@
 
     const EMPTY_FUNCTION = function () { };
 
-    app.AuthenticationServerComponent = ng.core.Component({
+    app.AuthenticationService = ng.core.Component({
         providers: [Http]
     }).Class({
-        constructor: [Http, function AuthenticationServerComponent(http) {
+        constructor: [Http, function AuthenticationService(http) {
             this.http = http;
         }],
         login: function (data, callback, error) {

@@ -10,6 +10,7 @@ var minifyCSS = require('gulp-minify-css');
 var PROJECT_SRC = 'src/';
 var PROJECT_BUILD = 'client/';
 
+var JS_LIBS = 'js/libs/';
 //-----------CLEAN-----------------
 gulp.task('build-clean', function () {
     return gulp.src(PROJECT_BUILD, { read: false })
@@ -60,20 +61,52 @@ gulp.task('icons', function () {
 //-----------JS--------------------
 //TODO reorganize js files
 var jsLibsSources = [
+    'node_modules/es6-shim/es6-shim.min.js',
+    'node_modules/angular2/bundles/angular2-polyfills.js',
+    'node_modules/rxjs/bundles/Rx.umd.js',
+    'node_modules/angular2/bundles/angular2-all.umd.js',
+    'node_modules/angular2/bundles/angular2.dev.js',
+    'node_modules/angular2/bundles/router.dev.js',
+    //'node_modules/angular2-translator/bundles/angular2-translator.js',
+    //'node_modules/systemjs/dist/system-polyfills.js',
+    'node_modules/systemjs/dist/system.js',
+    'node_modules/systemjs/dist/system.js.map'
 ];
 var jsLibs = [
-
+    'system.js',
+    'es6-shim.min.js',
+    'angular2-polyfills.js',
+    'Rx.umd.js',
+    'angular2-all.umd.js',
+    'angular2.dev.js',
+    'router.dev.js',
+    //'angular2-translator.js',
+    
 ];
 var jsSourves = [
-    // 'js/tools/logger.js',
+    'js/tools/logger.js',
+    'js/tools.js',
 
-    // 'js/pipes/date_pipe.js',
-    // 'js/pipes/filesize_pipe.js',
+    'js/components/HeaderComponent.js',
+    'js/components/FooterComponent.js',
 
-    //  'js/tools.js',
+    'js/pipes/DatePipe.js',
+    'js/pipes/FileSizePipe.js',
+
+    'js/service/AuthenticationService.js',
+    'js/service/UserService.js',
+    
+
+    'js/modules/SiteModule.js',
+    'js/modules/ChangeLanguageModule.js',
+    'js/modules/authentication/LoginModule.js',
+    'js/modules/authentication/LogoutModule.js',
+    'js/modules/authentication/RegistrationModule.js',
+    'js/modules/authentication/RestoreModule.js',
+    
 
     //'js/components/'
-
+    //'js/app.module.js',
     'js/app.js'
 ];
 var jsApp = ['js/app.js'];
@@ -90,7 +123,7 @@ gulp.task('js-libs-prod', function () {
 });
 
 gulp.task('js-app-dev', function () {
-    return gulp.src(jsSourves.map((el) => { return PROJECT_SRC + el; }))
+    return gulp.src([PROJECT_SRC + 'js/*/*/*.js',, PROJECT_SRC + 'js/*/*.js', PROJECT_SRC + 'js/*.js'])
         .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
 gulp.task('js-app-prod', function () {
@@ -152,8 +185,8 @@ gulp.task('index-dev', function () {
     var version = Math.random();
     gulp.src([PROJECT_SRC + 'view/*/*.html'])
         .pipe(replace(/(<!--STYLES-->)/g, launchStylesAsString(styleProd, version)))
-        .pipe(replace(/(<!--JSLIBS-->)/g, launchScriptsAsString(jsLibs, 0.1)))
-        .pipe(replace(/(<!--JSAPP-->)/g, launchScriptsAsString(jsApp, version)))
+        .pipe(replace(/(<!--JSLIBS-->)/g, launchScriptsAsString(jsLibs.map(function(el){return JS_LIBS + el}), 0.1)))
+        .pipe(replace(/(<!--JSAPP-->)/g, launchScriptsAsString(jsSourves, version)))
         .pipe(replace(/(<!--LN-->)/g, supportedLanguages()))
         .pipe(rename(function (path) {
             path.dirname = "/view/";

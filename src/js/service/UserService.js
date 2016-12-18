@@ -5,10 +5,10 @@
 
     const EMPTY_FUNCTION = function () { };
 
-    app.UserServerComponent = ng.core.Component({
+    app.UserService = ng.core.Component({
         providers: [Http]
     }).Class({
-        constructor: [Http, function UserServerComponent(http) {
+        constructor: [Http, function UserService(http) {
             this.http = http;
         }],
         getMe: function (callback, error) {

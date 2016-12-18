@@ -3,15 +3,20 @@ var Schema = mongoose.Schema;
 var DeliveryOrderModel = new Schema({
     cid: { type: String, required: true }, //Company ID
     uid: { type: String, required: true }, //Driver
-    tid: { type: String, required: true }, //Car
+    truck: {
+        id: { type: String, required: true },
+        name: { type: String, default: "" },
+    }, //Car
     title: { type: String, default: "" },
     //TODO add types
-    cargo_types: {type: String, enum: ['explosive', 'toxic', 'organic'], default: ""},
+    cargo_types: { type: String, enum: ['explosive', 'toxic', 'organic'], default: "" },
     description: { type: String, default: "" },
+    address_start: { type: String, default: "" },
     location_start: {
         type: [Number],
         index: '2d'
     },
+    address_end: { type: String, default: "" },
     location_end: {
         type: [Number],
         index: '2d'

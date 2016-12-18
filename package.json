@@ -5,26 +5,19 @@
   "description": "Truckers social net",
   "author": "FTR",
   "dependencies": {
-    "@angular/common": "^2.2.4",
-    "@angular/compiler": "^2.2.4",
-    "@angular/core": "^2.2.4",
-    "@angular/forms": "^2.2.4",
-    "@angular/http": "^2.2.4",
-    "@angular/platform-browser": "^2.2.4",
-    "@angular/platform-browser-dynamic": "^2.2.4",
-    "@angular/router": "^3.2.4",
-    "@angular/upgrade": "^2.2.4",
-    "angular-in-memory-web-api": "^0.1.16",
+    "@angular/material": "^2.0.0-alpha.11-3",
+    "angular2": "2.0.0-beta.15",
     "body-parser": "^1.15.2",
     "core-js": "^2.4.1",
     "ejs": "^2.5.3",
+    "es6-shim": "0.35.0",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "mongoose": "^4.7.1",
-    "reflect-metadata": "^0.1.8",
-    "rxjs": "^5.0.0-rc.4",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
     "systemjs": "^0.19.41",
-    "zone.js": "^0.7.2"
+    "zone.js": "0.6.10"
   },
   "scripts": {
     "start": "node server/index.js"

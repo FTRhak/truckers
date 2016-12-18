@@ -76,35 +76,38 @@ module.exports = function (ControllerBaseClass) {
 
         actionRegister(req, res) {
             if (req.session.user) {
-                res.json({ status: 200, id: req.session.user.id });
+                res.json({ status: false, error: 'user is logged already' });
                 return;
             }
 
             if (req.body.password !== req.body.passwordConfirm) {
-                res.json({ status: 201, error: 'password is not confirmed' });
+                res.json({ status: false, error: 'password is not confirmed' });
                 return;
             }
 
             function createUser() {
-                let user = new app.models.UserModel();
-                user.firstname = req.body.firstName;
-                user.secondname = req.body.secondName;
-                user.mail = req.body.email;
-                user.password = req.body.password;
-                user.sex = req.body.sex;
+                let model = {
+                    personal_data: {},
+                    access_data: {},
+                    contacts: {},
+                    date_created: Date.now(),
+                    date_last_visit: Date.now()
+                };
+                model.personal_data.firstname = req.body.firstName;
+                model.personal_data.surname = req.body.secondName;
+                model.contacts.email = req.body.email;
+                model.access_data.password = req.body.password;
+                model.access_data.login = req.body.login;
 
-                user.save(function (err, row, fields) {
-                    if (!err) {
-                        res.json({ status: 200, message: "OK" });
-                    } else {
-                        res.json({ status: 201, error: "Error insert new user!" });
-                    }
+                let item = new app.models.User(model);
+                item.save(function (err, data) {
+                    res.json({ status: true, data: data, error: err });
                 });
             }
 
-            app.models.UserModel.findOne({ 'where': { query: "`mail` = '%s'", data: [req.body.email] } }, function (err, row, fields) {
-                if (!err && row && row.uid) {
-                    res.json({ status: 201, error: "Email already used!" });
+            app.models.User.findOne({ $or: [{ 'access_data.login': req.body.login }, { 'contacts.email': req.body.email }] }, function (err, data) {
+                if (data || err) {
+                    res.json({ status: true, error: err || "user exist" });
                 } else {
                     createUser();
                 }

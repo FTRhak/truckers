@@ -7,38 +7,38 @@
         selector: 'app-trucker',
         templateUrl: 'templates/authentication/register.html',
         directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES, ng.router.ROUTER_DIRECTIVES],
-        pipes: [ng.localization.Translate],
         providers: [Server, AuthenticationService, PageTitle]
     }).Class({
-        constructor: [Server, AuthenticationService, ng.router.Router, PageTitle, function RegistratePageConstructor(server, authServer, router, title) {
+        constructor: [ng.router.Router, PageTitle, Server, AuthenticationService, function RegistratePageConstructor(router, title, server, authServer) {
             if (server.user.isLogin()) {
                 router.navigate(['Index']);
             }
             title.setTitle("Register");
-            /*this.registrationComplete = false;
-            this.server = server;
-            this.authServer = authServer;
 
             this.model = {
+                login: "",
                 firstName: "",
                 secondName: "",
                 email: "",
                 password: "",
-                passwordConfirm: "",
-                sex: ""
+                passwordConfirm: ""
             };
+           
+            this.server = server;
+            this.authServer = authServer;
+
+            
             //this.formControl = new ng.common.Control("Registrate");
             //console.log(this.formControl);
-            this.message = "";*/
+            this.registrationComplete = false;
+            this.message = "";
         }],
-        /*registerAccepted: function (data) {
+        registerAccepted: function (data) {
             if (data.error) {
                 this.message = data.error;
             } else {
                 this.registrationComplete = true;
             }
-
-            console.log('registerAccepted: ', data);
         },
         registerError: function (data) {
             console.log('registerError: ', data);
@@ -46,7 +46,7 @@
         onSubmit: function () {
             this.message = "";
             this.authServer.register(this.model, this.registerAccepted.bind(this), this.registerError.bind(this));
-        }*/
+        }
     });
 
     app.routeList = app.routeList || [];
@@ -57,5 +57,5 @@
     ng.platform.browser.Title,
     window.app,
     window.app.Server,
-    window.app.AuthenticationServerComponent
+    window.app.AuthenticationService
     );

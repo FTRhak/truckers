@@ -4,7 +4,7 @@
         <div class="form">
             <form action="" method="post" (ngSubmit)="onSubmit(inputLogin, inputPassword)">
                 <div class="form-group">
-                    <label for="field_login">Email</label>
+                    <label for="field_login">Login</label>
                     <input type="text" class="form-control" required id="field_login" #inputLogin>
                 </div>
                 <div class="form-group">
@@ -12,7 +12,7 @@
                     <input type="password" class="form-control" required id="field_pass" #inputPassword>
                 </div>
                 <div class="form-group">
-                    <div class="alert alert-danger" [style.display]="errorMessage?'block':'none'" role="alert">{{errorMessage}}</div>
+                    <div class="alert alert-danger" *ngIf="errorMessage" role="alert">{{errorMessage}}</div>
                     <input type="submit" value="Login" class="btn btn-align btn-default">
                 </div>
                 <div class="form-group center">

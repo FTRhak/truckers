@@ -5,7 +5,7 @@
 
     let RegistratePage = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/authentication/register.html',
+        templateUrl: '/templates/authentication/register.html',
         directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES, ng.router.ROUTER_DIRECTIVES],
         providers: [Server, AuthenticationService, PageTitle]
     }).Class({
@@ -26,18 +26,18 @@
            
             this.server = server;
             this.authServer = authServer;
+            this.router = router;
 
             
             //this.formControl = new ng.common.Control("Registrate");
             //console.log(this.formControl);
-            this.registrationComplete = false;
             this.message = "";
         }],
         registerAccepted: function (data) {
             if (data.error) {
                 this.message = data.error;
             } else {
-                this.registrationComplete = true;
+                this.router.navigate(['RegisterCompleted']);
             }
         },
         registerError: function (data) {

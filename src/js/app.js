@@ -38,7 +38,7 @@
 
     app.Site404Page = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/site/404.html'
+        templateUrl: '/templates/site/404.html'
     }).Class({
         constructor: function () {
 

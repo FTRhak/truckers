@@ -13,13 +13,16 @@ class ControllerBase {
     }
     checkAuthentication(req, res) {
         if (DEBUD && req.headers['access-for-test']) {
-            return {_id: 1001, name: "Test Account"};
+            return { _id: 1001, name: "Test Account" };
         }
         if (!this.isLogin(req)) {
             res.sendStatus(401);
             return false;
         }
         return req.session.user;
+    }
+    sendEmail() {
+
     }
 }
 
@@ -50,6 +53,6 @@ module.exports = function (express) {
     //initUrlControllers(require(__dirname + '/car_controller'));
 
     DEBUD && initUrlControllers(require(__dirname + '/AppInstallationController'));
-    
+
 
 };

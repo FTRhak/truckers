@@ -1,15 +1,15 @@
 /*global ng:true */
 
-(function (ng, PageTitle, app, Server, AuthenticationServerComponent) {
+(function (ng, PageTitle, app, Server, AuthenticationService) {
     'use strict';
 
     let RestoreComponent = ng.core.Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/authentication/restore.html',
+        templateUrl: '/templates/authentication/restore.html',
         directives: [ng.router.ROUTER_DIRECTIVES],
-        providers: [Server, AuthenticationServerComponent, PageTitle]
+        providers: [Server, AuthenticationService, PageTitle]
     }).Class({
-        constructor: [Server, AuthenticationServerComponent, ng.router.Router, PageTitle, function RestoreComponent(server, authServer, router, title) {
+        constructor: [Server, AuthenticationService, ng.router.Router, PageTitle, function RestoreComponent(server, authServer, router, title) {
             /*if (server.user.isLogin()) {
                 router.navigate(['Login']);
             }*/
@@ -41,5 +41,5 @@
     ng.platform.browser.Title,
     window.app,
     app.Server,
-    app.AuthenticationServerComponent
+    window.app.AuthenticationService
     );

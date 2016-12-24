@@ -70,7 +70,10 @@ var jsLibsSources = [
     //'node_modules/angular2-translator/bundles/angular2-translator.js',
     //'node_modules/systemjs/dist/system-polyfills.js',
     'node_modules/systemjs/dist/system.js',
-    'node_modules/systemjs/dist/system.js.map'
+    'node_modules/systemjs/dist/system.js.map',
+
+    //'node_modules/@angular/material/material.umd.js',
+    //'node_modules/@angular/material/material.umd.js.map',
 ];
 var jsLibs = [
     'system.js',
@@ -81,6 +84,7 @@ var jsLibs = [
     'angular2.dev.js',
     'router.dev.js',
     //'angular2-translator.js',
+    //'material.umd.js'
     
 ];
 var jsSourves = [
@@ -102,8 +106,9 @@ var jsSourves = [
     'js/modules/authentication/LoginModule.js',
     'js/modules/authentication/LogoutModule.js',
     'js/modules/authentication/RegistrationModule.js',
+    'js/modules/authentication/RegistrationCompletedModule.js',
+    'js/modules/authentication/RegistrationConfirmationModule.js',
     'js/modules/authentication/RestoreModule.js',
-    'js/modules/authentication/ResetPasswordModule.js',
 
     'js/modules/profile/UserEditModule.js',
     'js/modules/profile/UserSettingsModule.js',

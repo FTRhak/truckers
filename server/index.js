@@ -5,28 +5,24 @@ var express = require('express');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var md5 = require('md5');
+var nodemailer = require('nodemailer');
 var settings = require('./settings');
 var _basePath = __dirname + "/../";
 
+global.settings = settings;
+global.md5 = md5;
+global.nodemailer = nodemailer;
 global.mongoose = require('mongoose');
 
 global._basePath = _basePath;
 var app = {
     express: express(),
-    models: {}
+    models: {},
+    mailer: {}
 };
 global.app = app;
 global.DEBUD = true;
-
-/*var mysql = require('mysql');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'trucker',
-    debug: false
-});
-global.db = connection;*/
 
 mongoose.connect('mongodb://' + settings.db.host + '/' + settings.db.database);
 var db = mongoose.connection;
@@ -66,7 +62,8 @@ app.express.set('/node_modules', express.static(_basePath + 'node_modules'));
 var models = require(__dirname + '/models/model.js');
 models(app.models);
 
-
+var models = require(__dirname + '/mailcontrollers/controller.js');
+models(app.mailer);
 
 var controllers = require(__dirname + '/controllers/controller.js');
 controllers(app.express);

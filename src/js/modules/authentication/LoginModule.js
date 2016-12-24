@@ -5,7 +5,7 @@
 
     let LoginPage = Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/authentication/login.html',
+        templateUrl: '/templates/authentication/login.html',
         directives: [ng.router.ROUTER_DIRECTIVES],
         providers: [PageTitle, Server, AuthenticationService]
     }).Class({
@@ -17,25 +17,26 @@
             this.server = server;
             this.router = router;
             this.authServer = authServer;
+            this.errorMessage = "";
         }],
         loginAccepted: function (res) {
             if (res.status && !res.error) {
                 this.server.user.login(res.user);
                 this.router.navigate(['UserProfile']);
             } else {
-                this.errorMessage = data.error;
+                this.errorMessage = res.error || "Error access";
             }
         },
-        loginError: function (data) {
-            console.warn('loginError: ', data);
+        loginError: function () {
+            console.warn('loginError: ', arguments[0]);
         },
         onSubmit: function (inputLogin, inputPassword) {
+            this.errorMessage = "";
             const model = {
                 login: inputLogin.value,
                 password: inputPassword.value
             };
             let self = this;
-            console.log(model);
             this.authServer.login(model, this.loginAccepted.bind(this), this.loginError.bind(this));
         }
     });

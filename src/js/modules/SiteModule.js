@@ -3,7 +3,7 @@
 (function (ng, Component, PageTitle, Route, app) {
     let SitePage = Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/site/index.html',
+        templateUrl: '/templates/site/index.html',
         providers: [PageTitle]
     }).Class({
         constructor: [PageTitle, function SitePageConstructor(title) {
@@ -13,7 +13,7 @@
 
     let SiteAboutPage = Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/site/about.html',
+        templateUrl: '/templates/site/about.html',
         providers: [PageTitle]
     }).Class({
         constructor: [PageTitle, function SiteAboutPageConstructor(title) {
@@ -23,7 +23,7 @@
 
     let SiteTermsPage = Component({
         selector: 'app-trucker',
-        templateUrl: 'templates/site/terms.html',
+        templateUrl: '/templates/site/terms.html',
         providers: [PageTitle]
     }).Class({
         constructor: [PageTitle, function SiteTermsPageConstructor(title) {

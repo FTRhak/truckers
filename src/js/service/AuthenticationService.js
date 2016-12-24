@@ -31,6 +31,14 @@
                 }
             }, error || EMPTY_FUNCTION);
         },
+        registerConfirm: function (confirmationKey, callback, error) {
+            this.http.get('/api/register/confirm/' + confirmationKey + '?rid=' + Math.random(), {}, function (res) {
+                if (res.status === 200) {
+                    const body = JSON.parse(res._body);
+                    callback(body);
+                }
+            }, error || EMPTY_FUNCTION);
+        },
         restore: function (data, callback, error) {
             this.http.post('/api/restore?rid=' + Math.random(), data, function (res) {
                 if (res.status === 200) {
@@ -48,14 +56,14 @@
             }, error || EMPTY_FUNCTION);
         },
         logout: function (callback, error) {
-            this.http.get('/api/logout?rid=' + Math.random(), {}, function(res){
+            this.http.get('/api/logout?rid=' + Math.random(), {}, function (res) {
                 callback(res._body);
             }, error || EMPTY_FUNCTION);
         }
     });
 
 })(
-    ng, 
+    ng,
     window.app,
     app.Http
     );

@@ -1,17 +1,17 @@
 /*global ng:true */
 
 (function (ng, Component, PageTitle, Route, app) {
-    let ChangeLanguageComponent = Component({
+    let ChangeLanguagePage = Component({
         selector: 'app-trucker',
         templateUrl: 'templates/site/languages.html'
     }).Class({
-        constructor: function () {
+        constructor: function ChangeLanguagePageConstructor() {
 
         }
     });
 
     app.routeList = app.routeList || [];
-    app.routeList.push(new Route({ path: '/languages', component: ChangeLanguageComponent, name: 'ChangeLanguage' }));
+    app.routeList.push(new Route({ path: '/languages', component: ChangeLanguagePage, name: 'ChangeLanguage' }));
 
 })(
     ng,

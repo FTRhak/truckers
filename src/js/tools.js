@@ -10,10 +10,10 @@
             const jsonHeader = new ng.http.RequestOptions({ headers: headers });
 
             
-            this.post = function (url, data, success, error) {
+            this.post = function (url, data, successCallback, errorCallback) {
                 return http.post(url, JSON.stringify(data), jsonHeader).toPromise()
-                    .then(success)
-                    .catch(error || function () { 
+                    .then(successCallback)
+                    .catch(errorCallback || function () { 
                         router.navigate(['Login']);
                     });
             };

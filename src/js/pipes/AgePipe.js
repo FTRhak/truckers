@@ -1,15 +1,14 @@
 (function (Pipe, app) {
     app.pipes = app.pipes || {};
 
-    app.pipes.FileSize = Pipe({
-        name: 'filesize',
-        implements: [ng.core.PipeTransform]
+    app.pipes.AgeFormat = Pipe({
+        name: 'age'
     }).Class({
         constructor: function () {
 
         },
         transform: function (value) {
-            return "K" + value + "K";
+            return "Age:" + value + "";
         }
 
     });

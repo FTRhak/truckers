@@ -1,43 +1,51 @@
-<section class="row">
-    <div class="col-md-4 col-sm-3"></div>
-    <div class="col-md-4 col-sm-6">
-        <form action="" class="form" method="post" (ngSubmit)="onSubmit()" >
-            <div class="form-group">
-                <label for="field_firstname">Login</label>
-                <input type="text" class="form-control" required name="login" id="field_login" [ngControl]='formControl' [(ngModel)]="model.login">
-            </div>
-            <div class="form-group">
-                <label for="field_firstname">First name</label>
-                <input type="text" class="form-control" required name="firstName" id="field_firstname" [ngControl]='formControl' [(ngModel)]="model.firstName">
-            </div>
-            <div class="form-group">
-                <label for="field_firstname">Second name</label>
-                <input type="text" class="form-control" required name="secondName" id="field_firstname" [(ngModel)]="model.secondName">
-            </div>
-            <div class="form-group">
-                <label for="field_email">Email</label>
-                <input type="email" class="form-control" required name="email" id="field_email" [(ngModel)]="model.email">
-            </div>
-            <div class="form-group">
-                <label for="field_pass">Password</label>
-                <input type="password" class="form-control" required name="password" id="field_pass" [(ngModel)]="model.password">
-            </div>
-            <div class="form-group">
-                <label for="field_pass_confirm">Password confirm</label>
-                <input type="password" class="form-control" required name="passwordConfirm" id="field_pass_confirm" [(ngModel)]="model.passwordConfirm">
-            </div>
-            <div class="form-group">
-                <label>{{message}}</label>
-            </div>
-            <div class="form-group row">
-                <div class="col-xs-6">
-                    <a [routerLink]="['Login']" class="btn btn-align">Back</a>
+<section class="layout-row">
+    <div class="flex-auto">
+        <div class="inset">
+            <form action="" class="form" method="post" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <md-input-container class="md-block">
+                        <input type="text" class="ng-pristine md-input" placeholder="Login" required name="login" id="field_login" [ngControl]='formControl'
+                            [(ngModel)]="model.login">
+                    </md-input-container>
                 </div>
-                <div class="col-xs-6">
-                    <input type="submit" value="Sign Up" class="btn btn-align">
+                <div class="form-group">
+                    <md-input-container class="md-block">
+                        <input type="text" class="ng-pristine md-input" placeholder="First name" required name="firstName" id="field_firstname" [ngControl]='formControl'
+                            [(ngModel)]="model.firstName">
+                    </md-input-container>
                 </div>
-            </div>
-        </form>
+                <div class="form-group">
+                    <md-input-container class="md-block">
+                        <input type="text" class="ng-pristine md-input" required placeholder="Second name" name="secondName" id="field_firstname"
+                            [(ngModel)]="model.secondName">
+                    </md-input-container>
+                </div>
+                <div class="form-group">
+                    <md-input-container class="md-block">
+                        <input type="email" class="ng-pristine md-input" autocomplete="off" placeholder="Email" required name="email" id="field_email"
+                            [(ngModel)]="model.email">
+                    </md-input-container>
+                </div>
+                <div class="form-group">
+                    <md-input-container class="md-block">
+                        <input type="password" class="ng-pristine md-input" placeholder="Password" required name="password" id="field_pass" [(ngModel)]="model.password">
+                    </md-input-container>
+                </div>
+                <div class="form-group">
+                    <md-input-container class="md-block">
+                        <input type="password" class="ng-pristine md-input" required placeholder="Password confirm" name="passwordConfirm" id="field_pass_confirm"
+                            [(ngModel)]="model.passwordConfirm">
+                    </md-input-container>
+                </div>
+                <div class="layout-row">
+                    <div class="flex-auto">
+                        <a [routerLink]="['Login']" class="md-raised md-button md-ink-ripple">Back</a>
+                    </div>
+                    <div class="flex-auto">
+                        <input type="submit" value="Sign Up" class="md-raised md-primary md-button md-ink-ripple">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="col-md-4 col-sm-3"></div>
 </section>

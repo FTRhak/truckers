@@ -10,7 +10,7 @@ var minifyCSS = require('gulp-minify-css');
 var PROJECT_SRC = 'src/';
 var PROJECT_BUILD = 'client/';
 
-var JS_LIBS = 'js/libs/';
+var JS_LIBS = '';
 //-----------CLEAN-----------------
 gulp.task('build-clean', function () {
     return gulp.src(PROJECT_BUILD, { read: false })
@@ -51,12 +51,19 @@ gulp.task('templates', function () {
     return gulp.src([
         PROJECT_SRC + 'templates/*/*.html'])
         .pipe(gulp.dest(PROJECT_BUILD + 'templates/'));
-});//-----------ICONS-----------------
+});
+//-----------ICONS-----------------
 gulp.task('icons', function () {
     return gulp.src([
         PROJECT_SRC + 'icons/*',
         PROJECT_SRC + 'icons/*/*'])
         .pipe(gulp.dest(PROJECT_BUILD + 'icons/'));
+});
+//-----------ICONS-----------------
+gulp.task('fonts', function () {
+    return gulp.src([
+        PROJECT_SRC + 'fonts/*'])
+        .pipe(gulp.dest(PROJECT_BUILD + 'fonts/'));
 });
 //-----------JS--------------------
 //TODO reorganize js files
@@ -71,29 +78,43 @@ var jsLibsSources = [
     //'node_modules/systemjs/dist/system-polyfills.js',
     'node_modules/systemjs/dist/system.js',
     'node_modules/systemjs/dist/system.js.map',
+    'node_modules/systemjs/dist/system.src.js',
 
     //'node_modules/@angular/material/material.umd.js',
     //'node_modules/@angular/material/material.umd.js.map',
 ];
 var jsLibs = [
-    'system.js',
-    'es6-shim.min.js',
-    'angular2-polyfills.js',
-    'Rx.umd.js',
-    'angular2-all.umd.js',
-    'angular2.dev.js',
-    'router.dev.js',
+    'systemjs/dist/system.js',
+    'es6-shim/es6-shim.min.js',
+    'angular2/bundles/angular2-polyfills.js',
+    'rxjs/bundles/Rx.umd.js',
+    'angular2/bundles/angular2-all.umd.js',
+    'angular2/bundles/angular2.dev.js',
+    'angular2/bundles/router.dev.js',
     //'angular2-translator.js',
     //'material.umd.js'
+    //'@angular/bundles/material.umd.js'
     
 ];
 var jsSourves = [
+    'js/settings.js',
+
     'js/tools/logger.js',
     'js/tools.js',
 
+    'js/ui_contollers/MdInputContainerUI.js',
+
+    'js/components/navigation/NavigationMenuComponent.js',
+    'js/components/navigation/NavigationSideMenuComponent.js',
+    'js/components/navigation/SettingsComponent.js',
     'js/components/HeaderComponent.js',
     'js/components/FooterComponent.js',
+    'js/components/profile/UserSkillsComponent.js',
+    'js/components/profile/UserApproversComponent.js',
+    'js/components/profile/MenuCommunicationsComponent.js',
+    
 
+    'js/pipes/AgePipe.js',
     'js/pipes/DatePipe.js',
     'js/pipes/FileSizePipe.js',
 
@@ -110,6 +131,8 @@ var jsSourves = [
     'js/modules/authentication/RegistrationConfirmationModule.js',
     'js/modules/authentication/RestoreModule.js',
 
+    'js/modules/profile/UserChangePasswordModule.js',
+    'js/modules/profile/UserChangeContactDataModule.js',
     'js/modules/profile/UserEditModule.js',
     'js/modules/profile/UserSettingsModule.js',
     'js/modules/profile/UserProfileModule.js',
@@ -124,13 +147,13 @@ var jsApp = ['js/app.js'];
 
 
 gulp.task('js-libs-dev', function () {
-    return gulp.src(jsLibsSources)
-        .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
+    //return gulp.src(jsLibsSources)
+    //    .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
 });
 
 gulp.task('js-libs-prod', function () {
-    return gulp.src(jsLibsSources)
-        .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
+    //return gulp.src(jsLibsSources)
+    //    .pipe(gulp.dest(PROJECT_BUILD + 'js/libs/'));
 });
 
 gulp.task('js-app-dev', function () {
@@ -209,5 +232,5 @@ gulp.task('index-dev', function () {
 
 
 //===============================
-gulp.task('dev-web', ['css-dev', 'templates', 'icons', 'js-dev', 'index-dev']);
-gulp.task('prod-web', ['css-prod', 'templates', 'icons', 'js-prod', 'index-dev']);
+gulp.task('dev-web', ['css-dev', 'templates', 'icons', 'fonts', 'js-dev', 'index-dev']);
+gulp.task('prod-web', ['css-prod', 'templates', 'icons', 'fonts', 'js-prod', 'index-dev']);

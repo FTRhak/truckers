@@ -8,12 +8,13 @@
         templateUrl: '/templates/profile/user.html',
         directives: [
             ng.router.ROUTER_DIRECTIVES,
-            //app.UserMenuController,
-            //app.FreightsHistoryComponent,
-            //app.UserCarsComponent,
-            //app.UserTranceCompanyComponent
+            app.NavigationMenuComponent,
+            app.UserSkillsComponent,
+            app.MenuCommunicationsComponent,
+            app.UserApproversComponent
             ],
-        providers: [PageTitle, Server]
+        providers: [PageTitle, Server],
+        pipes: [app.pipes.AgeFormat]
     }).Class({
         constructor: [ng.router.Router, PageTitle, Server, function UserProfilePageController(router, title, server) {
             let self = this;
@@ -21,6 +22,8 @@
             if (!server.user.isLogin()) {
                 router.navigate(['Login']);
             }
+
+            this.testValue = 1482936305498;
 
             this.user = server.user.getUser();
         }],

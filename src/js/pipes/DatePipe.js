@@ -1,7 +1,7 @@
-(function (ng, app) {
-    ng.localization = ng.localization || {};
+(function (Pipe, app) {
+    app.pipes = app.pipes || {};
 
-    ng.localization.DateFormat = ng.core.Pipe({
+    app.pipes.DateFormat = Pipe({
         name: 'dateformat'
     }).Class({
         constructor: function () {
@@ -13,4 +13,4 @@
 
     });
 
-})(ng, window.app);
+})(ng.core.Pipe, window.app);

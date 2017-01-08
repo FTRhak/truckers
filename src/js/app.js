@@ -1,4 +1,4 @@
-(function(ng, app) {
+(function (ng, app) {
     'use strict';
 
     app.TestDirective = ng.core.Directive({
@@ -15,15 +15,23 @@
     app.ApplicationComponent = ng.core.Component({
         selector: '[app-trucker]',
         template: `
-            <header header-profile class="header"></header>
-            <side class="side-bar left-side-bar">Side</side>
-            <section page-content class="content">
-                <router-outlet></router-outlet>
+            <md-toolbar class="header"></md-toolbar>
+            <section class="layout-row layout-row-sm layout-row-xs layout-row-md">
+                <div class="flex-20 hide-sm hide-xs flex-md-10"></div>
+                <div class="flex-auto flex-sm-auto flex-xs-auto">
+                    <router-outlet></router-outlet>
+                </div>
+                <div class="flex-20 hide-sm hide-xs flex-md-10"></div>
             </section>
-            <nav class="navigation">Settings</nav>
-            <footer class="footer">Hello</footer>
+            <md-toast md-theme="default" ng-class="{'md-capsule': toast.capsule}" class="hidden _md md-default-theme md-top md-right">
+                <div class="md-toast-content">
+                    <span class="md-toast-text ng-binding" role="alert" aria-relevant="all" aria-atomic="true">
+                        Simple Toast!
+                    </span>
+                </div>
+            </md-toast>
         `,
-        directives: [ng.router.ROUTER_DIRECTIVES, app.TestDirective],
+        directives: [ng.router.ROUTER_DIRECTIVES, app.HeaderComponent],
         providers: [app.Http, app.Auth]
     }).Class({
         constructor: [ng.router.Router, app.Auth, function ApplicationComponent(router, user) {
@@ -31,7 +39,7 @@
             console.log('synchronizeUser');
             user.synchronizeUser();
             //router.subscribe(function(path) {
-                //console.log("path changed: ",path);
+            //console.log("path changed: ",path);
             //});
         }]
     });
@@ -58,13 +66,14 @@
 
 (function (app) {
     document.addEventListener('DOMContentLoaded', function () {
+
         ng.platform.browser.bootstrap(app.TruckersApplication, [
             ng.router.ROUTER_PROVIDERS,
-            ng.core.provide(ng.router.LocationStrategy, {useClass: ng.router.PathLocationStrategy}),
-            //ng.core.provide(ng.router.LocationStrategy, {useClass: ng.router.HashLocationStrategy}),
-            ng.core.provide(ng.router.APP_BASE_HREF, {useValue: '/'}),
+            ng.core.provide(ng.router.LocationStrategy, { useClass: ng.router.PathLocationStrategy }),
+            //ng.core.provide(ng.router.LocationStrategy, { useClass: ng.router.HashLocationStrategy }),
+            ng.core.provide(ng.router.APP_BASE_HREF, { useValue: '/' }),
             ng.http.HTTP_PROVIDERS
-            ]);
+        ]);
     });
 })(window.app || (window.app = {}));
 

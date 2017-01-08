@@ -1,44 +1,80 @@
-<section class="row">
-    <div class="col-md-4 col-sm-3"></div>
-    <div class="col-md-4 col-sm-6">
-        <h1>Edit</h1>
-
-        <form #userEditForm="ngForm" class="form" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="field_firstname">Mail</label>
-                <input type="text" class="form-control" name="mail" id="field_firstname" [(ngModel)]="model.contacts.email" placeholder="Mail" readonly>
-            </div>
-            <div class="form-group">
-                <label for="field_firstname">First name</label>
-                <input type="text" class="form-control" required name="firstName" id="field_firstname" placeholder="First name"
-                    [(ngModel)]="model.personal_data.firstname" ngControl="firstName" #firstName="ngForm">
-                <span *ngIf="!firstName.valid">Not valid</span>
-            </div>
-            <div class="form-group">
-                <label for="field_firstname">Second name</label>
-                <input type="text" class="form-control" required name="secondName" id="field_firstname" [(ngModel)]="model.personal_data.surname">
-            </div>
-            <div class="form-group">
-                <label for="field_email">Nickname</label>
-                <input type="text" class="form-control" name="nickname" id="field_email" [(ngModel)]="model.personal_data.nickname" placeholder="Nickname">
-            </div>
-            <div class="form-group">
-                <label for="field_pass_confirm">Country</label>
-                <input type="text" class="form-control" name="country" id="field_pass_confirm" [(ngModel)]="model.address.country" placeholder="Country">
-            </div>
-            <div class="form-group">
-                <label for="field_pass_confirm">City</label>
-                <input type="text" class="form-control" name="city" id="field_pass_confirm" [(ngModel)]="model.address.city" placeholder="City">
-            </div>
-            <div class="form-group">
-                <label for="field_pass_confirm">Address</label>
-                <input type="text" class="form-control" name="address" id="field_pass_confirm" [(ngModel)]="model.address.address" placeholder="Address">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-md btn-default" [disabled]="!userEditForm.form.valid">
-                <a [routerLink]="['UserProfile']" class="btn">Back to profile</a>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-4 col-sm-3"></div>
-</section>
+<div class="profile-edit inset">
+    <form #userEditForm="ngForm" class="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <md-input-container class="flex-gt-sm" aria-label="First name" name="firstname"></md-input-container>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block md-input-has-value">
+                <label>World</label>
+                <input type="text" class="ng-pristine md-input" placeholder="Second name" name="secondname" id="field_secondname" [(ngModel)]="model.personal_data.surname">
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <input type="text" class="ng-pristine md-input" placeholder="Nickname" name="nickname" id="field_nickname" [(ngModel)]="model.personal_data.nickname">
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <select class="ng-pristine md-input" name="sex" id="field_sex" [(ngModel)]="model.personal_data.sex">
+                    <option value="">- Select sex -</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <div class="layout-row">
+                    <div class="flex-auto float-fix">
+                        <select class="ng-pristine md-input" name="year" id="field_birthday_year" [(ngModel)]="model.personal_data.birthday.year">
+                        <option value="" >- Year -</option>
+                        <option value="{{yearValue}}" *ngFor="#yearValue of years">{{yearValue}}</option>
+                    </select>
+                    </div>
+                    <div class="flex-auto float-fix">
+                        <select class="ng-pristine md-input" name="month" id="field_birthday_month" [(ngModel)]="model.personal_data.birthday.month">
+                        <option value="">- Month -</option>
+                        <option value="{{monthValue}}" *ngFor="#monthValue of monthes">{{monthValue}}</option>
+                    </select>
+                    </div>
+                    <div class="flex-auto float-fix">
+                        <select class="ng-pristine md-input" name="day" id="field_birthday_day" [(ngModel)]="model.personal_data.birthday.day">
+                        <option value="">- Day -</option>
+                        <option value="{{dayValue}}" *ngFor="#dayValue of days">{{dayValue}}</option>
+                    </select>
+                    </div>
+                </div>
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <input type="number" class="ng-pristine md-input" placeholder="Experience" name="experience" id="field_experience" [(ngModel)]="model.personal_data.experience">
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <input type="text" class="ng-pristine md-input" placeholder="Country" name="country" id="field_country" [(ngModel)]="model.address.country">
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <input type="text" class="ng-pristine md-input" placeholder="City" name="city" id="field_city" [(ngModel)]="model.address.city">
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <input type="text" class="ng-pristine md-input" placeholder="Address" name="address" id="field_address" [(ngModel)]="model.address.address">
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <md-input-container1 class="md-block">
+                <textarea type="text" class="md-input md-textarea" placeholder="Description" name="description" id="field_description" [(ngModel)]="model.description"></textarea>
+            </md-input-container1>
+        </div>
+        <div class="form-group">
+            <a [routerLink]="['UserProfile']" class="md-raised md-button md-ink-ripple">Back</a>
+            <input type="submit" value="Edit" class="md-raised md-primary md-button md-ink-ripple" [disabled]="!userEditForm.form.valid">
+        </div>
+    </form>
+</div>

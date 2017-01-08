@@ -30,12 +30,20 @@
                     callback(body);
                 }
             }, error || EMPTY_FUNCTION);
+        },
+        editPersonalData: function (model, callback, error) {
+            this.http.post('/api/user/edit/personaldata?rid=' + Math.random(), model, function (res) {
+                if (res.status === 200) {
+                    const body = JSON.parse(res._body);
+                    callback(body);
+                }
+            }, error || EMPTY_FUNCTION);
         }
-        
+
     });
 
 })(
-    ng, 
+    ng,
     window.app,
     app.Http
     );

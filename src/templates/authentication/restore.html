@@ -4,16 +4,18 @@
             <div class="form" [ngClass]="{'hidden':restoreCompleted}">
                 <form action="" method="post" (ngSubmit)="onSubmit(inputEmail)">
                     <md-input-container class="md-block">
-                        <input type="text" class="ng-pristine md-input" placeholder="Email" required name="email" #inputEmail>
+                        <input type="text" md-input placeholder="Email" required name="email" #inputEmail>
                     </md-input-container>
-                    <input type="submit" class="md-raised md-primary md-button md-ink-ripple" value="Restore">
-                    <a [routerLink]="['Login']" class="md-raised md-button md-ink-ripple">Back</a>
+                    <div>
+                        <input type="submit" class="md-raised md-primary md-button md-ink-ripple" value="Restore">
+                        <a [routerLink]="['/login']" class="md-raised md-button md-ink-ripple">Back</a>
+                    </div>
                 </form>
             </div>
             <div class="form" [ngClass]="{'hidden':!restoreCompleted}">
                 Please check your email
                 <div>
-                    <a [routerLink]="['Login']" class="md-raised md-primary md-button md-ink-ripple">Back</a>
+                    <a [routerLink]="['/login']" class="md-raised md-primary md-button md-ink-ripple">Back</a>
                 </div>
             </div>
         </div>

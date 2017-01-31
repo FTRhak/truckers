@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
 
 import { HttpModule } from '@angular/http';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 //import { ROUTER_PROVIDERS } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
@@ -21,9 +21,8 @@ import { AboutPage } from './modules/about-page';
 import { TermsPage } from './modules/terms-page';
 import { _404Page } from './modules/404-page';
 
-import { LoginPage } from './modules/authentication/login-page';
-import { LogoutPage } from './modules/authentication/logout-page';
-import { RegistrationPage } from './modules/authentication/registration-page';
+import { LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage } from './modules/authentication/index';
+import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage } from './modules/user/index';
 
 @NgModule({
   imports: [
@@ -40,14 +39,13 @@ import { RegistrationPage } from './modules/authentication/registration-page';
     TermsPage,
     _404Page,
 
-    LoginPage,
-    LogoutPage,
-    RegistrationPage
+    LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage,
+    UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    //{ provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    //{ provide: LocationStrategy, useClass: PathLocationStrategy },
     HttpAPI
   ],
   bootstrap: [AppComponent]

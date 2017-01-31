@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+//import { Subscription } from 'rxjs/Subscription';
+
 
 @Injectable()
 export class HttpAPI {
@@ -9,15 +12,17 @@ export class HttpAPI {
         this.jsonHeader = new RequestOptions({ headers: headers });
     }
 
-    post(url: string, data: any, callback: Function, callbackError: Function): any {
-        return this.http.post(url, data, this.jsonHeader).subscribe(
+    post(url: string, data: any, callback: Function, callbackError: Function): Observable<Response> {
+        let response = this.http.post(url, data, this.jsonHeader);
+        response.subscribe(
             response => callback(response),
             error => callbackError(error),
             () => console.log('Completed!')
         );
+        return response;
     }
 
-    get(url: string, data: any, callback: Function, callbackError: Function): any {
+    get(url: string, data: any, callback: Function, callbackError: Function): Observable<Response> {
         let options = url.indexOf('?') !== -1 ? '&' : '?';
         let result: string[] = [];
         if (data && Object.keys(data).length > 0) {
@@ -25,10 +30,12 @@ export class HttpAPI {
                 result.push(encodeURIComponent(property) + "=" + encodeURIComponent(data[property]));
             options += result.join("&");
         }
-        return this.http.get(url + options, this.jsonHeader).subscribe(
+        let response =  this.http.get(url + options, this.jsonHeader);
+        response.subscribe(
             response => callback(response),
             error => callbackError(error),
             () => console.log('Completed!')
         );
+        return response;
     }
 }

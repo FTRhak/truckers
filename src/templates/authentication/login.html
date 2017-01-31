@@ -12,10 +12,10 @@
                 </md-input-container>
             </div>
             <div>
-            <button md-button type="submit" (click)="onSubmit(inputLogin, inputPassword)">Login</button>
+                <button md-button type="submit" (click)="onSubmit(inputLogin, inputPassword)">Login</button>
             </div>
             <div class="form-group center">
-            <a [routerLink]="['Restore']" class="md-link">Forgot password</a>
+                <a [routerLink]="['/restore']" class="md-link">Forgot password</a>
             </div>
         </form>
 
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="flex-80">
-        <a [routerLink]="['Register']" class="md-raised md-primary md-button md-ink-ripple">Create user</a>
+        <a [routerLink]="['/registration']" class="md-raised md-primary md-button md-ink-ripple">Create user</a>
 
         <div class="form-group center">
             <a [routerLink]="['ChangeLanguage']" class="link">English</a> |

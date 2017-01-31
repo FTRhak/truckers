@@ -20,7 +20,7 @@ export class HttpAPI {
     get(url: string, data: any, callback: Function, callbackError: Function): any {
         let options = url.indexOf('?') !== -1 ? '&' : '?';
         let result: string[] = [];
-        if (Object.keys(data).length > 0) {
+        if (data && Object.keys(data).length > 0) {
             for (let property in data)
                 result.push(encodeURIComponent(property) + "=" + encodeURIComponent(data[property]));
             options += result.join("&");

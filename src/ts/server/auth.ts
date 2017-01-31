@@ -5,6 +5,34 @@ import { HttpAPI } from './http';
 export class AuthServer {
     constructor(private http: HttpAPI) { }
 
+    synchronizeUser() {
+        let self = this;
+        if (this.isLogin()) {
+            this.http.get('/api/access?rid=' + Math.random(), {}, function (res: any) {
+                const body = JSON.parse(res._body);
+                self.setUser(body.user);
+            }, function (error: any) {
+                self.removeUser();
+            });
+        }
+    }
+
+    isLogin() {
+        return !!(localStorage.getItem('user'));
+    }
+    getUser() {
+        return JSON.parse(localStorage.getItem('userData'));
+    }
+    setUser(user: any) {
+        localStorage.setItem('user', user._id);
+        localStorage.setItem('userData', JSON.stringify(user));
+    }
+    removeUser() {
+        localStorage.removeItem('user');
+        localStorage.removeItem('userData');
+    }
+    //---------------------------------------------
+
     login(model: any, callback: Function, error: Function): any {
         return this.http.post('/api/login?rid=' + Math.random(), JSON.stringify(model),
             function (res: any) {
@@ -12,6 +40,14 @@ export class AuthServer {
                     const body = JSON.parse(res._body);
                     callback(body);
                 }
-            }, function () { console.log(2); });
+            }, error);
+    }
+    logout(model: any, callback: Function, error: Function) {
+        return this.http.get('/api/logout?rid=' + Math.random(), null,
+            function (res: any) {
+                if (res.status === 200) {
+                    callback(res._body);
+                }
+            }, error);
     }
 }

@@ -1,22 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { AuthServer } from './../../server/auth';
+
+import { Header } from './../../components/navigation/header';
 
 @Component({
     selector: 'app-trucker',
     templateUrl: '/templates/authentication/login.html',
     providers: [AuthServer]
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
+    name: string = "Login";
+    constructor(
+        private authServer: AuthServer,
+        public snackBar: MdSnackBar,
+        public router: Router,
+        private title: Title) { }
 
-    constructor(private authServer: AuthServer, public snackBar: MdSnackBar, public router: Router) { }
+    ngOnInit() {
+        this.title.setTitle(this.name);
+        if (this.authServer.isLogin()) {
+            this.router.navigate(['/user']);
+        }
+    }
 
     actionAccepted(res: any) {
         if (res.status && !res.error) {
             this.authServer.setUser(res.user);
-            this.router.navigate(['/about']);
+            this.router.navigate(['/user']);
         } else {
             this.snackBar.open(res.error || "Error access", '', {
                 duration: 2000,

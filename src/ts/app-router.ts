@@ -17,8 +17,8 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
 @Component({
   moduleId: module.id,
   selector: '[app-trucker]',
-  template: `<md-toolbar>My App</md-toolbar><router-outlet></router-outlet>
-  <div>
+  template: `<router-outlet></router-outlet>
+  <div class="hidden">
     <a [routerLink]="['/']">Index</a>
     <a [routerLink]="['/about']">About</a>
     <a [routerLink]="['/terms']">Terms</a>

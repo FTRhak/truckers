@@ -1,7 +1,9 @@
 <div class="profile-edit inset">
     <form #userEditForm="ngForm" class="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <md-input-container class="flex-gt-sm" aria-label="First name" name="firstname"></md-input-container>
+            <md-input-container class="flex-gt-sm" aria-label="First name"
+                [(value)]="model.personal_data.firstname"
+                name="firstname" type="text"></md-input-container>
         </div>
         <div class="form-group">
             <md-input-container1 class="md-block md-input-has-value">

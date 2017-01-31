@@ -19,10 +19,14 @@
 </head>
 
 <body class="page">
-    <div app-trucker class="hide-left-side">Loading...</div>
+    <div app-trucker>Loading...</div>
 
-    <!--JSLIBS-->
-    <!--JSAPP-->
+    <script src="js-libs/core-js/client/shim.min.js"></script>
+    <script src="js-libs/zone-js/dist/zone.js"></script>
+    <script src="js-libs/systemjs/dist/system.src.js"></script>
+
+    <script src="js/systemjs.config.js"></script>
+    <script>System.import('app').catch(function(err){ console.error(err); });</script>
     <script1 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6LWAt8hsoCtgK3efbbtnCG81uKBvuCpc&callback=app.initMap" async defer></script1>
 </body>
 

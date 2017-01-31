@@ -12,12 +12,20 @@
         directives: []
     }).Class({
         constructor: [ng.core.ElementRef, ng.core.Renderer, function MdInput(el, renderer) {
+            this.element = el;
             this._focusEmitter = new ng.core.EventEmitter();
             this._emptyEmitter = new ng.core.EventEmitter();
 
             this._value = "";
             this._type = "text";
         }],
+        ngAfterViewInit(){
+            this._value = this.element.nativeElement.value;
+            this._type = this.element.nativeElement.getAttribute('type');
+
+            const empty = ((this._value == null || this._value === '') && this.type !== 'date');
+            this._emptyEmitter.emit(empty);
+        },
 
         _focus(ev) {
             this._focusEmitter.emit(true);
@@ -43,21 +51,29 @@
         registerOnTouched() { }
     });
 
-
+    const prov = {
+        provide: ng.common.NG_VALUE_ACCESSOR,
+        useExisting: ng.core.forwardRef(() => con),
+        multi: true
+    };
     app.ui.MdInputContainer = ng.core.Component({
         selector: 'md-input-container',
         template: `
             <label></label>
-            <input type="text" (_focusEmitter)="focus($event)" (_emptyEmitter)="empty($event)" (change)="change($event)" [(ngModel)]="value" class="ng-pristine md-input" name="firstName">
+            <input type="text" (_focusEmitter)="focus($event)" (_emptyEmitter)="empty($event)" (change)="change($event)" [(ngModel)]="value" class="ng-pristine md-input">
         `,
         host: {
             '[class.md-block]': 'true',
             '[class.md-input-focused]': 'inputFucused',
             '[class.md-input-has-value]': 'hasValue'
         },
-        inputs: ['areaLabel: aria-label'],
+        inputs: [
+            'areaLabel: aria-label',
+            'typeInput: type',
+            'nameInput: name',
+            'value'],
         directives: [app.ui.MdInput],
-        //providers: [ng.core.ContentChildren]
+        //providers: [prov]
     }).Class({
         constructor: [ng.core.ElementRef, ng.core.Renderer, function MdInputContainer(el, renderer) {
             this.element = el.nativeElement;
@@ -65,11 +81,18 @@
             this._renderer = renderer;
             this.inputFucused = false;
             this.hasValue = false;
-            this.value = '';
+            //this.value = '';
         }],
         ngAfterViewInit() {
             let label = this.element.querySelector('label');
-            label && (label.innerHTML = this.areaLabel);
+            if (label) {
+                this.areaLabel && (label.innerHTML = this.areaLabel);
+            }
+            let input = this.element.querySelector('input');
+            if (input) {
+                input.setAttribute('type', this.typeInput);
+                this.nameInput && input.setAttribute('name', this.nameInput);
+            }
         },
         focus(ev) {
             this.inputFucused = ev;
@@ -78,7 +101,7 @@
             this.hasValue = !ev;
         },
         change(ev) {
-            console.log("-change-", ev);
+            console.log("-change-", this.value);
         },
         writeValue(value) {
             if (value !== undefined) {

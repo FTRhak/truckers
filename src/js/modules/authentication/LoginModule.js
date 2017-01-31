@@ -6,7 +6,7 @@
     let LoginPage = Component({
         selector: 'app-trucker',
         templateUrl: '/templates/authentication/login.html',
-        directives: [ng.router.ROUTER_DIRECTIVES],
+        directives: [ng.router.ROUTER_DIRECTIVES, app.ui.MdInputContainer],
         providers: [PageTitle, Server, AuthenticationService]
     }).Class({
         constructor: [ng.router.Router, PageTitle, Server, AuthenticationService, function LoginPageConstructor(router, title, server, authServer) {
@@ -18,6 +18,10 @@
             this.router = router;
             this.authServer = authServer;
             this.errorMessage = "";
+
+            this.model = {
+                firstname: "Taras"
+            };
         }],
         loginAccepted: function (res) {
             if (res.status && !res.error) {

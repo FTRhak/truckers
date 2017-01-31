@@ -1,15 +1,20 @@
 @import 'compass';
 @import 'constants';
-@import 'angular-material';
+
+@import 'material/variables';
+@import 'material/mixins';
+@import 'material/typography';
+@import 'material/structure';
+@import 'material/layout/layout-attributes';
+@import 'material/layout';
+@import 'material/layout/layout';
+@import 'material/layout/ie_fixes.css';
+
 @import 'base';
 
-@import 'site/profile';
+//@import 'site/profile';
 
-@import 'components/map';
-html {
-    height: 100%;
-}
-.page {
+/*.page {
     //background-image: url("/icons/bg.jpg");
     background-color: $bgColor;
     background-attachment: fixed;
@@ -23,4 +28,4 @@ html {
     color: $baseTextColor;
     font-size: 14px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
+}*/

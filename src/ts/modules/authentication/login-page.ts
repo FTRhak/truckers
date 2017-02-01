@@ -14,16 +14,15 @@ import { Header } from './../../components/navigation/header';
     providers: [AuthServer]
 })
 export class LoginPage extends Locale implements OnInit {
-    name: string = "Login";
     constructor(
         private authServer: AuthServer,
         public snackBar: MdSnackBar,
         public router: Router,
         private title: Title,
-        public locale: LocaleService, 
+        public locale: LocaleService,
         public localization: LocalizationService) {
-            super(locale, localization);
-         }
+        super(locale, localization);
+    }
 
     ngOnInit() {
         const pageTitle = this.localization.translate('login.title');
@@ -34,20 +33,25 @@ export class LoginPage extends Locale implements OnInit {
     }
 
     actionAccepted(res: any) {
-        if (res.status && !res.error) {
+        if (res.status) {
             this.authServer.setUser(res.user);
             this.router.navigate(['/user']);
         } else {
-            this.snackBar.open(res.error || "Error access", '', {
-                duration: 2000,
+            const dbError = res.error && res.error.message;
+            const errorCode = res.data;
+            const errorMessage = this.localization.translate('general.errors.' + errorCode);
+            const error = errorCode && errorMessage ? errorMessage : res.error;
+            this.snackBar.open(dbError || error, '', {
+                duration: 2000
             });
         }
     }
     actionError(res: any) {
-        this.snackBar.open("error", '', {
+        let error = '';
+        error = this.localization.translate('general.errors.SR-' + res.status);
+        this.snackBar.open(error, '', {
             duration: 2000,
         });
-        console.warn('actionError: ', arguments[0]);
     }
 
     onSubmit(inputLogin: any, inputPassword: any) {

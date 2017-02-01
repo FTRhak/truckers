@@ -13,6 +13,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { AppRoutingModule, AppComponent } from './app-router';
+import { LogService } from './log-service';
 
 import { HttpAPI } from './server/http';
 
@@ -57,6 +58,7 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     //{ provide: LocationStrategy, useClass: PathLocationStrategy },
     HttpAPI,
+    LogService,
     LocalizationConfig,
     {
         provide: APP_INITIALIZER, // APP_INITIALIZER will execute the function when the app is initialized and delay what it provides.

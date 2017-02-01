@@ -42,6 +42,8 @@ export class AuthServer {
                 if (res.status === 200) {
                     const body = JSON.parse(res._body);
                     callback(body);
+                } else {
+                    error(res)
                 }
             }, error);
     }
@@ -60,7 +62,15 @@ export class AuthServer {
 
     }
     restore(model: any, callback: Function, error: Function) {
-
+        return this.http.post('/api/restore?rid=' + Math.random(), null,
+            function (res: any) {
+                if (res.status === 200) {
+                    const body = JSON.parse(res._body);
+                    callback(body);
+                } else {
+                    error(res)
+                }
+            }, error);
     }
     resetPassword(model: any, callback: Function, error: Function) {
 

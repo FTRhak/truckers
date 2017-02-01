@@ -2,7 +2,7 @@
 <section class="layout-gt-sm-row layout-sm-row layout-xs-column">
     <div class="flex-gt-sm-none flex-sm-none flex-xs-sm-100 inset">
         <md-card>
-            <form>
+            <form (ngSubmit)="onSubmit(inputLogin, inputPassword)">
                 <div>
                     <md-input-container class="with-fill">
                         <input md-input type="text" placeholder="{{ 'login.loginPanel.login' | translate:lang }}" required maxlength="64" value="" #inputLogin>
@@ -14,7 +14,7 @@
                     </md-input-container>
                 </div>
                 <div>
-                    <button md-raised-button class="with-fill" type="submit" (click)="onSubmit(inputLogin, inputPassword)">{{ 'login.loginPanel.submit' | translate:lang }}</button>
+                    <button md-raised-button class="with-fill" type="submit">{{ 'login.loginPanel.submit' | translate:lang }}</button>
                 </div>
             </form>
             <div class="text-right inset">

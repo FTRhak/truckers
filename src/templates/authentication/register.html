@@ -2,43 +2,38 @@
 <section class="inset">
     <md-card class="layout-gt-sm-row layout-sm-row layout-xs-column">
         <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
-        <form class="flex-gt-sm-40 flex-sm-40 flex-xs-sm-100">
+        <form autocomplete="off" (ngSubmit)="onSubmit()" class="flex-gt-sm-40 flex-sm-40 flex-xs-sm-100">
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="text" md-input placeholder="Login" required name="login" id="field_login" [(ngModel)]="model.login">
+                    <input type="text" md-input  required name="login" minlength="4" maxlength="64" id="field_login" [(ngModel)]="model.login" placeholder="{{ 'registration.registrationPanel.login' | translate:lang }}">
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="text" md-input placeholder="First name" required name="firstName" id="field_firstname" [(ngModel)]="model.firstName">
+                    <input type="text" md-input required name="firstName" maxlength="64" id="field_firstname" [(ngModel)]="model.firstName" placeholder="{{ 'registration.registrationPanel.firstname' | translate:lang }}">
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="text" md-input required placeholder="Second name" name="secondName" id="field_firstname" [(ngModel)]="model.secondName">
+                    <input type="text" md-input required name="secondName" maxlength="64" id="field_firstname" [(ngModel)]="model.secondName" placeholder="{{ 'registration.registrationPanel.secondname' | translate:lang }}">
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="email" md-input autocomplete="off" placeholder="Email" required name="email" id="field_email" [(ngModel)]="model.email">
+                    <input type="email" md-input autocomplete="none" required name="uemail" minlength="5" maxlength="64" id="field_uemail" [(ngModel)]="model.email" placeholder="{{ 'registration.registrationPanel.email' | translate:lang }}">
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="password" md-input placeholder="Password" required name="password" id="field_pass" [(ngModel)]="model.password">
-                </md-input-container>
-            </div>
-            <div class="md-block">
-                <md-input-container class="with-fill">
-                    <input type="password" md-input required placeholder="Password confirm" name="passwordConfirm" id="field_pass_confirm" [(ngModel)]="model.passwordConfirm">
+                    <input type="password" md-input autocomplete="off" required name="upassword" id="field_pass" [(ngModel)]="model.password" placeholder="{{ 'registration.registrationPanel.password' | translate:lang }}">
                 </md-input-container>
             </div>
             <div class="layout-row">
                 <div class="flex-auto inset">
-                    <a [routerLink]="['/login']" class="with-fill" md-button>Back</a>
+                    <a [routerLink]="['/login']" class="with-fill" md-button>{{ 'registration.registrationPanel.back' | translate:lang }}</a>
                 </div>
                 <div class="flex-auto inset">
-                    <button md-raised-button  class="with-fill" type="submit" (click)="onSubmit()">Sign Up</button>
+                    <button md-raised-button  class="with-fill" type="submit">{{ 'registration.registrationPanel.submit' | translate:lang }}</button>
                 </div>
             </div>
         </form>

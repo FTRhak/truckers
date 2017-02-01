@@ -6,8 +6,6 @@ import { Locale, LocaleService, LocalizationService } from 'angular2localization
 
 import { AuthServer } from './../../server/auth';
 
-import { Header } from './../../components/navigation/header';
-
 @Component({
     selector: 'app-trucker',
     templateUrl: '/templates/authentication/login.html',

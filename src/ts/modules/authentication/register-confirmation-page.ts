@@ -20,4 +20,7 @@ export class RegisterConfirmationPage {
     actionError(res: any) {
         this.router.navigate(['/login']);
     }
+    onSubmit() {
+        
+    }
 }

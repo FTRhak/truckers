@@ -1,21 +1,21 @@
 <header anonymous></header>
-<section class="row">
-    <div class="col-md-4 col-sm-3"></div>
-    <div class="col-md-4 col-sm-6">
-        <div>
+<section class="inset">
+    <md-card class="layout-gt-sm-row layout-sm-row layout-xs-column">
+        <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
+        <div class="flex-gt-sm-40 flex-sm-60 flex-xs-sm-100">
             <h1>Registration confirmation</h1>
             <div>
                 <span>{{confirmationKey}}</span>
             </div>
-            <div class="form-group row">
-                <div class="col-xs-6">
-                    <a [routerLink]="['Login']" class="btn btn-align">Back to Login</a>
+            <div class="layout-row">
+                <div class="flex-auto inset">
+                    <a [routerLink]="['/login']" class="with-fill" md-button>Back</a>
                 </div>
-                <div class="col-xs-6">
-                    <input type="button" value="Confirm" class="btn btn-align" (click)="onSubmit()">
+                <div class="flex-auto inset">
+                    <button md-raised-button  class="with-fill" type="submit" (click)="onSubmit()">Confirm</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 col-sm-3"></div>
+        <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
+    </md-card>
 </section>

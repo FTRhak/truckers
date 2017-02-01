@@ -1,28 +1,33 @@
 <header anonymous></header>
 <section class="layout-gt-sm-row layout-sm-row layout-xs-column">
     <div class="flex-gt-sm-none flex-sm-none flex-xs-sm-100 inset">
-        <div class="md-padding">
+        <md-card>
             <form>
                 <div>
-                    <md-input-container>
+                    <md-input-container class="with-fill">
                         <input md-input placeholder="Login" value="" #inputLogin>
                     </md-input-container>
                 </div>
                 <div>
-                    <md-input-container>
+                    <md-input-container class="with-fill">
                         <input md-input type="password" placeholder="Password" value="" #inputPassword>
                     </md-input-container>
                 </div>
                 <div>
-                    <button md-button class="with-fill" type="submit" (click)="onSubmit(inputLogin, inputPassword)">Login</button>
+                    <button md-raised-button class="with-fill" type="submit" (click)="onSubmit(inputLogin, inputPassword)">Login</button>
                 </div>
             </form>
-            <div class="center">
-                <a [routerLink]="['/restore']" class="md-link">Forgot password</a>
+            <div class="text-right">
+                <a [routerLink]="['/restore']" md-link>Forgot password</a>
             </div>
-        </div>
+        </md-card>
     </div>
     <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100 inset">
-        <a [routerLink]="['/registration']" class="md-raised md-primary md-button md-ink-ripple">Create user</a>
+        <md-card class="tr-card-fill">
+            <div class="md-padding ">
+                <a [routerLink]="['/registration']" md-link>Create user</a>
+                <div soc-auth-1></div>
+            </div>
+        </md-card>
     </div>
 </section>

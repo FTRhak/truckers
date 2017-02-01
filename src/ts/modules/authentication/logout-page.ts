@@ -15,9 +15,11 @@ export class LogoutPage {
     }
 
     actionAccepted(res: any) {
+        this.authServer.removeUser();
         this.router.navigate(['/login']);
     }
     actionError(res: any) {
+        this.authServer.removeUser();
         this.router.navigate(['/login']);
     }
 }

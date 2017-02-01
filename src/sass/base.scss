@@ -49,6 +49,9 @@ a {
     color: $baseTextColor;
     text-decoration: none;
 }
+[md-link] {
+    font-size: $font-size - 2px;
+}
 ul.list-data {
     margin: 0px;
     padding: 0px;
@@ -61,8 +64,11 @@ ul.list-data {
 .float-fix{
     overflow: hidden;
 }
-.center {
+.text-center {
     text-align: center;
+}
+.text-right {
+    text-align: right;
 }
 .with-fill {
     width: 100%;

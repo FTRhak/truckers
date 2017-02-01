@@ -1,24 +1,30 @@
 <header anonymous></header>
-<section class="layout-row">
-    <div class="flex-auto">
-        <div class="inset">
-            <div class="form" [ngClass]="{'hidden':restoreCompleted}">
-                <form action="" method="post" (ngSubmit)="onSubmit(inputEmail)">
-                    <md-input-container class="md-block">
-                        <input type="text" md-input placeholder="Email" required name="email" #inputEmail>
+<section class="inset">
+    <md-card class="layout-gt-sm-row layout-sm-row layout-xs-column">
+        <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
+        <div class="flex-gt-sm-40 flex-sm-40 flex-xs-sm-100">
+            <div [ngClass]="{'hidden':restoreCompleted}">
+                <form>
+                    <md-input-container class="with-fill">
+                        <input type="email" md-input placeholder="Email" required name="email" #inputEmail>
                     </md-input-container>
-                    <div>
-                        <input type="submit" class="md-raised md-primary md-button md-ink-ripple" value="Restore">
-                        <a [routerLink]="['/login']" class="md-raised md-button md-ink-ripple">Back</a>
+                    <div class="layout-row">
+                        <div class="flex-auto inset">
+                            <a [routerLink]="['/login']" class="with-fill" md-button>Back</a>
+                        </div>
+                        <div class="flex-auto inset">
+                            <button md-raised-button class="with-fill" type="submit" (click)="onSubmit(inputEmail)">Restore</button>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="form" [ngClass]="{'hidden':!restoreCompleted}">
-                Please check your email
+                <div>Please check your email</div>
                 <div>
-                    <a [routerLink]="['/login']" class="md-raised md-primary md-button md-ink-ripple">Back</a>
+                    <a [routerLink]="['/login']" class="with-fill" md-raised-button>Move to Login</a>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
+    </md-card>
 </section>

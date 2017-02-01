@@ -15,7 +15,7 @@ export class RestorePage {
     constructor(private authServer: AuthServer, public router: Router) { }
 
     actionAccepted(res: any) {
-        this.router.navigate(['/login']);
+        this.restoreCompleted = true;
     }
     actionError(res: any) {
 

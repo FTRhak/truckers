@@ -1,1 +1,15 @@
-﻿
+﻿{
+    "general": {
+        "errors": {
+            "404": "Error 404"
+        }
+    },
+    "login": {
+        "title": "Login",
+        "loginPanel": {
+            "login": "Login",
+            "password": "Password",
+            "submit": "Login"
+        }
+    }
+}

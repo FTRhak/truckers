@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 import { AuthServer } from './../../server/auth';
 
@@ -12,16 +13,21 @@ import { Header } from './../../components/navigation/header';
     templateUrl: '/templates/authentication/login.html',
     providers: [AuthServer]
 })
-export class LoginPage implements OnInit {
+export class LoginPage extends Locale implements OnInit {
     name: string = "Login";
     constructor(
         private authServer: AuthServer,
         public snackBar: MdSnackBar,
         public router: Router,
-        private title: Title) { }
+        private title: Title,
+        public locale: LocaleService, 
+        public localization: LocalizationService) {
+            super(locale, localization);
+         }
 
     ngOnInit() {
-        this.title.setTitle(this.name);
+        const pageTitle = this.localization.translate('login.title');
+        this.title.setTitle(pageTitle);
         if (this.authServer.isLogin()) {
             this.router.navigate(['/user']);
         }

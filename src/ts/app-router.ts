@@ -1,6 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PathLocationStrategy } from '@angular/common';
+import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 import { IndexPage } from './modules/index-page';
 import { AboutPage } from './modules/about-page';
@@ -18,6 +19,9 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
   moduleId: module.id,
   selector: '[app-trucker]',
   template: `<router-outlet></router-outlet>
+  <div class="hidden">
+    <label>{{ 'test' | translate:lang }}</label>
+  </div>
   <div class="hidden">
     <a [routerLink]="['/']">Index</a>
     <a [routerLink]="['/about']">About</a>
@@ -42,7 +46,18 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
   `,
   //directives: [ROUTER_DIRECTIVES]
 })
-export class AppComponent { }
+export class AppComponent extends Locale {
+  constructor(public locale: LocaleService, public localization: LocalizationService) {
+    super(locale, localization);
+  }
+  // Sets a new locale & currency.
+  selectLocale(language: string, country: string, currency: string): void {
+
+    //this.locale.setCurrentLocale(language, country);
+    //this.locale.setCurrentCurrency(currency);
+
+  }
+}
 
 const routes: Routes = [
   { path: '', component: IndexPage },

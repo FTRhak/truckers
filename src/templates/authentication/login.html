@@ -5,16 +5,16 @@
             <form>
                 <div>
                     <md-input-container class="with-fill">
-                        <input md-input placeholder="Login" value="" #inputLogin>
+                        <input md-input type="text" placeholder="{{ 'login.loginPanel.login' | translate:lang }}" value="" #inputLogin>
                     </md-input-container>
                 </div>
                 <div>
                     <md-input-container class="with-fill">
-                        <input md-input type="password" placeholder="Password" value="" #inputPassword>
+                        <input md-input type="password" placeholder="{{ 'login.loginPanel.password' | translate:lang }}" value="" #inputPassword>
                     </md-input-container>
                 </div>
                 <div>
-                    <button md-raised-button class="with-fill" type="submit" (click)="onSubmit(inputLogin, inputPassword)">Login</button>
+                    <button md-raised-button class="with-fill" type="submit" (click)="onSubmit(inputLogin, inputPassword)">{{ 'login.loginPanel.submit' | translate:lang }}</button>
                 </div>
             </form>
             <div class="text-right">

@@ -53,6 +53,13 @@ gulp.task('templates', function () {
         PROJECT_SRC + 'templates/*/*.html'])
         .pipe(gulp.dest(PROJECT_BUILD + 'templates/'));
 });
+//-----------LANGUAGES-----------------
+gulp.task('languages', function () {
+    return gulp.src([
+        PROJECT_SRC + 'languages/*',
+        PROJECT_SRC + 'languages/*/*'])
+        .pipe(gulp.dest(PROJECT_BUILD + 'languages/'));
+});
 //-----------ICONS-----------------
 gulp.task('icons', function () {
     return gulp.src([
@@ -60,7 +67,7 @@ gulp.task('icons', function () {
         PROJECT_SRC + 'icons/*/*'])
         .pipe(gulp.dest(PROJECT_BUILD + 'icons/'));
 });
-//-----------ICONS-----------------
+//-----------FONTS-----------------
 gulp.task('fonts', function () {
     return gulp.src([
         PROJECT_SRC + 'fonts/*'])
@@ -81,7 +88,7 @@ gulp.task('tsToJs', function () {
 
 gulp.task('ts-dev', ['systemjs', 'tsToJs']);
 //-----------INDEX-----------------
-var styleProd = ['/@angular/theme/prebuilt/indigo-pink.css', '/css/style.css'];
+var styleProd = ['/@angular/theme/prebuilt/pink-bluegrey.css', '/css/style.css'];
 
 /*var libsScriptDev = [
     //'libs/system.js',
@@ -144,5 +151,5 @@ gulp.task('index-dev', function () {
 
 
 //===============================
-gulp.task('dev-web', ['css-dev', 'templates', 'icons', 'fonts', 'ts-dev', 'index-dev']);
+gulp.task('dev-web', ['css-dev', 'templates', 'languages', 'icons', 'fonts', 'ts-dev', 'index-dev']);
 gulp.task('prod-web', ['css-prod', 'templates', 'icons', 'fonts', 'js-prod', 'index-dev']);

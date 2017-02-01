@@ -1,8 +1,10 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
+import { LocaleModule, LocalizationModule } from 'angular2localization';
+import { LocalizationConfig, initLocalization } from './localization.config';
 
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
@@ -32,6 +34,8 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
     MaterialModule.forRoot(),
     HttpModule,
     FormsModule,
+    LocaleModule.forRoot(),
+    LocalizationModule.forRoot(),
     AppRoutingModule
   ],
   declarations: [
@@ -52,7 +56,14 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     //{ provide: LocationStrategy, useClass: PathLocationStrategy },
-    HttpAPI
+    HttpAPI,
+    LocalizationConfig,
+    {
+        provide: APP_INITIALIZER, // APP_INITIALIZER will execute the function when the app is initialized and delay what it provides.
+        useFactory: initLocalization,
+        deps: [LocalizationConfig],
+        multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,15 @@
+{
+    "general": {
+        "errors": {
+            "404": "Помилка 404"
+        }
+    },
+    "login": {
+        "title": "Увійти",
+        "loginPanel": {
+            "login": "Логін",
+            "password": "Пароль",
+            "submit": "Увійти"
+        }
+    }
+}

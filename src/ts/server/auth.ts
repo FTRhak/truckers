@@ -77,7 +77,7 @@ export class AuthServer {
             }, error);
     }
     restore(model: any, callback: Function, error: Function): Observable<Response> {
-        return this.http.post('/api/restore?rid=' + Math.random(), null,
+        return this.http.post('/api/restore?rid=' + Math.random(), model,
             function (res: Response) {
                 if (res.status === 200) {
                     callback(res.json());

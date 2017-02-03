@@ -39,6 +39,15 @@
 .md-block {
     display: block;
 }
+.tr-input-alert {
+    font-size: 10px;
+    position: absolute;
+    bottom: -15px;
+    left: 0px;
+}
+.tr-input-alert-danger {
+    color: red;
+}
 /*.page {
     //background-image: url("/icons/bg.jpg");
     background-color: $bgColor;

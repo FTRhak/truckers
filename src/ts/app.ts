@@ -20,6 +20,7 @@ import { HttpAPI } from './server/http';
 import { Header } from './components/navigation/header';
 import { UserHeader } from './components/navigation/userHeader';
 import { SocAuth } from './components/authentication/soc-auth';
+import { InputValidationErrors } from './components/input-validation-errors';
 
 import { IndexPage } from './modules/index-page';
 import { AboutPage } from './modules/about-page';
@@ -40,6 +41,7 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
     AppRoutingModule
   ],
   declarations: [
+    InputValidationErrors,
     Header,
     UserHeader,
     SocAuth,

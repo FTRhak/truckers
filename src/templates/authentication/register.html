@@ -2,30 +2,45 @@
 <section class="inset">
     <md-card class="layout-gt-sm-row layout-sm-row layout-xs-column">
         <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
-        <form autocomplete="off" (ngSubmit)="onSubmit()" class="flex-gt-sm-40 flex-sm-40 flex-xs-sm-100">
+        <form autocomplete="off" (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="flex-gt-sm-none flex-sm-none flex-xs-sm-100">
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="text" md-input  required name="login" minlength="4" maxlength="64" id="field_login" [(ngModel)]="model.login" placeholder="{{ 'registration.registrationPanel.login' | translate:lang }}">
+                    <input type="text" md-input required name="login" minlength="4" maxlength="64" id="field_login" 
+                        [(ngModel)]="model.login" #login="ngModel"
+                        placeholder="{{ 'registration.registrationPanel.login' | translate:lang }}">
+                    <input-errors [inputField]="login" class="tr-input-alert"></input-errors>
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="text" md-input required name="firstName" maxlength="64" id="field_firstname" [(ngModel)]="model.firstName" placeholder="{{ 'registration.registrationPanel.firstname' | translate:lang }}">
+                    <input type="text" md-input required name="firstName" maxlength="64" id="field_firstname" 
+                        [(ngModel)]="model.firstName" #firstName="ngModel"
+                        placeholder="{{ 'registration.registrationPanel.firstname' | translate:lang }}">
+                    <input-errors [inputField]="firstName" class="tr-input-alert"></input-errors>
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="text" md-input required name="secondName" maxlength="64" id="field_firstname" [(ngModel)]="model.secondName" placeholder="{{ 'registration.registrationPanel.secondname' | translate:lang }}">
+                    <input type="text" md-input required name="secondName" maxlength="64" id="field_firstname" 
+                        [(ngModel)]="model.secondName" #secondName="ngModel"
+                        placeholder="{{ 'registration.registrationPanel.secondname' | translate:lang }}">
+                    <input-errors [inputField]="secondName" class="tr-input-alert"></input-errors>
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="email" md-input autocomplete="none" required name="uemail" minlength="5" maxlength="64" id="field_uemail" [(ngModel)]="model.email" placeholder="{{ 'registration.registrationPanel.email' | translate:lang }}">
+                    <input type="email" md-input required name="email" minlength="5" maxlength="64" id="field_uemail" 
+                        [(ngModel)]="model.email" #email="ngModel"
+                        placeholder="{{ 'registration.registrationPanel.email' | translate:lang }}">
+                    <input-errors [inputField]="email" class="tr-input-alert"></input-errors>
                 </md-input-container>
             </div>
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="password" md-input autocomplete="off" required name="upassword" id="field_pass" [(ngModel)]="model.password" placeholder="{{ 'registration.registrationPanel.password' | translate:lang }}">
+                    <input type="password" md-input autocomplete="off" required name="password" minlength="5" maxlength="64" id="field_pass"
+                        [(ngModel)]="model.password" #password="ngModel"
+                        placeholder="{{ 'registration.registrationPanel.password' | translate:lang }}">
+                    <input-errors [inputField]="password" class="tr-input-alert"></input-errors>
                 </md-input-container>
             </div>
             <div class="layout-row">
@@ -37,6 +52,5 @@
                 </div>
             </div>
         </form>
-        <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
     </md-card>
 </section>

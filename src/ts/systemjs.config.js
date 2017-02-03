@@ -27,7 +27,7 @@
       // other libraries
       'rxjs':                      '/js-libs/rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'angular2localization': 'npm:angular2localization/bundles/angular2localization.umd.min.js'
+      'angular2localization': '@angular/localization/angular2localization.umd.min.js',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

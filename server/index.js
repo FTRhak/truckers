@@ -6,12 +6,14 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var md5 = require('md5');
+var validator = require('validator');
 var nodemailer = require('nodemailer');
 var settings = require('./settings');
 var _basePath = __dirname + "/../";
 
 global.settings = settings;
 global.md5 = md5;
+global.validator = validator;
 global.nodemailer = nodemailer;
 global.mongoose = require('mongoose');
 
@@ -24,7 +26,7 @@ var app = {
 global.app = app;
 global.DEBUD = true;
 
-mongoose.connect('mongodb://' + settings.db.host + '/' + settings.db.database);
+mongoose.connect('mongodb://' + settings.db.host + '/' + settings.db.database, settings.db.options);
 var db = mongoose.connection;
 db.on('error', function (err) {
     console.error('\x1b[31m%s\x1b[0m: ','Connection DB error:', err.message);
@@ -57,12 +59,14 @@ app.express.use('/js-libs/systemjs', express.static(_basePath + 'node_modules/sy
 app.express.use('/js-libs/rxjs', express.static(_basePath + 'node_modules/rxjs'));
 
 app.express.use('/@angular/theme', express.static(_basePath + 'node_modules/@angular/material/core/theming'));
+app.express.use('/@angular/localization', express.static(_basePath + 'node_modules/angular2localization/bundles/'));
 app.express.use('/@angular', express.static(_basePath + 'node_modules/@angular'));
 
 //TODO remove
 app.express.use('/node_modules', express.static(_basePath + 'node_modules/'));
 
 
+app.express.use('/languages', express.static(_basePath + 'client/languages'));
 app.express.use('/fonts', express.static(_basePath + 'client/fonts'));
 app.express.use('/css', express.static(_basePath + 'client/css'));
 app.express.use('/js', express.static(_basePath + 'client/js'));
@@ -73,8 +77,8 @@ app.express.use('/templates', express.static(_basePath + 'client/templates'));
 var models = require(__dirname + '/models/model.js');
 models(app.models);
 
-var models = require(__dirname + '/mailcontrollers/controller.js');
-models(app.mailer);
+var mcontrollers = require(__dirname + '/mailcontrollers/controller.js');
+mcontrollers(app.mailer);
 
 var controllers = require(__dirname + '/controllers/controller.js');
 controllers(app.express);

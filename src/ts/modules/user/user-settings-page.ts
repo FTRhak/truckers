@@ -6,8 +6,7 @@ import { AuthServer } from './../../server/auth';
 
 @Component({
   selector: 'app-trucker',
-  template: `<h1>UserSettings</h1>
-  `,
+  templateUrl: '/templates/user/user_settings.html',
   providers: [AuthServer]
 })
 export class UserSettingsPage {

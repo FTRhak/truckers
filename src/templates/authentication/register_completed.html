@@ -2,8 +2,9 @@
 <section class="inset">
     <md-card>
         <div>
-            <h1>Registration complete</h1>
-            <a [routerLink]="['/login']" md-raised-button>Go to Login</a>
+            <h1>{{ 'registrationComplited.registrationPanel.title' | translate:lang }}</h1>
+            <p>{{ 'registrationComplited.registrationPanel.message' | translate:lang }}</p>
+            <a [routerLink]="['/login']" md-raised-button>{{ 'registrationComplited.registrationPanel.moveToLogin' | translate:lang }}</a>
         </div>
     </md-card>
 </section>

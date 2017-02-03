@@ -4,7 +4,12 @@ import { AppSettins } from './../../settings';
 
 @Component({
     selector: 'header[user]',
-    template: `<md-toolbar>{{appName}}</md-toolbar>`,
+    template: `
+        <md-toolbar>
+            <span>{{appName}}</span>
+            <div class="flex-auto"></div>
+            <account-settings-menu></account-settings-menu>
+        </md-toolbar>`,
     providers: [AppSettins]
 })
 export class UserHeader implements OnInit {

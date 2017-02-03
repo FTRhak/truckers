@@ -20,7 +20,8 @@ import { ShowingErrorMessages } from './services/showing-error-messages';
 import { HttpAPI } from './server/http';
 
 import { Header } from './components/navigation/header';
-import { UserHeader } from './components/navigation/userHeader';
+import { UserHeader } from './components/navigation/user-header';
+import { AccountSettingsMenu } from './components/navigation/account-settings-menu';
 import { SocAuth } from './components/authentication/soc-auth';
 import { InputValidationErrors } from './components/input-validation-errors';
 
@@ -44,6 +45,7 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
   ],
   declarations: [
     InputValidationErrors,
+    AccountSettingsMenu,
     Header,
     UserHeader,
     SocAuth,

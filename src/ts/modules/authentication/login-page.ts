@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 import { Response } from '@angular/http';
 
 import { AuthServer } from './../../server/auth';
+import { ShowingErrorMessages } from './../../services/showing-error-messages';
 import { SuccessResponse, UserLoginModel } from './../../interfaces';
 
 @Component({
@@ -16,7 +16,7 @@ import { SuccessResponse, UserLoginModel } from './../../interfaces';
 export class LoginPage extends Locale implements OnInit {
     constructor(
         private authServer: AuthServer,
-        public snackBar: MdSnackBar,
+        public showingErrorMessages: ShowingErrorMessages,
         public router: Router,
         private title: Title,
         public locale: LocaleService,
@@ -37,20 +37,11 @@ export class LoginPage extends Locale implements OnInit {
             this.authServer.setUser(res.user);
             this.router.navigate(['/user']);
         } else {
-            const dbError = res.error && res.error.message;
-            const errorCode = res.data;
-            const errorMessage = this.localization.translate('general.errors.' + errorCode);
-            const error = errorCode && errorMessage ? errorMessage : res.error;
-            this.snackBar.open(dbError || error, '', {
-                duration: 2000
-            });
+            this.showingErrorMessages.showError(res);
         }
     }
     actionError(res: Response): void {
-        const error = this.localization.translate('general.errors.SR-' + res.status);
-        this.snackBar.open(error, '', {
-            duration: 2000,
-        });
+        this.showingErrorMessages.showServerError(res);
     }
 
     onSubmit(inputLogin: HTMLInputElement, inputPassword: HTMLInputElement): void {

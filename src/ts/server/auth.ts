@@ -55,11 +55,26 @@ export class AuthServer {
                 }
             }, error);
     }
-    register(model: RegistrationModel, callback: Function, error: Function) {
-
+    register(model: RegistrationModel, callback: Function, error: Function): Observable<Response> {
+        return this.http.post('/api/register?rid=' + Math.random(), model,
+            function (res: Response) {
+                if (res.status === 200) {
+                    callback(res.json());
+                }
+            }, error);
     }
-    registerConfirm(model: any, callback: Function, error: Function) {
-
+    registerConfirm(key: string, callback: Function, error: Function): Observable<Response> {
+        const md5 = /^[a-f0-9]{32}$/;
+        if (!md5.test(key)) {
+            callback({ status: false, data: "VL-1" });
+            return;
+        }
+        return this.http.get('/api/register/confirm/' + key + '?rid=' + Math.random(), null,
+            function (res: Response) {
+                if (res.status === 200) {
+                    callback(res.json());
+                }
+            }, error);
     }
     restore(model: any, callback: Function, error: Function): Observable<Response> {
         return this.http.post('/api/restore?rid=' + Math.random(), null,

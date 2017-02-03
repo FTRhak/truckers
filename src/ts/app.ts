@@ -15,6 +15,8 @@ import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@a
 import { AppRoutingModule, AppComponent } from './app-router';
 import { LogService } from './log-service';
 
+import { ShowingErrorMessages } from './services/showing-error-messages';
+
 import { HttpAPI } from './server/http';
 
 import { Header } from './components/navigation/header';
@@ -60,6 +62,7 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     //{ provide: LocationStrategy, useClass: PathLocationStrategy },
     HttpAPI,
+    ShowingErrorMessages,
     LogService,
     LocalizationConfig,
     {

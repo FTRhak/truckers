@@ -3,16 +3,17 @@
     <md-card class="layout-gt-sm-row layout-sm-row layout-xs-column">
         <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
         <div class="flex-gt-sm-40 flex-sm-60 flex-xs-sm-100">
-            <h1>Registration confirmation</h1>
-            <div>
-                <span>{{confirmationKey}}</span>
+            <h1>{{ 'registrationConfirmation.confirmationPanel.title' | translate:lang }}</h1>
+            <div class="text-information">
+                <p>{{ 'registrationConfirmation.confirmationPanel.message' | translate:lang }}</p>
+                <span class="text-italic">{{confirmationKey}}</span>
             </div>
             <div class="layout-row">
                 <div class="flex-auto inset">
-                    <a [routerLink]="['/login']" class="with-fill" md-button>Back</a>
+                    <a [routerLink]="['/login']" class="with-fill" md-button>{{ 'registrationConfirmation.confirmationPanel.back' | translate:lang }}</a>
                 </div>
                 <div class="flex-auto inset">
-                    <button md-raised-button  class="with-fill" type="submit" (click)="onSubmit()">Confirm</button>
+                    <button md-raised-button  class="with-fill" type="submit" (click)="onSubmit()">{{ 'registrationConfirmation.confirmationPanel.submit' | translate:lang }}</button>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@ export class HttpAPI {
                 result.push(encodeURIComponent(property) + "=" + encodeURIComponent(data[property]));
             options += result.join("&");
         }
-        let response =  this.http.get(url + options, this.jsonHeader);
+        let response = this.http.get(url + options, this.jsonHeader);
         response.subscribe(
             response => callback(response),
             error => callbackError(error),

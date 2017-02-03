@@ -49,6 +49,9 @@ a {
     color: $baseTextColor;
     text-decoration: none;
 }
+h1, h2, h3 {
+    cursor: default;
+}
 [md-link] {
     font-size: $font-size - 2px;
 }
@@ -69,6 +72,12 @@ ul.list-data {
 }
 .text-right {
     text-align: right;
+}
+.text-italic {
+    font-style: italic;
+}
+.text-information {
+    cursor: default;
 }
 .with-fill {
     width: 100%;

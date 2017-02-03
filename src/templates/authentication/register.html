@@ -2,10 +2,10 @@
 <section class="inset">
     <md-card class="layout-gt-sm-row layout-sm-row layout-xs-column">
         <div class="flex-gt-sm-auto flex-sm-auto flex-xs-sm-100"></div>
-        <form autocomplete="off" (ngSubmit)="onSubmit()" #registrationForm="ngForm" class="flex-gt-sm-none flex-sm-none flex-xs-sm-100">
+        <form autocomplete="off" (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm" class="flex-gt-sm-none flex-sm-none flex-xs-sm-100">
             <div class="md-block">
                 <md-input-container class="with-fill">
-                    <input type="text" md-input required name="login" minlength="4" maxlength="64" id="field_login" 
+                    <input type="text" md-input required name="login" minlength="4" maxlength="64" id="field_login" pattern="[A-Za-z0-9]{0,64}"
                         [(ngModel)]="model.login" #login="ngModel"
                         placeholder="{{ 'registration.registrationPanel.login' | translate:lang }}">
                     <input-errors [inputField]="login" class="tr-input-alert"></input-errors>

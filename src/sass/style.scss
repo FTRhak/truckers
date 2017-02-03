@@ -38,11 +38,13 @@
 }
 .md-block {
     display: block;
+    box-sizing: border-box;
+    padding-bottom: 10px;
 }
 .tr-input-alert {
     font-size: 10px;
     position: absolute;
-    bottom: -15px;
+    top: 23px;
     left: 0px;
 }
 .tr-input-alert-danger {

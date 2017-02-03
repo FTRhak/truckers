@@ -5,7 +5,7 @@ $footerHeight: 40px;
 $fontSize: 14px;
 
 $baseTextColor: rgb(203, 203, 203);
-$inputHasNoValue: $baseTextColor;//transparent;
+$inputHasNoValue: $baseTextColor; //transparent;
 $inputFocus: rgb(203, 100, 100);
 
 $inputBorderColor: rgba(0,0,0,0.12);
@@ -13,8 +13,6 @@ $inputBorderColorFocused: rgba(0,0,0,0.42);
 
 $baseBgColor: rgba(0, 0, 0, 0.35);
 $secondBgColor: rgba(0, 0, 0, 0.5);
-
-
 
 //$headerBgColor: rgba(120,120,120,0.5);
 $headerBgColor: rgba(50, 50, 50, 0.5);

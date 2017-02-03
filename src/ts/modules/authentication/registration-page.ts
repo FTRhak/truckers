@@ -4,16 +4,11 @@ import { Router } from '@angular/router';
 import { NgForm, NgModel } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Response } from '@angular/http';
 
 import { AuthServer } from './../../server/auth';
+import { SuccessResponse, RegistrationModel } from './../../interfaces';
 
-class RegistrationModel {
-    public login: string;
-    public firstName: string;
-    public secondName: string;
-    public email: string;
-    public password: string;
-}
 
 @Component({
     selector: 'app-trucker',
@@ -40,14 +35,14 @@ export class RegistrationPage extends Locale implements OnInit {
         }
     }
 
-    actionAccepted(res: any): void {
+    actionAccepted(res: SuccessResponse): void {
         this.router.navigate(['/login']);
     }
-    actionError(res: any): void {
+    actionError(res: Response): void {
 
     }
 
-    onSubmit() {
+    onSubmit(): void {
         console.log(this.model);
 
         //this.authServer.register(this.model, this.actionAccepted.bind(this), this.actionError.bind(this));

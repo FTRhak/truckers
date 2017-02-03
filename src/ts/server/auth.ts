@@ -3,6 +3,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { HttpAPI } from './http';
+import { SuccessResponse, UserLoginModel, RegistrationModel } from './../interfaces';
 
 @Injectable()
 export class AuthServer {
@@ -36,12 +37,11 @@ export class AuthServer {
     }
     //---------------------------------------------
 
-    login(model: any, callback: Function, error: Function): Observable<Response> {
+    login(model: UserLoginModel, callback: Function, error: Function): Observable<Response> {
         return this.http.post('/api/login?rid=' + Math.random(), JSON.stringify(model),
-            function (res: any) {
+            function (res: Response) {
                 if (res.status === 200) {
-                    const body = JSON.parse(res._body);
-                    callback(body);
+                    callback(res.json());
                 } else {
                     error(res)
                 }
@@ -49,24 +49,23 @@ export class AuthServer {
     }
     logout(model: any, callback: Function, error: Function): Observable<Response> {
         return this.http.get('/api/logout?rid=' + Math.random(), null,
-            function (res: any) {
+            function (res: Response) {
                 if (res.status === 200) {
-                    callback(res._body);
+                    callback(res.json());
                 }
             }, error);
     }
-    register(model: any, callback: Function, error: Function) {
+    register(model: RegistrationModel, callback: Function, error: Function) {
 
     }
     registerConfirm(model: any, callback: Function, error: Function) {
 
     }
-    restore(model: any, callback: Function, error: Function) {
+    restore(model: any, callback: Function, error: Function): Observable<Response> {
         return this.http.post('/api/restore?rid=' + Math.random(), null,
-            function (res: any) {
+            function (res: Response) {
                 if (res.status === 200) {
-                    const body = JSON.parse(res._body);
-                    callback(body);
+                    callback(res.json());
                 } else {
                     error(res)
                 }

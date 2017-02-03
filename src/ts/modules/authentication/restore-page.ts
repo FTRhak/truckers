@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
 
 import { AuthServer } from './../../server/auth';
+import { SuccessResponse } from './../../interfaces';
 
 @Component({
     selector: 'app-trucker',
@@ -30,7 +31,7 @@ export class RestorePage implements OnInit {
         }
     }
 
-    actionAccepted(res: any): void {
+    actionAccepted(res: SuccessResponse): void {
         if (res.status) {
             this.restoreCompleted = true;
         } else if (res.error && res.error.message) {
@@ -47,7 +48,7 @@ export class RestorePage implements OnInit {
         });
     }
 
-    onSubmit(inputLogin: any): void {
+    onSubmit(inputLogin: HTMLInputElement): void {
         const email = inputLogin.value;
         this.authServer.restore({ email: email }, this.actionAccepted.bind(this), this.actionError.bind(this));
     }

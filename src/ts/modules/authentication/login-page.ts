@@ -3,8 +3,10 @@ import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Locale, LocaleService, LocalizationService } from 'angular2localization';
+import { Response } from '@angular/http';
 
 import { AuthServer } from './../../server/auth';
+import { SuccessResponse, UserLoginModel } from './../../interfaces';
 
 @Component({
     selector: 'app-trucker',
@@ -30,7 +32,7 @@ export class LoginPage extends Locale implements OnInit {
         }
     }
 
-    actionAccepted(res: any) {
+    actionAccepted(res: SuccessResponse): void {
         if (res.status) {
             this.authServer.setUser(res.user);
             this.router.navigate(['/user']);
@@ -44,15 +46,14 @@ export class LoginPage extends Locale implements OnInit {
             });
         }
     }
-    actionError(res: any) {
-        let error = '';
-        error = this.localization.translate('general.errors.SR-' + res.status);
+    actionError(res: Response): void {
+        const error = this.localization.translate('general.errors.SR-' + res.status);
         this.snackBar.open(error, '', {
             duration: 2000,
         });
     }
 
-    onSubmit(inputLogin: any, inputPassword: any) {
+    onSubmit(inputLogin: HTMLInputElement, inputPassword: HTMLInputElement): void {
         const model = {
             login: inputLogin.value,
             password: inputPassword.value

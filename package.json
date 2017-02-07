@@ -34,6 +34,7 @@
   },
   "scripts": {
     "start": "node server/index.js",
+    "test": "mocha -R spec tests/server/index.js",
     "build": "tsc && concurrently \"tsc -w\"",
     "tsc": "tsc",
     "tsc:w": "tsc -w"

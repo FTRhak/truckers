@@ -12,7 +12,7 @@ var login = require('./authentication/login');
 
 var randPrefix = Math.round(Math.random()*10000);
 
-var server = require('../server/index.js');
+var server = require('../../server/index.js');
 
 describe('----first test----', function () {
     beforeEach(function () {

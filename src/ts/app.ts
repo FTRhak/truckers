@@ -35,7 +35,8 @@ import { TermsPage } from './modules/terms-page';
 import { _404Page } from './modules/404-page';
 
 import { LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage } from './modules/authentication/index';
-import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage } from './modules/user/index';
+import { UserProfilePage, UserSettingsPage, UserChangePasswordPage, UserChangeContactDataPage } from './modules/user/index';
+import { UserEditPage,  UserEditGeneralPage, UserEditNavigation, UserEditContactsPage, UserEditSocnetPage, UserEditAccessPage} from './modules/user-edit/index';
 import { FriendsPage } from './modules/friends/index';
 import { MessagesListPage } from './modules/messages/index';
 
@@ -67,7 +68,8 @@ import { MessagesListPage } from './modules/messages/index';
     _404Page,
 
     LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage,
-    UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage, 
+    UserProfilePage, UserSettingsPage, UserChangePasswordPage, UserChangeContactDataPage, 
+    UserEditPage, UserEditGeneralPage, UserEditContactsPage, UserEditSocnetPage, UserEditAccessPage, UserEditNavigation,
     FriendsPage,
     MessagesListPage
   ],

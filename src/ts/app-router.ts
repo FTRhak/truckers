@@ -10,7 +10,8 @@ import { _404Page } from './modules/404-page';
 
 
 import { LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage } from './modules/authentication/index';
-import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage } from './modules/user/index';
+import { UserProfilePage, UserSettingsPage, UserChangePasswordPage, UserChangeContactDataPage } from './modules/user/index';
+import { UserEditPage, UserEditGeneralPage, UserEditContactsPage, UserEditSocnetPage, UserEditAccessPage } from './modules/user-edit/index';
 import { FriendsPage } from './modules/friends/index';
 import { MessagesListPage } from './modules/messages/index';
 
@@ -77,6 +78,11 @@ const routes: Routes = [
   { path: 'user', component: UserProfilePage },
   { path: 'user/settings', component: UserSettingsPage },
   { path: 'user/edit', component: UserEditPage },
+  { path: 'user/edit/general', component: UserEditGeneralPage },
+  { path: 'user/edit/contacts', component: UserEditContactsPage },
+  { path: 'user/edit/socnet', component: UserEditSocnetPage },
+  { path: 'user/edit/access', component: UserEditAccessPage },
+  
   { path: 'user/password', component: UserChangePasswordPage },
   { path: 'user/edit-contacts', component: UserChangeContactDataPage },
   { path: 'friends', component: FriendsPage },

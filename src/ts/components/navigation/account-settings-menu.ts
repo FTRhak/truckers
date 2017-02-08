@@ -12,6 +12,10 @@ import { Component, OnInit } from '@angular/core';
                 <md-icon>&#xE7FD;</md-icon>
                 <span>{{ 'accountSettingsMenu.profile' | translate:lang }}</span>
             </button>
+            <button md-menu-item  [routerLink]="['/user/edit']">
+                <md-icon>&#xE7FF;</md-icon>
+                <span>{{ 'accountSettingsMenu.edit' | translate:lang }}</span>
+            </button>
             <button md-menu-item  [routerLink]="['/user/settings']">
                 <md-icon>&#xE8B8;</md-icon>
                 <span>{{ 'accountSettingsMenu.setting' | translate:lang }}</span>

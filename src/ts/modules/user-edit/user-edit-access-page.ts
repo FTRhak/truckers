@@ -5,20 +5,20 @@ import { Locale, LocaleService, LocalizationService } from 'angular2localization
 
 import { AuthServer } from './../../server/auth';
 
+
 @Component({
   selector: 'app-trucker',
   template: `
 <header user></header>
-<section class="profile-page ">
-    <user-data-profile [user]="user"></user-data-profile>
-    <user-actions></user-actions>
-    <user-current-delivery-order class="inset md-block"></user-current-delivery-order>
-    <user-skills class="inset md-block"></user-skills>
+<section class="user-edit-page">
+    <user-edit-navigation></user-edit-navigation>
+    <div>
+      Access
+    </div>
 </section>`,
   providers: [AuthServer]
 })
-export class UserProfilePage extends Locale implements OnInit {
-  name = 'Profile';
+export class UserEditAccessPage extends Locale implements OnInit {
   user: any;
   constructor(
     private authServer: AuthServer,
@@ -30,7 +30,7 @@ export class UserProfilePage extends Locale implements OnInit {
     this.user = this.authServer.getUser();
   }
   ngOnInit() {
-    const pageTitle = this.localization.translate('profile.title');
+    const pageTitle = this.localization.translate('userEditGeneral.title');
     this.title.setTitle(pageTitle);
     if (!this.authServer.isLogin()) {
       this.router.navigate(['/login']);

@@ -23,6 +23,10 @@ import { Header } from './components/navigation/header';
 import { UserHeader } from './components/navigation/user-header';
 import { AccountSettingsMenu } from './components/navigation/account-settings-menu';
 import { SocAuth } from './components/authentication/soc-auth';
+import { UserDataProfile } from './components/user/user-data-profile';
+import { UserActions } from './components/user/user-actions';
+import { UserSkills } from './components/user/user-skills';
+import { UserCurrentDeliveryOrder } from './components/user/user-current-delivery-order';
 import { InputValidationErrors } from './components/input-validation-errors';
 
 import { IndexPage } from './modules/index-page';
@@ -49,6 +53,10 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
     Header,
     UserHeader,
     SocAuth,
+    UserDataProfile,
+    UserActions,
+    UserSkills,
+    UserCurrentDeliveryOrder,
 
     AppComponent,
     IndexPage,

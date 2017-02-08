@@ -7,7 +7,14 @@ import { AuthServer } from './../../server/auth';
 
 @Component({
   selector: 'app-trucker',
-  templateUrl: '/templates/user/user.html',
+  template: `
+<header user></header>
+<section class="profile-page ">
+    <user-data-profile [user]="user"></user-data-profile>
+    <user-actions></user-actions>
+    <user-current-delivery-order class="inset md-block"></user-current-delivery-order>
+    <user-skills class="inset md-block"></user-skills>
+</section>`,
   providers: [AuthServer]
 })
 export class UserProfilePage extends Locale implements OnInit {

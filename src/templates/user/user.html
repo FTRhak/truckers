@@ -1,26 +1,8 @@
 <header user></header>
-<section class="profile-page">
-    <div class="profile-base-info">
-        <div class="profile-avatar">
-            <i class="profile-avatar-img"></i>
-        </div>
-        <div class="profile-data">
-            <div class="user-name">{{user.personal_data.firstname}} {{user.personal_data.surname}}</div>
-            <ul class="list-data user-data">
-                <li>
-                    <span>{{user.contacts.email}}</span>
-                </li>
-                <li>
-                    <span>{{user.contacts.phone}}</span>
-                </li>
-                <li>
-                    <span>{{user.contacts.website}}</span>
-                </li>
-                <li>
-                    <span>{{user.contacts.website}}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <nav class="menu-communications" menu-communications-view></nav>
+<section class="profile-page ">
+    <user-data-profile [user]="user"></user-data-profile>
+    <user-actions></user-actions>
+
+    <user-current-delivery-order class="inset md-block"></user-current-delivery-order>
+    <user-skills class="inset md-block"></user-skills>
 </section>

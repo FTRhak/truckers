@@ -6,10 +6,17 @@ import { MaterialModule } from '@angular/material';
 import { LocaleModule, LocalizationModule } from 'angular2localization';
 import { HttpModule } from '@angular/http';
 
-import { MessagesListPage } from './messages-list-page';
+
+import { IndexPage } from './index-page';
+import { AboutPage } from './about-page';
+import { TermsPage } from './terms-page';
+import { _404Page } from './404-page';
 
 const routes: Routes = [
-    { path: 'messages', component: MessagesListPage },
+    { path: '', component: IndexPage },
+    { path: 'about', component: AboutPage },
+    { path: 'terms', component: TermsPage },
+    { path: '**', component: _404Page }
 ];
 
 @NgModule({
@@ -23,10 +30,10 @@ const routes: Routes = [
     ],
     exports: [RouterModule],
     declarations: [
-        //AccountSettingsMenu,
-        //UserHeader,
-
-        MessagesListPage
+        IndexPage,
+        AboutPage,
+        TermsPage,
+        _404Page,
     ]
 })
-export class MessagesModule { }
+export class GeneralPagesModule { }

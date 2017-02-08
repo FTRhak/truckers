@@ -53,6 +53,7 @@
 
 .tr-user-avatar {
     width: 100%;
+    max-width: 150px;
     border-radius: 50%;
     margin-bottom: -25px;
     background-position: center center;
@@ -77,6 +78,10 @@
 user-data-profile {
     background-color: rgba(100,100,100,0.2);
     display: block;
+
+    .avatar-container {
+        text-align: right;
+    }
 }
 
 /*.page {

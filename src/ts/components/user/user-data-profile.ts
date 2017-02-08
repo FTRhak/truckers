@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
     selector: 'user-data-profile',
     template: `
         <div class="layout-xs layout-sm layout-gt-sm">
-            <div class="flex-xs-40 flex-sm-30 flex-gt-sm-20 inset">
+            <div class="flex-xs-40 flex-sm-30 flex-gt-sm-20 inset avatar-container">
                 <img class="tr-user-avatar" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
             </div>
             <div class="flex-auto inset">

@@ -11,6 +11,8 @@ import { _404Page } from './modules/404-page';
 
 import { LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage } from './modules/authentication/index';
 import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage } from './modules/user/index';
+import { FriendsPage } from './modules/friends/index';
+import { MessagesListPage } from './modules/messages/index';
 
 //directives: [ng.common.CORE_DIRECTIVES, ng.common.FORM_DIRECTIVES, ng.router.ROUTER_DIRECTIVES],
 //import { ROUTER_DIRECTIVES } from '@angular/router';
@@ -77,6 +79,11 @@ const routes: Routes = [
   { path: 'user/edit', component: UserEditPage },
   { path: 'user/password', component: UserChangePasswordPage },
   { path: 'user/edit-contacts', component: UserChangeContactDataPage },
+  { path: 'friends', component: FriendsPage },
+  { path: 'friends/:fid', component: FriendsPage },
+
+  { path: 'messages', component: MessagesListPage },
+  
 
   { path: '**', component: _404Page }
   //{ path: 'dashboard', redirectTo: '/dashboard2',  component: DashboardComponent },

@@ -36,6 +36,8 @@ import { _404Page } from './modules/404-page';
 
 import { LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage } from './modules/authentication/index';
 import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage } from './modules/user/index';
+import { FriendsPage } from './modules/friends/index';
+import { MessagesListPage } from './modules/messages/index';
 
 @NgModule({
   imports: [
@@ -65,7 +67,9 @@ import { UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage
     _404Page,
 
     LoginPage, LogoutPage, RestorePage, RegistrationPage, RegisterCompletedPage, RegisterConfirmationPage,
-    UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage
+    UserProfilePage, UserSettingsPage, UserEditPage, UserChangePasswordPage, UserChangeContactDataPage, 
+    FriendsPage,
+    MessagesListPage
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

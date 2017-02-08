@@ -26,7 +26,7 @@ export class LocalizationConfig {
         this.locale.definePreferredCurrency('UAH');
 
         // Initializes LocalizationService: asynchronous loading.
-        this.localization.translationProvider('./languages/'); // Required: initializes the translation provider with the given path prefix.
+        this.localization.translationProvider('/languages/'); // Required: initializes the translation provider with the given path prefix.
 
         var promise: Promise<any> = new Promise((resolve: any) => {
             this.localization.translationChanged.subscribe(() => {

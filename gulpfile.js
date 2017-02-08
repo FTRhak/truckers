@@ -7,6 +7,7 @@ var replace = require("gulp-replace");
 var compass = require('gulp-compass');
 var minifyCSS = require('gulp-minify-css');
 var ts = require('gulp-typescript');
+var uglify = require('gulp-uglify');
 
 var PROJECT_SRC = 'src/';
 var PROJECT_BUILD = 'client/';
@@ -45,8 +46,8 @@ gulp.task('sass-prod', function () {
         .pipe(minifyCSS())
         .pipe(gulp.dest(PROJECT_BUILD + 'css/'));
 });
-gulp.task('css-dev', ['css-dist', 'sass-dev']);
-gulp.task('css-prod', ['css-dist', 'sass-prod']);
+gulp.task('css-dev', ['sass-dev']);
+gulp.task('css-prod', ['sass-prod']);
 //-----------TEMPLATES-------------
 gulp.task('templates', function () {
     return gulp.src([
@@ -84,9 +85,15 @@ gulp.task('tsToJs', function () {
         .pipe(tsProject())
         .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
 });
-//ts
+gulp.task('tsToJsProd', function () {
+    return gulp.src([PROJECT_SRC + 'ts/*.ts', PROJECT_SRC + 'ts/**/*.ts'])
+        .pipe(tsProject())
+        .pipe(uglify())
+        .pipe(gulp.dest(PROJECT_BUILD + 'js/'));
+});
 
 gulp.task('ts-dev', ['systemjs', 'tsToJs']);
+gulp.task('ts-prod', ['systemjs', 'tsToJsProd']);
 //-----------INDEX-----------------
 var styleProd = ['/@angular/theme/prebuilt/pink-bluegrey.css', '/css/style.css'];
 
@@ -152,4 +159,4 @@ gulp.task('index-dev', function () {
 
 //===============================
 gulp.task('dev-web', ['css-dev', 'templates', 'languages', 'icons', 'fonts', 'ts-dev', 'index-dev']);
-gulp.task('prod-web', ['css-prod', 'templates', 'icons', 'fonts', 'js-prod', 'index-dev']);
+gulp.task('prod-web', ['css-prod', 'templates', 'languages', 'icons', 'fonts', 'ts-prod', 'index-dev']);

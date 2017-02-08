@@ -21,6 +21,28 @@ class ControllerBase {
         }
         return req.session.user;
     }
+    updateUserSession(session, uid, callback) {
+        app.models.User.findOne({ _id: uid }, function (err, row, fields) {
+            if (!err && row) {
+                row.access_data = null;
+                session.user = row;
+                callback(true, row);
+            } else {
+                callback(false, {});
+            }
+        });
+    }
+    isValidStuctureOfParamsObject(obj, countParams) {
+        if (!obj || typeof obj !== "object") {
+            return false;
+        }
+        const keys = Object.keys(obj);
+        if (countParams && keys.length !== countParams) {
+            return false;
+        }
+
+        return true;
+    }
     sendEmail() {
 
     }
@@ -48,8 +70,9 @@ module.exports = function (express) {
     //initUrlControllers(require(__dirname + '/MessageController'));
     initUrlControllers(require(__dirname + '/api/TranceCompanyController'));
     initUrlControllers(require(__dirname + '/api/TruckController'));
-    initUrlControllers(require(__dirname + '/api/UserController'));
+    //initUrlControllers(require(__dirname + '/api/UserController'));
     initUrlControllers(require(__dirname + '/AuthenticationController'));
+    initUrlControllers(require(__dirname + '/UserController'));
     //initUrlControllers(require(__dirname + '/car_controller'));
 
     DEBUD && initUrlControllers(require(__dirname + '/AppInstallationController'));

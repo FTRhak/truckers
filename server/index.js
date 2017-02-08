@@ -32,7 +32,7 @@ db.on('error', function (err) {
     console.error('\x1b[31m%s\x1b[0m: ','Connection DB error:', err.message);
 });
 db.once('open', function callback() {
-    console.log('\x1b[33m%s\x1b[0m: ', "Connected to DB! ", "");
+    DEBUD && console.log('\x1b[33m%s\x1b[0m: ', "Connected to DB! ", "");
 });
 global.db = db;
 
@@ -107,6 +107,6 @@ var server = app.express.listen(3000, function () {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Example app listening at http://%s:%s', host, port);
+    DEBUD && console.log('Example app listening at http://%s:%s', host, port);
 });
 module.exports = server;

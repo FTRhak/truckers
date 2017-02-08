@@ -7,7 +7,15 @@ class MailControllerBase {
         //this.mailer = mailer;
         this.mailer = {
             sendMail: function (mailOptions, callback) {
-
+                if (DEBUD) {
+                    console.log('\x1b[41m%s', "--------------Email:---------------");
+                    console.log('\x1b[41m%s %s\x1b[0m', "  FROM:\t", mailOptions.from);
+                    console.log('\x1b[41m%s %s\x1b[0m', "  TO:\t", mailOptions.to);
+                    console.log('\x1b[41m%s %s\x1b[0m', "  SUBJECT:\t", mailOptions.subject);
+                    console.log('\x1b[41m%s %s\x1b[0m', "  TEXT:", mailOptions.text);
+                    console.log('\x1b[41m%s %s\x1b[0m', "-----------------------------------", "");
+                    console.log(" ");
+                }
             }
         };
     }

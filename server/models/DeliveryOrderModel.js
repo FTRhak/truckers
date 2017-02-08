@@ -8,6 +8,8 @@ var DeliveryOrderModel = new Schema({
         name: { type: String, default: "" },
     }, //Car
     title: { type: String, default: "" },
+
+
     //TODO add types
     cargo_types: { type: String, enum: ['explosive', 'toxic', 'organic'], default: "" },
     description: { type: String, default: "" },
@@ -21,11 +23,7 @@ var DeliveryOrderModel = new Schema({
         type: [Number],
         index: '2d'
     },
-    location: {
-        type: [Number],
-        index: '2d'
-    },
-
+    
 
 
     is_deleted: { type: Boolean, default: false },

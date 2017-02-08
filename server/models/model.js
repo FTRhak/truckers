@@ -17,4 +17,5 @@ module.exports = function(modelsList) {
     initUrlControllers('User');
     initUrlControllers('ChatMessage');
     initUrlControllers('MObjectComment');
+    initUrlControllers('UserSkills');
 };

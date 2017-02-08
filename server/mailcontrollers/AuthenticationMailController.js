@@ -8,8 +8,8 @@ module.exports = function (ControllerBaseClass) {
                 from: settings.mail_server.from,
                 to: user.contacts.email,
                 subject: 'Registration notification',
-                text: 'You registered. Please notify ' + settings.server.host + '/user-confirmation/' + user.access_data.confirmation_key,
-                html: '<p>You registered. Please notify ' + settings.server.host + '/user-confirmation/' + user.access_data.confirmation_key + '</p>'
+                text: 'You registered. Please notify ' + settings.server.host_display + '/register/confirm/' + user.access_data.confirmation_key,
+                html: '<p>You registered. Please notify ' + settings.server.host_display + 'register/confirm/' + user.access_data.confirmation_key + '</p>'
             };
             this.mailer.sendMail(mailOptions, callback || this.callbackFunction);
         }

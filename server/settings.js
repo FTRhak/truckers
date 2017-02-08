@@ -5,10 +5,29 @@ module.exports = {
         database: 'trucker_db',
         user: 'root',
         password: '',
-        charset: 'utf8'
+        charset: 'utf8',
+        options: {
+            //db: {native_parser: true},
+            replset: {
+                auto_reconnect:false,
+                poolSize: 10,
+                socketOptions: {
+                    keepAlive: 1000,
+                    connectTimeoutMS: 30000
+                }
+            },
+            server: {
+                poolSize: 5,
+                socketOptions: {
+                    keepAlive: 1000,
+                    connectTimeoutMS: 30000
+                }
+            }
+        }
     },
     server: {
         host: 'http://localhost:3000/',
+        host_display: 'http://localhost:3000/#',
         port: 3000,
         host_name: 'localhost'
     },
